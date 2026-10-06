@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Mount WebDAV on Synology NAS - File Station Remote Connection Setup | CloudMount</title>
+<meta name="description" content="How to mount WebDAV drives on Synology NAS using File Station remote connection and the WebDAV Server package. Default ports 5005/5006, the limits of Chinese cloud drives, and an easier one-click alternative.">
+<meta name="keywords" content="mount WebDAV Synology,Synology WebDAV mount,WebDAV cloud drive mount,File Station remote connection,WebDAV Server Synology">
+<link rel="canonical" href="https://beatwind.github.io/en/webdav-mount.html">
+<link rel="alternate" hreflang="zh-CN" href="https://beatwind.github.io/webdav-mount.html">
+<link rel="alternate" hreflang="x-default" href="https://beatwind.github.io/webdav-mount.html">
+<meta property="og:title" content="Mount WebDAV on Synology NAS - File Station Remote Connection Setup">
+<meta property="og:description" content="Full steps for File Station remote connection and WebDAV Server setup on Synology, plus the limits of mounting Chinese cloud drives over WebDAV.">
+<meta property="og:url" content="https://beatwind.github.io/en/webdav-mount.html">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="mobile-agent" content="format=html5;url=https://beatwind.github.io/en/webdav-mount.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="Mount WebDAV on Synology NAS">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mount WebDAV on Synology NAS - File Station Remote Connection Setup">
+<meta name="twitter:description" content="WebDAV Server port setup and File Station remote connection steps, plus the limits of mounting Chinese cloud drives.">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Mount WebDAV Drives on Synology NAS",
+  "description": "Steps to mount cloud drives or services over the WebDAV protocol on a Synology NAS",
+  "step": [
+    {"@type": "HowToStep", "name": "Enable WebDAV Server", "text": "Install and enable the WebDAV Server package, turn on HTTP and HTTPS in the settings and confirm the ports"},
+    {"@type": "HowToStep", "name": "Connect via File Station remote connection", "text": "Open Tools > Remote Connection > Connection Setup, choose the WebDAV protocol and enter the server address and account"},
+    {"@type": "HowToStep", "name": "Verify the mount", "text": "Confirm the remote directory appears in the File Station left panel and can be browsed and copied normally"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"Tutorials","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"Mount WebDAV on Synology NAS","item":"https://beatwind.github.io/en/webdav-mount.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Synology File Station support WebDAV?","acceptedAnswer":{"@type":"Answer","text":"Yes. In File Station go to Tools > Remote Connection > Connection Setup and choose the WebDAV or WebDAV HTTPS protocol to connect a remote service. Once configured, the remote directory appears in the left panel."}},{"@type":"Question","name":"What are the default WebDAV ports on Synology?","acceptedAnswer":{"@type":"Answer","text":"When you enable the WebDAV Server package the default HTTP port is 5005 and the HTTPS port is 5006. You can customize the ports under Settings > HTTP/HTTPS."}},{"@type":"Question","name":"Do Baidu Wangpan and Aliyun Drive support direct WebDAV mounting?","acceptedAnswer":{"@type":"Answer","text":"Most mainstream Chinese cloud drives do not expose a WebDAV interface directly. Mounting them usually requires a third-party relay such as Alist to convert the protocol, which has a high setup barrier. For direct mounting of Chinese drives, CloudMount's one-click mount is much simpler."}},{"@type":"Question","name":"What is the difference between WebDAV mounting and CloudMount mounting?","acceptedAnswer":{"@type":"Answer","text":"WebDAV is a generic file protocol suited to configuring each WebDAV-capable service one at a time and normally mounts one remote at a time. CloudMount is natively integrated into Synology, mounts 8 major drives after a single QR login, and supports cross-drive transfer and offline caching."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Mount WebDAV Drives on Synology NAS (Full Tutorial)","description":"Steps and limits of mounting cloud drives and services over WebDAV on Synology","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-10-07","dateModified":"2026-10-07","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/en/webdav-mount.html"},"inLanguage":"en"}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th,td{padding:12px;text-align:left;border:1px solid #334155}
+th{background:#1e293b;color:#e5e7eb}
+td{color:#d1d5db}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.btn:hover{opacity:0.9}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h2,.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/tutorials.html">Tutorials</a> / WebDAV Mount Tutorial</div>
+  <h1>How to Mount WebDAV Drives on Synology NAS (Full Tutorial)</h1>
+  <p class="subtitle">Use Synology's built-in File Station remote connection and the WebDAV Server package to mount cloud drives and services, with port setup and the limits of Chinese cloud drives explained.</p>
+
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#what">What Is WebDAV and Why Mount Drives With It</a></li>
+      <li><a href="#file-station">Method 1: Mount via File Station Remote Connection</a></li>
+      <li><a href="#webdav-server">Method 2: Serve Files With the WebDAV Server Package</a></li>
+      <li><a href="#limits">Limits of WebDAV for Chinese Cloud Drives</a></li>
+      <li><a href="#better">The Simpler Option: One-Click Mount With CloudMount</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="what">1. What Is WebDAV and Why Mount Drives With It</h2>
+  <p>WebDAV (Web Distributed Authoring and Versioning) is a file transfer protocol built on top of HTTP. It lets you read and write a remote server's directory as if it were a local folder. Synology DSM's File Station natively supports FTP, SFTP, WebDAV and WebDAV HTTPS, which is why many users try to mount cloud drives to the NAS over WebDAV.</p>
+  <p>Its advantage is being generic and requiring no extra package: as long as the other side exposes a WebDAV endpoint, you can mount it as a directory on Synology, then browse, download and play files through File Station.</p>
+
+  <h2 id="file-station">2. Method 1: Mount via File Station Remote Connection</h2>
+  <p>If the target service already provides a WebDAV address (with an account and password), you can mount it directly with File Station's remote connection. The whole process is graphical and needs no extra package.</p>
+  <ol>
+    <li>Open File Station and go to <strong>Tools &gt; Remote Connection &gt; Connection Setup</strong></li>
+    <li>Click the icon to choose a protocol, tick <strong>WebDAV</strong> or <strong>WebDAV HTTPS</strong>, and click "Next"</li>
+    <li>In the wizard, fill in the remote address, port, account and password to complete authentication</li>
+    <li>Once set up, the remote service appears in the left panel of File Station and can be browsed like a local directory</li>
+  </ol>
+  <div class="highlight">
+    <strong>Tip:</strong> WebDAV HTTPS encrypts the transfer and is more secure. If the other side only offers plain HTTP WebDAV, avoid transferring sensitive files over untrusted networks.
+  </div>
+
+  <h2 id="webdav-server">3. Method 2: Serve Files With the WebDAV Server Package</h2>
+  <p>If you want another device (a phone, a computer or another NAS) to access your Synology the other way around, install the WebDAV Server package on Synology to expose your shared folders over WebDAV.</p>
+  <ol>
+    <li>Install and start <strong>WebDAV Server</strong> in Package Center</li>
+    <li>Go to <strong>Settings &gt; HTTP/HTTPS</strong> and tick "Enable HTTP" and "Enable HTTPS"</li>
+    <li>Confirm the ports: the defaults are <strong>HTTP 5005 and HTTPS 5006</strong>, customizable as needed</li>
+    <li>Click "Apply", then connect from File Station or a third-party client via <strong>Location &gt; Connect to Server</strong></li>
+  </ol>
+  <p>Note that when the package serves files externally, always enable the firewall and account permission control so shared directories are not exposed to unauthorized access.</p>
+
+  <h2 id="limits">4. Limits of WebDAV for Chinese Cloud Drives</h2>
+  <p>WebDAV is generic, but mounting Chinese cloud drives with it runs into several practical issues worth knowing in advance:</p>
+  <ul>
+    <li><strong>No open interface</strong>: most mainstream Chinese cloud drives such as Baidu Wangpan, Aliyun Drive and Quark Drive do not expose a WebDAV interface directly</li>
+    <li><strong>Needs a third-party relay</strong>: mounting these drives usually requires a service like Alist to convert the drive protocol to WebDAV, which has a high deployment and troubleshooting barrier</li>
+    <li><strong>Cumbersome multi-drive management</strong>: WebDAV typically connects to one remote at a time, so mounting several drives means adding connections over and over</li>
+    <li><strong>No native features</strong>: WebDAV is only a file protocol and lacks drive-specific features such as offline caching, cross-drive transfer and QR-code login</li>
+  </ul>
+
+  <table>
+    <thead>
+      <tr><th>Approach</th><th>Setup difficulty</th><th>Chinese cloud drives</th><th>Extra features</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>File Station + direct WebDAV</td><td>Low</td><td>Requires the provider to expose WebDAV</td><td>File browsing only</td></tr>
+      <tr><td>Alist + WebDAV relay</td><td>High</td><td>Supported</td><td>Requires self-maintenance</td></tr>
+      <tr><td>CloudMount one-click mount</td><td>Low</td><td>Supports 8 major drives natively</td><td>Cross-drive transfer, cache, QR login</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="better">5. The Simpler Option: One-Click Mount With CloudMount</h2>
+  <p>If you just want to quickly mount Baidu Wangpan, Aliyun Drive, Quark Drive and others onto the NAS without wrestling with WebDAV addresses and third-party relays, CloudMount saves a lot of effort. Install it from Package Center, log in with a QR code and mount: it integrates natively with <a href="/">File Station</a>, and mounted folders can be accessed directly by <a href="/jellyfin-cloud-drive.html">Jellyfin</a> and <a href="/video-station-cloud-drive.html">Video Station</a>, with <a href="/cross-drive-transfer.html">cross-drive transfer</a> support.</p>
+  <p><a class="btn" href="/">Download CloudMount from the Official Website →</a></p>
+
+  <h2 id="faq">6. FAQ</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Does Synology File Station support WebDAV?</div>
+    <p>A: Yes. In File Station, go to Tools &gt; Remote Connection &gt; Connection Setup and choose the WebDAV or WebDAV HTTPS protocol to connect a remote service. Once configured, the remote directory appears in the left panel.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: What are the default WebDAV ports on Synology?</div>
+    <p>A: When you enable the WebDAV Server package, the default HTTP port is 5005 and the HTTPS port is 5006. You can customize the ports under Settings &gt; HTTP/HTTPS.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Do Baidu Wangpan and Aliyun Drive support direct WebDAV mounting?</div>
+    <p>A: Most mainstream Chinese cloud drives do not expose a WebDAV interface directly. Mounting them usually requires a third-party relay such as Alist to convert the protocol, which has a high setup barrier. For direct mounting of Chinese drives, CloudMount's one-click mount is simpler.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: What is the difference between WebDAV mounting and CloudMount mounting?</div>
+    <p>A: WebDAV is a generic file protocol suited to configuring each WebDAV-capable service one at a time and normally mounts one remote at a time. CloudMount is natively integrated into Synology, mounts 8 major drives after a single QR login, and supports cross-drive transfer and offline caching.</p>
+  </div>
+
+  <p style="margin-top:40px;text-align:center">
+    <a class="btn" href="/">Back to Official Website →</a>
+  </p>
+
+  <div class="related">
+    <h2>Related Reading</h2>
+    <ul>
+      <li><a href="/en/mount-troubleshooting.html">Synology Cloud Drive Mount Failed - Troubleshooting Guide</a></li>
+      <li><a href="/en/mount-speed-optimization.html">Speed Up Synology NAS Cloud Mounts</a></li>
+      <li><a href="/en/mount-vs-sync.html">Mount vs Sync on Synology NAS</a></li>
+      <li><a href="/baidu-wangpan-mount.html">Mount Baidu Wangpan on Synology NAS</a></li>
+      <li><a href="/compare-cloudmount-clouddrive2-alist.html">CloudMount vs CloudDrive2 vs Alist</a></li>
+      <li><a href="/synology-package-install.html">How to Install a Synology Package</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 CloudMount · Cloud Drive Mount Tool for Synology NAS</p>
+  <p><a href="/">Home</a> | <a href="/tutorials.html">Tutorials</a> | <a href="/webdav-mount.html">中文版</a> | <a href="/compare-cloudmount-clouddrive2-alist.html">Comparison</a></p>
+</footer>
+</body>
+</html>

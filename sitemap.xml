@@ -232,4 +232,36 @@
         <mobile:mobile/>
     </url>
 
+    <url>
+        <loc>https://beatwind.github.io/en/webdav-mount.html</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/en/mount-troubleshooting.html</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/en/mount-speed-optimization.html</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/en/mount-vs-sync.html</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <mobile:mobile/>
+    </url>
+
 </urlset>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Synology Cloud Drive Mount Failed? Troubleshooting Guide | CloudMount</title>
+<meta name="description" content="Mount failed, empty folders or constant disconnects on Synology NAS? A symptom-based troubleshooting guide: basic environment, permissions and firewall, missing files, disconnects and a full reset.">
+<meta name="keywords" content="Synology mount failed,Synology cloud drive mount error,Synology mount troubleshooting,Synology mount disconnect,File Station mount failed">
+<link rel="canonical" href="https://beatwind.github.io/en/mount-troubleshooting.html">
+<link rel="alternate" hreflang="zh-CN" href="https://beatwind.github.io/mount-troubleshooting.html">
+<link rel="alternate" hreflang="x-default" href="https://beatwind.github.io/mount-troubleshooting.html">
+<meta property="og:title" content="Synology Cloud Drive Mount Failed? Troubleshooting Guide">
+<meta property="og:description" content="Diagnose and fix Synology cloud drive mount failures step by step, organized by symptom.">
+<meta property="og:url" content="https://beatwind.github.io/en/mount-troubleshooting.html">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="mobile-agent" content="format=html5;url=https://beatwind.github.io/en/mount-troubleshooting.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="Synology cloud drive mount troubleshooting">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Synology Cloud Drive Mount Failed? Troubleshooting Guide">
+<meta name="twitter:description" content="Fix mount failures, empty folders and disconnects on Synology step by step.">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Fix Synology Cloud Drive Mount Failures",
+  "description": "A step-by-step troubleshooting flow for cloud drive mount failures on a Synology NAS",
+  "step": [
+    {"@type": "HowToStep", "name": "Confirm the basic environment", "text": "Check that the NAS is powered on and reachable, the network is stable, the account is valid and the mount package is installed and running"},
+    {"@type": "HowToStep", "name": "Check permissions and firewall", "text": "Verify shared folder and remote directory permissions and make sure the firewall or router is not blocking the required ports"},
+    {"@type": "HowToStep", "name": "Re-login and re-mount", "text": "Sign out, sign back in to refresh the authorization, then uninstall and re-add the mount to reset the configuration"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"Tutorials","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"Synology Cloud Drive Mount Failed - Troubleshooting","item":"https://beatwind.github.io/en/mount-troubleshooting.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why can't I see files after mounting a cloud drive on Synology?","acceptedAnswer":{"@type":"Answer","text":"First refresh File Station or re-enter the mount directory. If it is still empty, check that the mount point is set correctly and the account still has permission, then sign out, sign back in and mount again. In some cases the cloud directory itself is empty or has not finished syncing."}},{"@type":"Question","name":"Why does my Synology cloud drive mount keep disconnecting?","acceptedAnswer":{"@type":"Answer","text":"Common causes are unstable networking, an expired account login token or firewall blocking. Confirm the network is stable and the router is not blocking the ports, then sign in again to refresh the authorization. If disconnects persist, check whether security software or a proxy is interfering."}},{"@type":"Question","name":"What should I do if mounting fails with a login or authentication error?","acceptedAnswer":{"@type":"Answer","text":"First confirm the account password or QR login is still valid and there is no abnormal login restriction on the drive side. Then confirm the NAS network can reach the drive service. If it keeps failing, sign out, sign back in and mount again."}},{"@type":"Question","name":"Does an encrypted shared folder affect mounting?","acceptedAnswer":{"@type":"Answer","text":"Yes. If the target shared folder is encrypted and not mounted (unlocked), related tasks may fail. Sign in as an administrator, select the encrypted folder under Control Panel > Shared Folder and click Mount to unlock it, then retry."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Synology Cloud Drive Mount Failed - Troubleshooting Guide","description":"A symptom-based troubleshooting guide for Synology cloud drive mount failures and disconnects","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-10-07","dateModified":"2026-10-07","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/en/mount-troubleshooting.html"},"inLanguage":"en"}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th,td{padding:12px;text-align:left;border:1px solid #334155}
+th{background:#1e293b;color:#e5e7eb}
+td{color:#d1d5db}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.btn:hover{opacity:0.9}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h2,.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/tutorials.html">Tutorials</a> / Mount Troubleshooting</div>
+  <h1>Synology Cloud Drive Mount Failed - Troubleshooting Guide</h1>
+  <p class="subtitle">Mount errors, no files visible, frequent disconnects? Locate and fix Synology cloud drive mounting problems step by step, organized by symptom.</p>
+
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#symptom">Common Mount Failure Symptoms at a Glance</a></li>
+      <li><a href="#step1">Step 1: Confirm the Basic Environment</a></li>
+      <li><a href="#step2">Step 2: Check Permissions and Firewall</a></li>
+      <li><a href="#step3">Step 3: Mounted but No Files Visible</a></li>
+      <li><a href="#step4">Step 4: Frequent Disconnects</a></li>
+      <li><a href="#step5">Step 5: Uninstall, Reinstall and Full Reset</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="symptom">1. Common Mount Failure Symptoms at a Glance</h2>
+  <p>Mounting problems look varied but usually fall into the categories below. Matching the symptom first helps you find the right direction faster.</p>
+  <table>
+    <thead>
+      <tr><th>Symptom</th><th>Common cause</th><th>Check first</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Login or authentication failure</td><td>Invalid password or expired QR login, drive-side restriction</td><td>Account and network</td></tr>
+      <tr><td>Mounts but the directory is empty</td><td>Wrong mount point, insufficient permission, empty cloud directory</td><td>Mount point and permissions</td></tr>
+      <tr><td>Frequent disconnects after mounting</td><td>Network fluctuation, expired authorization, firewall blocking</td><td>Network and firewall</td></tr>
+      <tr><td>Package fails to start or reports errors</td><td>Package exception, encrypted folder not unlocked</td><td>Package and system settings</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="step1">2. Step 1: Confirm the Basic Environment</h2>
+  <p>Most "cannot mount" problems come down to the three most basic things. Confirm each one first:</p>
+  <ul>
+    <li><strong>The NAS is powered on and reachable</strong>: you can log into DSM or access it through the web interface normally</li>
+    <li><strong>The network connection is stable</strong>: the NAS network works and can reach the target drive service</li>
+    <li><strong>The account information is correct</strong>: the password or QR login state is valid and there is no abnormal login restriction on the drive side</li>
+    <li><strong>The package is installed and running</strong>: the mount package is started, not stopped or disabled</li>
+  </ul>
+
+  <h2 id="step2">3. Step 2: Check Permissions and Firewall</h2>
+  <p>If the basic environment is fine, focus on permissions and network policy. Mounting essentially makes the NAS access a remote resource, so blocked permissions or ports will always fail.</p>
+  <ul>
+    <li><strong>Shared folder permissions</strong>: confirm the account used has read/write permission on the target shared folder</li>
+    <li><strong>Access permissions</strong>: confirm the account has sufficient access to the remote directory to mount; insufficient permission leads to a mount that succeeds but cannot read or write</li>
+    <li><strong>Firewall settings</strong>: check whether the Synology firewall or the router blocks the ports needed for the connection; when using protocols such as NFS or SMB, not opening the corresponding ports also causes mount failures</li>
+    <li><strong>Protocol version</strong>: some older devices need an adjusted protocol version (for example NFS <code>vers=2/3/4</code>) to mount successfully</li>
+  </ul>
+
+  <h2 id="step3">4. Step 3: Mounted but No Files Visible</h2>
+  <p>"It shows as mounted but the directory is empty" is the most common confusion. Check in order:</p>
+  <ol>
+    <li>Refresh the File Station interface, or exit the mount directory and re-enter it</li>
+    <li>Verify the mount point targets the correct cloud directory (many drives mount the root or a specific folder by default)</li>
+    <li>Confirm the cloud directory itself is not empty, or that resources have not finished syncing</li>
+    <li>Sign out of the account and sign in again to refresh the authorization, then re-mount</li>
+  </ol>
+  <div class="highlight">
+    <strong>Tip:</strong> If only one drive shows no files while others work normally, it is most likely an authorization or directory setting issue with that drive, not the NAS itself.
+  </div>
+
+  <h2 id="step4">5. Step 4: Frequent Disconnects</h2>
+  <p>Mounting connects but drops after a while, usually related to connection stability:</p>
+  <ul>
+    <li><strong>Network fluctuation</strong>: confirm the NAS network is stable and avoid weak Wi-Fi signals or frequent router restarts</li>
+    <li><strong>Expired authorization</strong>: after the drive login token expires, sign in again to refresh it</li>
+    <li><strong>Blocked ports</strong>: check whether security software, a proxy or a firewall is interrupting the connection</li>
+    <li><strong>Too many simultaneous mounts</strong>: mounting too many drives at once can worsen resource contention, so reduce concurrency first and observe</li>
+  </ul>
+
+  <h2 id="step5">6. Step 5: Uninstall, Reinstall and Full Reset</h2>
+  <p>If the checks above still leave problems, reset from lightest to heaviest:</p>
+  <ol>
+    <li>Unmount the current mount point and mount it again</li>
+    <li>Sign out of the account and sign in again to refresh all authorizations</li>
+    <li>Stop and restart the mount package</li>
+    <li>If necessary, uninstall the package and reinstall it (see the <a href="/synology-package-install.html">Synology package install tutorial</a>); the configuration will be re-initialized</li>
+    <li>If an encrypted shared folder is involved, sign in as an administrator, select it under Control Panel &gt; Shared Folder and click Mount to unlock it, then retry</li>
+  </ol>
+
+  <p>If you repeatedly hit complex mounts that need command lines or third-party relays, switching to a natively integrated, QR-code mount saves a lot of troubleshooting time. CloudMount mounts 8 major drives at once and integrates natively with <a href="/">File Station</a>, working directly with <a href="/jellyfin-cloud-drive.html">Jellyfin</a> and <a href="/video-station-cloud-drive.html">Video Station</a>.</p>
+  <p><a class="btn" href="/">Download CloudMount from the Official Website →</a></p>
+
+  <h2 id="faq">7. FAQ</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Why can't I see files after mounting a cloud drive on Synology?</div>
+    <p>A: First refresh File Station or re-enter the mount directory. If it is still empty, check that the mount point is set correctly and the account still has permission, then sign out, sign back in and mount again. In some cases the cloud directory itself is empty or has not finished syncing.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Why does my Synology cloud drive mount keep disconnecting?</div>
+    <p>A: Common causes are unstable networking, an expired account login token or firewall blocking. Confirm the network is stable and the router is not blocking the ports, then sign in again to refresh the authorization. If disconnects persist, check whether security software or a proxy is interfering.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: What should I do if mounting fails with a login or authentication error?</div>
+    <p>A: First confirm the account password or QR login is still valid and there is no abnormal login restriction on the drive side. Then confirm the NAS network can reach the drive service. If it keeps failing, sign out, sign back in and mount again.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Does an encrypted shared folder affect mounting?</div>
+    <p>A: Yes. If the target shared folder is encrypted and not mounted (unlocked), related tasks may fail. Sign in as an administrator, select the encrypted folder under Control Panel &gt; Shared Folder and click Mount to unlock it, then retry.</p>
+  </div>
+
+  <p style="margin-top:40px;text-align:center">
+    <a class="btn" href="/">Back to Official Website →</a>
+  </p>
+
+  <div class="related">
+    <h2>Related Reading</h2>
+    <ul>
+      <li><a href="/en/mount-speed-optimization.html">Speed Up Synology NAS Cloud Mounts</a></li>
+      <li><a href="/en/webdav-mount.html">Mount WebDAV on Synology NAS</a></li>
+      <li><a href="/en/mount-vs-sync.html">Mount vs Sync on Synology NAS</a></li>
+      <li><a href="/synology-package-install.html">How to Install a Synology Package</a></li>
+      <li><a href="/baidu-wangpan-mount.html">Mount Baidu Wangpan on Synology NAS</a></li>
+      <li><a href="/tutorials.html">All Tutorials</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 CloudMount · Cloud Drive Mount Tool for Synology NAS</p>
+  <p><a href="/">Home</a> | <a href="/tutorials.html">Tutorials</a> | <a href="/mount-troubleshooting.html">中文版</a> | <a href="/compare-cloudmount-clouddrive2-alist.html">Comparison</a></p>
+</footer>
+</body>
+</html>

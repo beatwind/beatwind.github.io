@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Mount vs Sync on Synology NAS - Storage Usage Compared | CloudMount</title>
+<meta name="description" content="What is the difference between mounting and syncing a cloud drive on a Synology NAS? Mounting reads files on demand and uses almost no local space, while syncing keeps a full local copy. Compared across principle, storage usage, speed, offline access and deletion risk.">
+<meta name="keywords" content="mount vs sync Synology,cloud drive mount vs sync,NAS sync storage usage,Synology Drive on-demand sync,Synology cloud sync">
+<link rel="canonical" href="https://beatwind.github.io/en/mount-vs-sync.html">
+<link rel="alternate" hreflang="zh-CN" href="https://beatwind.github.io/mount-vs-sync.html">
+<link rel="alternate" hreflang="x-default" href="https://beatwind.github.io/mount-vs-sync.html">
+<meta property="og:title" content="Mount vs Sync on Synology NAS - Storage Usage Compared">
+<meta property="og:description" content="Mounting vs syncing compared across principle, storage usage, speed, offline access and deletion risk, with advice on which to choose.">
+<meta property="og:url" content="https://beatwind.github.io/en/mount-vs-sync.html">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="mobile-agent" content="format=html5;url=https://beatwind.github.io/en/mount-vs-sync.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="Mount vs Sync on Synology NAS">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mount vs Sync on Synology NAS - Storage Usage Compared">
+<meta name="twitter:description" content="Mounting uses almost no local space; syncing keeps a full copy. Here is how to choose.">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Choose Between Mounting and Syncing a Cloud Drive",
+  "description": "Decide whether to mount or sync a cloud drive based on your scenario",
+  "step": [
+    {"@type": "HowToStep", "name": "Check whether you need offline access", "text": "Choose sync if you need to open files without a network connection; choose mounting if you only access them while online"},
+    {"@type": "HowToStep", "name": "Check whether local space is sufficient", "text": "If local space is tight, choose mounting or on-demand sync; if you need a complete copy, choose traditional sync"},
+    {"@type": "HowToStep", "name": "Check your purpose", "text": "Mounting suits media playback and expanding capacity; syncing suits backup and offline work, and the two can be combined"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"Tutorials","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"Mount vs Sync on Synology NAS","item":"https://beatwind.github.io/en/mount-vs-sync.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the most fundamental difference between mounting and syncing a cloud drive?","acceptedAnswer":{"@type":"Answer","text":"In one line: mounting means using the files in the cloud, reading them on demand, with almost no local copy; syncing means keeping a copy locally, retaining a full or partial replica that stays consistent with the cloud in both directions."}},{"@type":"Question","name":"Does mounting a cloud drive use local space on the NAS?","acceptedAnswer":{"@type":"Answer","text":"Very little. Files actually live in the cloud and only a small cache is used while reading or transferring (a 1 GB cap by default, for example). The cache is cleared automatically when idle, so mounting consumes almost none of your local drive capacity."}},{"@type":"Question","name":"Is there a way to save space and still have offline access?","acceptedAnswer":{"@type":"Answer","text":"Yes. Synology Drive's on-demand sync keeps only placeholder files locally and downloads them when opened, and you can pin the files you need to keep permanently. When local space runs low it automatically frees the least recently used copies, balancing space saving and offline access."}},{"@type":"Question","name":"Can mounting and syncing be used at the same time?","acceptedAnswer":{"@type":"Answer","text":"Yes. A common approach is to use cloud sync for important documents that need offline access or backup, and cloud drive mounting for large on-demand files such as media, which makes the two complementary."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Mount vs Sync on Synology NAS: What Is the Difference?","description":"Mounting vs syncing compared across principle, storage usage, speed, offline access and deletion risk, with advice on which to choose","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-10-07","dateModified":"2026-10-07","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/en/mount-vs-sync.html"},"inLanguage":"en"}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th,td{padding:12px;text-align:left;border:1px solid #334155}
+th{background:#1e293b;color:#e5e7eb}
+td{color:#d1d5db}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.btn:hover{opacity:0.9}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h2,.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/tutorials.html">Tutorials</a> / Mount vs Sync</div>
+  <h1>Mount vs Sync on Synology NAS: What Is the Difference?</h1>
+  <p class="subtitle">In one line: mounting means using the files in the cloud, while syncing means keeping a copy locally. This guide compares the two across five dimensions so you can pick the right one for your scenario.</p>
+
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#conclusion">The One-Line Conclusion</a></li>
+      <li><a href="#principle">How Each Works: Mount vs Sync</a></li>
+      <li><a href="#space">Local Storage Usage Compared</a></li>
+      <li><a href="#speed">Speed and Offline Access Compared</a></li>
+      <li><a href="#risk">Data Safety and Deletion Risk</a></li>
+      <li><a href="#table">The Whole Comparison in One Table</a></li>
+      <li><a href="#choose">Choosing by Scenario</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="conclusion">1. The One-Line Conclusion</h2>
+  <div class="highlight">
+    <strong>Mounting</strong>: connects a cloud drive's directory to the NAS like a local folder. Files stay in the cloud, are read on demand, and take up almost no local space.<br>
+    <strong>Syncing</strong>: keeps a local copy and keeps the cloud and the local side consistent in both directions, so your local drives genuinely hold the same amount of data.
+  </div>
+
+  <h2 id="principle">2. How Each Works: Mount vs Sync</h2>
+  <ul>
+    <li><strong>Mounting</strong>: maps a remote cloud drive to a directory through a mount mechanism and pulls data from the cloud only when accessed. The local side is just an entry point; the cloud remains the primary data location</li>
+    <li><strong>Syncing</strong>: builds a local copy and syncs changes both ways between local and cloud. The local side is real storage, so already-synced files can be opened even without a network connection</li>
+  </ul>
+
+  <h2 id="space">3. Local Storage Usage Compared</h2>
+  <p>This is the biggest difference between the two and where most people choose wrong:</p>
+  <ul>
+    <li><strong>Mounting</strong>: uses almost no local space, relying only on a small cache while reading or transferring, and the cache is cleared automatically when idle</li>
+    <li><strong>Syncing</strong>: keeps a complete local copy, so roughly as much data as you have in the cloud occupies your local drives</li>
+    <li><strong>The middle ground</strong>: Synology Drive's on-demand sync keeps only placeholder files locally and downloads them when opened, and you can pin the files you need to keep permanently. When local space runs low it frees the least recently used copies, balancing space saving and offline access</li>
+  </ul>
+
+  <h2 id="speed">4. Speed and Offline Access Compared</h2>
+  <ul>
+    <li><strong>Access speed</strong>: mounting is limited by the cloud drive's real-time download speed, so the first open involves waiting; syncing opens a local copy and reads faster</li>
+    <li><strong>Offline access</strong>: mounted cloud files are unavailable once you go offline; a synced local copy still works</li>
+    <li><strong>Bandwidth use</strong>: mounting uses bandwidth on demand, while syncing transfers continuously in the background, and the initial sync can consume a lot of bandwidth</li>
+  </ul>
+
+  <h2 id="risk">5. Data Safety and Deletion Risk</h2>
+  <ul>
+    <li><strong>Mounting</strong>: actions apply directly to the cloud, so deleting a file deletes it in the cloud, which calls for care; enable the drive's recycle bin or version protection</li>
+    <li><strong>Syncing</strong>: two-way sync can propagate a local accidental deletion to the cloud; on some file systems (such as ext4) enabling version control also uses roughly double the space</li>
+  </ul>
+
+  <h2 id="table">6. The Whole Comparison in One Table</h2>
+  <table>
+    <thead>
+      <tr><th>Dimension</th><th>Mounting</th><th>Syncing</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Data location</td><td>Primarily in the cloud, read on demand</td><td>Keeps a local copy</td></tr>
+      <tr><td>Local usage</td><td>Minimal (cache only)</td><td>Roughly equals total data size</td></tr>
+      <tr><td>Read speed</td><td>Limited by cloud drive speed</td><td>Reads locally, faster</td></tr>
+      <tr><td>Offline access</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Best for</td><td>Media playback, capacity expansion, on-demand access</td><td>Backup, offline work, important documents</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="choose">7. Choosing by Scenario</h2>
+  <ul>
+    <li><strong>Want to expand NAS capacity with cloud drives and store media</strong>: prefer mounting for zero local usage, see the <a href="/nas-storage-expansion.html">NAS storage expansion guide</a></li>
+    <li><strong>Important documents and photo backups that must open offline</strong>: prefer syncing, or use on-demand sync to download as needed</li>
+    <li><strong>Want to save space and sometimes work offline</strong>: use on-demand sync, pin the key files permanently and release the rest on demand</li>
+    <li><strong>The two do not conflict</strong>: use sync for team collaboration and backup, use mounting for media and capacity expansion, and combining them works best</li>
+  </ul>
+  <p>If your main need is to solve "the NAS is running out of space and I want to watch media stored in cloud drives", CloudMount's approach is more direct: mount 8 major cloud drives into <a href="/">File Station</a> after a single QR-code login, using almost no local space, and play them directly with <a href="/jellyfin-cloud-drive.html">Jellyfin</a> and <a href="/video-station-cloud-drive.html">Video Station</a>.</p>
+  <p><a class="btn" href="/">Download CloudMount from the Official Website →</a></p>
+
+  <h2 id="faq">8. FAQ</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: What is the most fundamental difference between mounting and syncing a cloud drive?</div>
+    <p>A: In one line: mounting means using the files in the cloud, reading them on demand with almost no local copy; syncing means keeping a copy locally, retaining a full or partial replica that stays consistent with the cloud in both directions.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Does mounting a cloud drive use local space on the NAS?</div>
+    <p>A: Very little. Files actually live in the cloud and only a small cache is used while reading or transferring (a 1 GB cap by default, for example). The cache is cleared automatically when idle, so mounting consumes almost none of your local drive capacity.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Is there a way to save space and still have offline access?</div>
+    <p>A: Yes. Synology Drive's on-demand sync keeps only placeholder files locally and downloads them when opened, and you can pin the files you need permanently. When local space runs low it automatically frees the least recently used copies, balancing space saving and offline access.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Can mounting and syncing be used at the same time?</div>
+    <p>A: Yes. A common approach is to use cloud sync for important documents that need offline access or backup, and cloud drive mounting for large on-demand files such as media, which makes the two complementary.</p>
+  </div>
+
+  <p style="margin-top:40px;text-align:center">
+    <a class="btn" href="/">Back to Official Website →</a>
+  </p>
+
+  <div class="related">
+    <h2>Related Reading</h2>
+    <ul>
+      <li><a href="/en/mount-troubleshooting.html">Synology Cloud Drive Mount Failed - Troubleshooting Guide</a></li>
+      <li><a href="/en/mount-speed-optimization.html">Speed Up Synology NAS Cloud Mounts</a></li>
+      <li><a href="/en/webdav-mount.html">Mount WebDAV on Synology NAS</a></li>
+      <li><a href="/nas-storage-expansion.html">Synology NAS Storage Expansion Guide</a></li>
+      <li><a href="/baidu-wangpan-mount.html">Mount Baidu Wangpan on Synology NAS</a></li>
+      <li><a href="/compare-cloudmount-clouddrive2-alist.html">CloudMount vs CloudDrive2 vs Alist</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 CloudMount · Cloud Drive Mount Tool for Synology NAS</p>
+  <p><a href="/">Home</a> | <a href="/tutorials.html">Tutorials</a> | <a href="/mount-vs-sync.html">中文版</a> | <a href="/compare-cloudmount-clouddrive2-alist.html">Comparison</a></p>
+</footer>
+</body>
+</html>
