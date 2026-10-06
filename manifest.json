@@ -9,9 +9,15 @@
   "lang": "zh-CN",
   "icons": [
     {
-      "src": "https://beatwind.github.io/screenshots/2.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "https://beatwind.github.io/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://beatwind.github.io/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
   ]
 }

@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0f1e">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="preconnect" href="https://beatwind.github.io">
-<link rel="dns-prefetch" href="https://beatwind.github.io">
 <title>网盘跨盘传输教程 - 百度网盘阿里云盘互传不占本地空间 CloudMount</title>
 <meta name="description" content="网盘跨盘传输完整教程，用CloudMount在百度网盘、阿里云盘、夸克网盘之间直接互传文件，不占本地存储空间。详细操作步骤和常见问题解答。">
 <meta name="keywords" content="网盘跨盘传输,百度网盘阿里云盘互传,网盘间互传文件,跨网盘传输,CloudMount跨盘传输,网盘文件搬家,不占本地空间传输">
@@ -34,7 +32,7 @@
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"教程合集","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"网盘跨盘传输教程","item":"https://beatwind.github.io/cross-drive-transfer.html"}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"跨盘传输会占用NAS本地存储空间吗？","acceptedAnswer":{"@type":"Answer","text":"不会。CloudMount采用缓存代理模式，文件从源网盘读取后直接写入目标网盘，仅在传输过程中使用少量缓存空间，传输完成后自动清理。"}},"@type":"Question","name":"百度网盘文件怎么传到阿里云盘？","acceptedAnswer":{"@type":"Answer","text":"用CloudMount同时挂载百度网盘和阿里云盘，在File Station中直接从百度网盘目录复制文件到阿里云盘目录即可，CloudMount会自动完成跨盘传输。"}},{"@type":"Question","name":"跨盘传输速度怎么样？","acceptedAnswer":{"@type":"Answer","text":"取决于源网盘的下载速度和目标网盘的上传速度。百度网盘非会员下载限速约200KB/s，阿里云盘和夸克网盘不限速，传输速度更快。"}},{"@type":"Question","name":"跨盘传输中断了怎么办？","acceptedAnswer":{"@type":"Answer","text":"CloudMount支持断点续传，传输中断后重新复制即可从中断处继续。大文件传输建议在网络稳定时进行。"}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"跨盘传输会占用NAS本地存储空间吗？","acceptedAnswer":{"@type":"Answer","text":"不会。CloudMount采用缓存代理模式，文件从源网盘读取后直接写入目标网盘，仅在传输过程中使用少量缓存空间，传输完成后自动清理。"}},{"@type":"Question","name":"百度网盘文件怎么传到阿里云盘？","acceptedAnswer":{"@type":"Answer","text":"用CloudMount同时挂载百度网盘和阿里云盘，在File Station中直接从百度网盘目录复制文件到阿里云盘目录即可，CloudMount会自动完成跨盘传输。"}},{"@type":"Question","name":"跨盘传输速度怎么样？","acceptedAnswer":{"@type":"Answer","text":"取决于源网盘的下载速度和目标网盘的上传速度。百度网盘非会员下载限速约200KB/s，阿里云盘和夸克网盘不限速，传输速度更快。"}},{"@type":"Question","name":"跨盘传输中断了怎么办？","acceptedAnswer":{"@type":"Answer","text":"CloudMount支持断点续传，传输中断后重新复制即可从中断处继续。大文件传输建议在网络稳定时进行。"}}]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Article","headline":"网盘跨盘传输教程 - 百度网盘阿里云盘互传不占本地空间","description":"用CloudMount在网盘之间直接互传文件不占本地空间","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-08-31","dateModified":"2026-09-01","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/cross-drive-transfer.html"}}
@@ -76,6 +74,10 @@ td{padding:12px;border:1px solid #334155}
 footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
 footer a{color:#3b82f6;text-decoration:none}
 </style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
 </head>
 <body>
 <div class="container">
