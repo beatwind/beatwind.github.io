@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://beatwind.github.io">
+<link rel="dns-prefetch" href="https://beatwind.github.io">
+<title>Video Station播放百度网盘/阿里云盘视频教程 - CloudMount</title>
+<meta name="description" content="群晖Video Station直接播放百度网盘、阿里云盘视频教程，使用CloudMount挂载网盘后，Video Station直接索引网盘电影电视剧，自动刮削海报字幕，无需下载。">
+<meta name="keywords" content="Video Station 网盘,群晖Video Station百度网盘,Video Station阿里云盘,Video Station挂载网盘,群晖视频播放网盘">
+<link rel="canonical" href="https://beatwind.github.io/video-station-cloud-drive.html">
+<meta property="og:title" content="Video Station播放网盘视频教程">
+<meta property="og:description" content="群晖Video Station直接播放网盘视频，无需下载">
+<meta property="og:url" content="https://beatwind.github.io/video-station-cloud-drive.html">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="mobile-agent" content="format=html5;url=https://beatwind.github.io/video-station-cloud-drive.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="Video Station播放网盘视频教程">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Video Station播放网盘视频 - 不用下载直接看">
+<meta name="twitter:description" content="群晖Video Station直接播放百度网盘、阿里云盘视频">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"Video Station播放网盘视频教程","step":[{"@type":"HowToStep","name":"挂载网盘","text":"用CloudMount挂载百度网盘/阿里云盘"},{"@type":"HowToStep","name":"添加视频库","text":"Video Station中添加网盘目录"},{"@type":"HowToStep","name":"播放","text":"直接播放网盘里的视频"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"教程合集","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"Video Station播放网盘视频教程","item":"https://beatwind.github.io/video-station-cloud-drive.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Video Station可以播放百度网盘的视频吗？","acceptedAnswer":{"@type":"Answer","text":"可以。使用CloudMount挂载百度网盘后，在Video Station中添加挂载目录作为视频库，即可直接播放网盘中的视频，支持自动刮削海报和字幕。"}},{"@type":"Question","name":"Video Station播放网盘视频会占用本地空间吗？","acceptedAnswer":{"@type":"Answer","text":"不会。视频文件存储在网盘云端，Video Station通过CloudMount挂载目录直接流式播放，仅在播放时使用少量缓存。"}},{"@type":"Question","name":"Video Station和Jellyfin哪个好？","acceptedAnswer":{"@type":"Answer","text":"Video Station安装简单，适合小白用户；Jellyfin刮削效果好、界面精美、转码强，适合进阶用户。两者都能播放网盘视频，根据需求选择。"}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Video Station播放网盘视频 - 不用下载直接看","description":"群晖Video Station直接播放网盘视频教程","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-08-31","dateModified":"2026-09-01","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/video-station-cloud-drive.html"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.vs-jellyfin{background:#1e293b;padding:20px;border-radius:12px;margin:20px 0}
+.vs-jellyfin table{width:100%;border-collapse:collapse;margin-top:15px}
+.vs-jellyfin th,.vs-jellyfin td{padding:10px;border:1px solid #334155;text-align:left}
+.vs-jellyfin th{background:#0f172a}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首页</a> / Video Station教程</div>
+  <h1>Video Station 直接播放百度网盘/阿里云盘视频教程</h1>
+  <p class="subtitle">用 CloudMount 挂载网盘后，Video Station 直接索引和播放，自动刮削海报，不用下载到本地</p>
+
+  <div class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">方案介绍</a></li>
+      <li><a href="#prereq">准备工作</a></li>
+      <li><a href="#step1">第一步：用 CloudMount 挂载网盘</a></li>
+      <li><a href="#step2">第二步：Video Station 添加视频库</a></li>
+      <li><a href="#vs-vs-jellyfin">Video Station vs Jellyfin 怎么选</a></li>
+      <li><a href="#tips">使用技巧</a></li>
+      <li><a href="#faq">常见问题 FAQ</a></li>
+      <li><a href="#related">相关阅读</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro">一、方案介绍</h2>
+  <p>群晖自带的 Video Station 是很多人首选的视频管理工具，但以前只能播放本地硬盘上的视频。有了 CloudMount 之后，你可以：</p>
+  <ul>
+    <li>把百度网盘、阿里云盘、115网盘等挂载成群晖本地文件夹</li>
+    <li>Video Station 直接索引网盘里的电影和电视剧</li>
+    <li>自动刮削海报、简介、评分等元数据</li>
+    <li>电视、手机、电脑多端播放，不用下载到本地</li>
+    <li>不占用 NAS 硬盘空间，网盘有多大媒体库就有多大</li>
+  </ul>
+
+  <h2 id="prereq">二、准备工作</h2>
+  <ul>
+    <li>群晖 NAS（x86_64 架构）</li>
+    <li>DSM 7.0 及以上系统</li>
+    <li>已安装 Video Station（套件中心搜索安装）</li>
+    <li>已安装 CloudMount 并挂载好网盘</li>
+    <li>网盘会员（建议超级会员，播放更流畅）</li>
+  </ul>
+
+  <h2 id="step1">三、第一步：用 CloudMount 挂载网盘</h2>
+
+  <p>如果你还没安装 CloudMount 并挂载网盘，先完成这一步：</p>
+  <ol>
+    <li>去 <a href="/" style="color:#3b82f6">CloudMount 官网</a> 下载 SPK 安装包</li>
+    <li>套件中心 → 手动安装 → 选择 SPK 文件</li>
+    <li>打开 CloudMount → 添加网盘 → 选择你要挂载的网盘（百度/阿里/115等）</li>
+    <li>扫码登录 → 设置挂载路径 → 确定</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>确认挂载成功：</strong>打开 File Station，在 <code>/volume1/CloudMount/</code> 下能看到你挂载的网盘目录，并且能正常浏览里面的文件。
+  </div>
+
+  <h2 id="step2">四、第二步：Video Station 添加视频库</h2>
+
+  <ol>
+    <li>打开 Video Station</li>
+    <li>点击右上角「设置」图标</li>
+    <li>选择「视频库」选项卡</li>
+    <li>点击「新增」按钮</li>
+    <li>选择视频库类型（电影 / 电视节目 / 家庭视频）</li>
+    <li>输入视频库名称，比如「百度网盘电影」</li>
+    <li>点击「选择文件夹」</li>
+    <li>找到 CloudMount 挂载的网盘目录，比如：<br>
+      <code>/volume1/CloudMount/百度网盘/电影</code>
+    </li>
+    <li>点击「确定」</li>
+    <li>配置刮削选项（建议勾选自动下载海报、简介、字幕等）</li>
+    <li>点击「确定」完成添加</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>完成！</strong>Video Station 会开始扫描网盘里的视频文件并自动刮削元数据。根据文件数量，扫描可能需要几分钟到几十分钟。扫描完成后就可以直接播放了！
+  </div>
+
+  <h2 id="vs-vs-jellyfin">五、Video Station vs Jellyfin 怎么选</h2>
+  <div class="vs-jellyfin">
+    <p>两款都是群晖上常用的视频管理工具，各有优劣：</p>
+    <table>
+      <thead>
+        <tr>
+          <th>对比项</th>
+          <th>Video Station</th>
+          <th>Jellyfin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>安装难度</td><td>简单（套件中心一键安装）</td><td>中等（Docker 部署）</td></tr>
+        <tr><td>刮削效果</td><td>一般</td><td>很好（插件丰富）</td></tr>
+        <tr><td>界面美观</td><td>简洁</td><td>精美</td></tr>
+        <tr><td>转码能力</td><td>一般</td><td>强大</td></tr>
+        <tr><td>多用户管理</td><td>支持</td><td>支持（更灵活）</td></tr>
+        <tr><td>TV 客户端</td><td>DS Video</td><td>Jellyfin 客户端（更多设备）</td></tr>
+        <tr><td>适合人群</td><td>小白用户、追求简单</td><td>进阶用户、追求体验</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>如果你是小白，先用 Video Station 上手没问题。如果追求更好的刮削效果和播放体验，可以考虑 <a href="/jellyfin-cloud-drive.html" style="color:#3b82f6">试试 Jellyfin</a>。两者可以同时用，互不冲突。</p>
+
+  <h2 id="tips">六、使用技巧</h2>
+
+  <h3>1. 文件命名要规范</h3>
+  <ul>
+    <li>电影：<code>电影名 (年份).mkv</code> 例如：<code>盗梦空间 (2010).mkv</code></li>
+    <li>电视剧：<code>剧名/Season 01/S01E01.mp4</code></li>
+    <li>规范的命名能大幅提高刮削准确率</li>
+  </ul>
+
+  <h3>2. 分类管理</h3>
+  <p>建议在网盘里把电影、电视剧、动漫、综艺等分别建文件夹，然后在 Video Station 里分别添加为不同的视频库，这样管理和浏览更清晰。</p>
+
+  <h3>3. 多网盘多视频库</h3>
+  <p>如果你同时挂载了百度网盘和阿里云盘，可以分别添加视频库，也可以把多个目录加到同一个视频库里。</p>
+
+  <h3>4. 网络要求</h3>
+  <ul>
+    <li>1080P 视频建议 10Mbps 以上带宽</li>
+    <li>4K 视频建议 50Mbps 以上带宽</li>
+    <li>有线网络比 Wi-Fi 更稳定</li>
+    <li>网盘会员速度更快，播放更流畅</li>
+  </ul>
+
+  <h2 id="faq">七、常见问题 FAQ</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：Video Station 刮削不到海报怎么办？</div>
+    <p>A：检查文件名是否规范，年份和剧名是否正确。如果还是刮削不到，可以手动编辑视频信息，手动搜索匹配。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：播放卡顿怎么办？</div>
+    <p>A：卡顿可能的原因：1）网络带宽不够，建议用有线网络；2）网盘速度限制，建议开通网盘会员；3）需要转码的视频，CPU 性能不足。如果是转码问题，可以尝试直接播放（不转码）或者用支持的格式。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：支持哪些网盘？</div>
+    <p>A：CloudMount 支持的网盘都可以，包括百度网盘、阿里云盘、夸克网盘、115网盘、天翼云盘、UC网盘、迅雷网盘、PikPak。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：DS Video 手机 App 能播放吗？</div>
+    <p>A：可以。Video Station 添加的视频库，在 DS Video App 里都能看到和播放，跟本地视频完全一样。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：TV 端怎么播放？</div>
+    <p>A：可以用 DS Video TV 版，或者用 DLNA/AirPlay 投屏到电视播放。如果你用 Jellyfin 的话，电视端客户端体验更好。</p>
+  </div>
+
+  <div id="related" class="related">
+    <h3>相关阅读</h3>
+    <ul>
+      <li><a href="/baidu-wangpan-mount.html">群晖挂载百度网盘详细教程</a></li>
+      <li><a href="/aliyun-drive-mount.html">群晖挂载阿里云盘教程</a></li>
+      <li><a href="/jellyfin-cloud-drive.html">Jellyfin播放网盘视频完整教程</a></li>
+      <li><a href="/docker-cloud-drive-mount.html">Docker挂载网盘教程</a></li>
+      <li><a href="/nas-storage-expansion.html">群晖NAS扩容方案</a></li>
+      <li><a href="/cross-drive-transfer.html">网盘跨盘传输教程</a></li>
+    </ul>
+  </div>
+
+  <p style="margin-top:40px;text-align:center">
+    <a class="btn" href="/">免费下载 CloudMount →</a>
+  </p>
+</div>
+
+<footer>
+  <p>© 2026 CloudMount · 群晖NAS网盘挂载工具</p>
+  <p><a href="/">首页</a> | <a href="/baidu-wangpan-mount.html">百度网盘教程</a> | <a href="/video-station-cloud-drive.html">Video Station教程</a> | <a href="/jellyfin-cloud-drive.html">Jellyfin教程</a></p>
+</footer>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var bp = document.createElement('script');
+  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+(function(){
+  var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://beatwind.github.io">
+<link rel="dns-prefetch" href="https://beatwind.github.io">
+<title>How to Mount UC Wangpan on Synology NAS | CloudMount</title>
+<meta name="description" content="Step-by-step tutorial to mount UC Wangpan on Synology NAS with CloudMount. Access UC browser files in File Station, play videos in Video Station, zero local storage.">
+<meta name="keywords" content="mount UC Wangpan Synology,UC Wangpan NAS,UC drive Synology mount,UC cloud Synology tutorial">
+<link rel="canonical" href="https://beatwind.github.io/en/uc-wangpan-mount.html">
+<link rel="alternate" hreflang="zh-CN" href="https://beatwind.github.io/uc-wangpan-mount.html">
+<link rel="alternate" hreflang="x-default" href="https://beatwind.github.io/uc-wangpan-mount.html">
+<meta property="og:title" content="How to Mount UC Wangpan on Synology NAS | CloudMount">
+<meta property="og:description" content="Mount UC Wangpan as a local Synology NAS folder with CloudMount in 3 steps.">
+<meta property="og:url" content="https://beatwind.github.io/en/uc-wangpan-mount.html">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="mobile-agent" content="format=html5;url=https://beatwind.github.io/en/uc-wangpan-mount.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="How to mount UC Wangpan on Synology NAS">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Mount UC Wangpan on Synology NAS | CloudMount">
+<meta name="twitter:description" content="Mount UC Wangpan as a local Synology NAS folder with CloudMount in 3 steps.">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to Mount UC Wangpan on Synology NAS","step":[{"@type":"HowToStep","name":"Download CloudMount","text":"Download the SPK package"},{"@type":"HowToStep","name":"Install the package","text":"Install manually via Synology Package Center"},{"@type":"HowToStep","name":"Add UC Wangpan","text":"Scan QR code to log in and mount"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"Tutorials","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"How to Mount UC Wangpan on Synology NAS","item":"https://beatwind.github.io/en/uc-wangpan-mount.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is UC Wangpan mounting to Synology NAS fast?","acceptedAnswer":{"@type":"Answer","text":"UC Wangpan runs on Alibaba cloud infrastructure, so speed is stable. Daily file browsing feels close to local after mounting; large file transfers depend on your network bandwidth."}},{"@type":"Question","name":"Do I need a UC membership to mount?","acceptedAnswer":{"@type":"Answer","text":"No, the basic mount feature works without membership. UC members get more storage and higher speed limits, recommended for heavy users."}},{"@type":"Question","name":"Can I transfer files between UC Wangpan and other drives?","acceptedAnswer":{"@type":"Answer","text":"Yes. With CloudMount's cross-drive transfer, you can move files directly between UC Wangpan and Baidu Wangpan, Aliyun Drive and more, without using extra NAS storage."}},{"@type":"Question","name":"Can I mount multiple UC accounts at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add multiple UC Wangpan accounts and mount each to a different folder, so each family member keeps files separate on one NAS."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How to Mount UC Wangpan on Synology NAS","description":"Full tutorial to mount UC Wangpan on Synology NAS","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-09-01","dateModified":"2026-09-01","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/en/uc-wangpan-mount.html"},"inLanguage":"en"}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h2,.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">Home</a> / UC Wangpan Mount Tutorial</div>
+  <h1>How to Mount UC Wangpan on Synology NAS (Full Tutorial)</h1>
+  <p class="subtitle">Use CloudMount to mount UC Wangpan as a local folder on your Synology NAS. Files saved in UC Browser are managed directly in File Station.</p>
+
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#intro">Why Mount UC Wangpan to Synology NAS</a></li>
+      <li><a href="#install">Installation Tutorial (3 Steps)</a></li>
+      <li><a href="#usage">Use Cases</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro">1. Why Mount UC Wangpan to Synology NAS</h2>
+  <p>UC Wangpan is deeply integrated with UC Browser, and many users download and store resources through UC Browser. After mounting it to your Synology NAS:</p>
+  <ul>
+    <li><strong>Direct access to saved resources</strong>: files saved or transferred in UC Browser are accessible on your NAS right away</li>
+    <li><strong>Unified management</strong>: manage all cloud drive files in one File Station interface</li>
+    <li><strong>Expanded capacity</strong>: your UC membership storage effectively extends your NAS</li>
+    <li><strong>Zero local storage usage</strong>: files stay in the cloud and use no NAS disk space</li>
+  </ul>
+
+  <h2 id="install">2. Installation Tutorial (3 Steps)</h2>
+
+  <h3>Step 1: Download CloudMount</h3>
+  <p>Visit the official website to download the SPK package for your Synology model. All x86_64 Synology models are supported.</p>
+  <p><a class="btn" href="/">Download from Official Website →</a></p>
+
+  <h3>Step 2: Install the Package</h3>
+  <ol>
+    <li>Open the Synology DSM management interface</li>
+    <li>Go to Package Center</li>
+    <li>Click "Manual Install" in the top-right corner</li>
+    <li>Select the downloaded SPK file</li>
+    <li>Click Next, accept the agreement, and finish the installation</li>
+  </ol>
+
+  <h3>Step 3: Add UC Wangpan</h3>
+  <ol>
+    <li>Open CloudMount</li>
+    <li>Click "Add Cloud Drive"</li>
+    <li>Select "UC Wangpan"</li>
+    <li>Scan the QR code to log in with UC Browser or the UC Wangpan app</li>
+    <li>Set the mount path and click OK</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>Done!</strong> Open File Station and you will see all your UC Wangpan files, just like a local folder.
+  </div>
+
+  <h2 id="usage">3. Use Cases</h2>
+
+  <h3>3.1 Play UC-Saved Media Directly</h3>
+  <p>Movies and shows saved in UC Browser can be played directly with Video Station after mounting, no downloading required.</p>
+
+  <h3>3.2 Auto-Archive Phone Files</h3>
+  <p>Photos and documents backed up to UC Wangpan from your phone can be archived, searched and managed on the NAS.</p>
+
+  <h3>3.3 Consolidate Multiple Cloud Drives</h3>
+  <p>Mount UC Wangpan alongside Baidu Wangpan and Aliyun Drive, then use <a href="/cross-drive-transfer.html">cross-drive transfer</a> to consolidate scattered files into your most-used drive.</p>
+
+  <h3>3.4 Expand Your Media Library</h3>
+  <p>Mount UC Wangpan as a media folder for Jellyfin or Video Station. See our <a href="/video-station-cloud-drive.html">online playback tutorial</a> to scrape and play directly.</p>
+
+  <h2 id="faq">4. FAQ</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Can free UC users use this?</div>
+    <p>A: Yes. Free users can mount and use UC Wangpan normally. UC members get more storage and lower download speed limits.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Can I mount files shared by other UC users?</div>
+    <p>A: First save shared files into your own UC Wangpan, then access them through the mount. This is a common cloud drive API limitation.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: Will the phone UC Wangpan and NAS stay in sync?</div>
+    <p>A: Mounting accesses cloud files in real time, so new files uploaded from your phone appear in the NAS mount directory immediately, with no manual sync needed.</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q: UC Wangpan or Quark Drive, which is better to mount?</div>
+    <p>A: Both are Alibaba-family cloud storage. UC wins on UC Browser integration; Quark has more refined speed and membership plans. CloudMount supports 8 drives simultaneously, so mount both as needed.</p>
+  </div>
+
+  <p style="margin-top:40px;text-align:center">
+    <a class="btn" href="/">Back to Official Website →</a>
+  </p>
+
+  <div class="related">
+    <h2>Related Reading</h2>
+    <ul>
+      <li><a href="/baidu-wangpan-mount.html">Mount Baidu Wangpan on Synology NAS</a></li>
+      <li><a href="/aliyun-drive-mount.html">Mount Aliyun Drive on Synology NAS</a></li>
+      <li><a href="/quark-drive-mount.html">Mount Quark Drive on Synology NAS</a></li>
+      <li><a href="/cross-drive-transfer.html">Cross-Drive Transfer Tutorial</a></li>
+      <li><a href="/video-station-cloud-drive.html">Play Cloud Drive Videos in Video Station</a></li>
+      <li><a href="/compare-cloudmount-clouddrive2-alist.html">CloudMount vs CloudDrive2 vs Alist</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 CloudMount · Cloud Drive Mount Tool for Synology NAS</p>
+  <p><a href="/">Home</a> | <a href="/tutorials.html">Tutorials</a> | <a href="/uc-wangpan-mount.html">中文版</a> | <a href="/compare-cloudmount-clouddrive2-alist.html">Comparison</a></p>
+</footer>
+</body>
+</html>

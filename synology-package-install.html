@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://beatwind.github.io">
+<link rel="dns-prefetch" href="https://beatwind.github.io">
+<title>群晖套件安装教程 - SPK手动安装完整步骤 CloudMount</title>
+<meta name="description" content="群晖NAS套件安装完整教程，教你如何在套件中心手动安装SPK文件，包含常见安装错误解决方法。以CloudMount为例详细演示每一步操作，新手也能3分钟完成。">
+<meta name="keywords" content="群晖套件安装,群晖SPK安装,群晖手动安装套件,套件中心安装,CloudMount安装,群晖安装第三方套件,群晖套件安装失败">
+<link rel="canonical" href="https://beatwind.github.io/synology-package-install.html">
+<meta property="og:title" content="群晖套件安装教程 - SPK手动安装完整步骤">
+<meta property="og:description" content="群晖NAS套件安装完整教程，SPK手动安装每一步操作详解">
+<meta property="og:url" content="https://beatwind.github.io/synology-package-install.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="群晖套件安装教程">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="群晖套件安装教程 - SPK手动安装完整步骤">
+<meta name="twitter:description" content="群晖NAS套件安装完整教程，新手也能3分钟完成">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"群晖套件SPK手动安装教程","description":"在群晖NAS上手动安装SPK套件包的完整步骤","step":[{"@type":"HowToStep","name":"下载SPK文件","text":"从官网或网盘下载SPK安装包到本地"},{"@type":"HowToStep","name":"打开套件中心","text":"登录DSM打开套件中心"},{"@type":"HowToStep","name":"选择手动安装","text":"点击右上角手动安装按钮"},{"@type":"HowToStep","name":"上传SPK","text":"选择下载的SPK文件并上传"},{"@type":"HowToStep","name":"完成安装","text":"按照向导完成安装"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"教程合集","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"群晖套件安装教程","item":"https://beatwind.github.io/synology-package-install.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"群晖套件安装失败怎么办？","acceptedAnswer":{"@type":"Answer","text":"常见原因：1.架构不匹配（x86_64套件不能装在ARM机型上），2.DSM版本过低（升级到DSM 7.0以上），3.存储空间不足。CloudMount需要x86_64架构的群晖NAS。"}},{"@type":"Question","name":"群晖怎么安装第三方套件？","acceptedAnswer":{"@type":"Answer","text":"在套件中心点击右上角的手动安装按钮，选择下载的SPK文件上传即可。不需要开启SSH或命令行操作，全程图形界面。"}},{"@type":"Question","name":"SPK文件是什么？","acceptedAnswer":{"@type":"Answer","text":"SPK是Synology Package Kit的缩写，是群晖NAS的套件安装包格式，类似于Windows的exe或Android的apk。在套件中心手动安装即可。"}},{"@type":"Question","name":"CloudMount支持哪些群晖型号？","acceptedAnswer":{"@type":"Answer","text":"支持所有x86_64架构的群晖NAS，包括DS220+、DS920+、DS224+、DS1522+等Plus系列和XS系列。ARM架构的value系列不支持。详见首页常见问题。"}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"群晖套件安装教程 - SPK手动安装完整步骤","description":"群晖NAS套件安装完整教程，SPK手动安装每一步操作详解","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-08-31","dateModified":"2026-09-01","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/synology-package-install.html"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.warning{background:rgba(239,68,68,0.1);padding:20px;border-radius:12px;border:1px solid #ef4444;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.faq-a{color:#d1d5db;font-size:14px}
+.faq-a a{color:#60a5fa;text-decoration:none}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th{background:#1e293b;padding:12px;text-align:left;border:1px solid #334155;font-weight:600}
+td{padding:12px;border:1px solid #334155}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.btn:hover{opacity:0.9}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首页</a> / <a href="/tutorials.html">教程合集</a> / 群晖套件安装教程</div>
+  <h1>群晖套件安装教程 - SPK手动安装完整步骤</h1>
+  <p class="subtitle">以 CloudMount 为例，详细演示群晖NAS套件安装的每一步操作，新手也能3分钟完成</p>
+
+  <div class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#what-spk">什么是SPK套件包</a></li>
+      <li><a href="#prerequisites">安装前提条件</a></li>
+      <li><a href="#steps">详细安装步骤</a></li>
+      <li><a href="#errors">常见安装错误及解决</a></li>
+      <li><a href="#faq">常见问题</a></li>
+    </ol>
+  </div>
+
+  <h2 id="what-spk">一、什么是SPK套件包</h2>
+  <p>SPK（Synology Package Kit）是群晖NAS的套件安装包格式，类似于 Windows 的 .exe 或 Android 的 .apk。群晖套件中心里大部分应用都是 SPK 格式，CloudMount 也是以 SPK 包形式分发的。</p>
+  <p>套件中心里的应用可以直接一键安装，但第三方开发的套件（如 CloudMount）需要通过「手动安装」功能来安装。</p>
+
+  <h2 id="prerequisites">二、安装前提条件</h2>
+  <table>
+    <thead>
+      <tr><th>条件</th><th>要求</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>NAS架构</td><td>x86_64（Intel/AMD处理器）</td></tr>
+      <tr><td>DSM版本</td><td>7.0 或以上</td></tr>
+      <tr><td>存储空间</td><td>至少100MB可用空间</td></tr>
+      <tr><td>网络</td><td>能访问互联网（登录网盘需要）</td></tr>
+      <tr><td>管理员权限</td><td>需要admin或root账户登录DSM</td></tr>
+    </tbody>
+  </table>
+  <div class="warning">
+    <p>注意：CloudMount 仅支持 x86_64 架构的群晖NAS。DS220j、DS223j 等 ARM 架构的 value 系列无法安装。支持型号详见<a href="/#faq">首页常见问题</a>。</p>
+  </div>
+
+  <h2 id="steps">三、详细安装步骤</h2>
+  <h3>步骤1：下载SPK安装包</h3>
+  <p>从<a href="/#download">下载页面</a>获取 CloudMount 的 SPK 安装包，文件名为 <code>webdav-mounter_x86_64.spk</code>。下载到本地电脑即可。</p>
+
+  <h3>步骤2：登录群晖DSM</h3>
+  <p>在浏览器中输入群晖NAS的IP地址，登录 DSM 管理界面。需要有管理员权限的账号。</p>
+
+  <h3>步骤3：打开套件中心</h3>
+  <p>在DSM桌面找到「套件中心」图标并打开。这是群晖管理所有应用的地方。</p>
+
+  <h3>步骤4：选择手动安装</h3>
+  <p>在套件中心页面右上角找到「手动安装」按钮。如果看不到，可能需要点击右上角的菜单图标展开。</p>
+
+  <h3>步骤5：上传SPK文件</h3>
+  <p>在弹出的窗口中点击「浏览」，选择刚才下载的 <code>webdav-mounter_x86_64.spk</code> 文件，点击「下一步」。</p>
+
+  <h3>步骤6：确认安装</h3>
+  <p>系统会显示套件信息，确认无误后点击「安装」。安装过程通常只需几秒钟。</p>
+
+  <h3>步骤7：打开CloudMount</h3>
+  <p>安装完成后，在DSM桌面或主菜单中找到 CloudMount 图标，打开后即可开始<a href="/baidu-wangpan-mount.html">挂载网盘</a>。</p>
+
+  <div class="highlight">
+    <p>整个安装过程不需要命令行、不需要SSH、不需要Docker，全程图形界面操作，3分钟即可完成。安装后可以参考我们的<a href="/tutorials.html">教程合集</a>开始挂载网盘。</p>
+  </div>
+
+  <h2 id="errors">四、常见安装错误及解决</h2>
+  <table>
+    <thead>
+      <tr><th>错误信息</th><th>原因</th><th>解决方法</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>无效的套件文件</td><td>下载不完整或文件损坏</td><td>重新下载SPK文件</td></tr>
+      <tr><td>此套件不支持您的NAS型号</td><td>ARM架构机型不兼容</td><td>更换x86_64架构NAS</td></tr>
+      <tr><td>DSM版本过低</td><td>DSM版本低于7.0</td><td>在更新设置中升级DSM</td></tr>
+      <tr><td>存储空间不足</td><td>NAS硬盘空间不够</td><td>清理文件释放空间</td></tr>
+      <tr><td>安装超时</td><td>网络不稳定</td><td>检查网络后重试</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="faq">五、常见问题</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：群晖怎么安装第三方套件？</div>
+    <div class="faq-a">A：在套件中心点击右上角的「手动安装」按钮，选择下载的SPK文件上传即可。不需要开启SSH或命令行操作，全程图形界面。详见上方<a href="#steps">安装步骤</a>。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：安装CloudMount需要开启SSH吗？</div>
+    <div class="faq-a">A：不需要。CloudMount通过套件中心手动安装SPK文件即可，和安装官方套件的操作完全一样。安装后也可以参考<a href="/docker-cloud-drive-mount.html">Docker挂载教程</a>进行进阶配置。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：CloudMount安装后在哪里打开？</div>
+    <div class="faq-a">A：安装后在DSM桌面或主菜单中找到CloudMount图标即可打开。打开后可以开始挂载<a href="/baidu-wangpan-mount.html">百度网盘</a>、<a href="/aliyun-drive-mount.html">阿里云盘</a>等网盘。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：套件安装失败提示架构不匹配怎么办？</div>
+    <div class="faq-a">A：说明你的群晖NAS是ARM架构（如DS220j、DS223j等value系列），CloudMount目前仅支持x86_64架构。详见<a href="/#faq">首页常见问题</a>中的型号支持列表。</div>
+  </div>
+
+  <a href="/#download" class="btn">立即下载 CloudMount SPK 安装包 →</a>
+
+  <div class="related">
+    <h3>相关阅读</h3>
+    <ul>
+      <li><a href="/">CloudMount 官网首页 - 立即下载</a></li>
+      <li><a href="/tutorials.html">全部教程合集</a></li>
+      <li><a href="/baidu-wangpan-mount.html">群晖挂载百度网盘教程</a></li>
+      <li><a href="/aliyun-drive-mount.html">群晖挂载阿里云盘教程</a></li>
+      <li><a href="/nas-storage-expansion.html">群晖NAS扩容方案</a></li>
+      <li><a href="/compare-cloudmount-clouddrive2-alist.html">网盘挂载工具对比评测</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>CloudMount - 群晖NAS网盘挂载工具 | <a href="/">首页</a> | <a href="/tutorials.html">教程</a> | <a href="/#download">下载</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://beatwind.github.io">
+<link rel="dns-prefetch" href="https://beatwind.github.io">
+<title>群晖NAS网盘挂载教程合集 - CloudMount 使用教程大全</title>
+<meta name="description" content="CloudMount 群晖NAS网盘挂载教程合集，包含百度网盘、阿里云盘、夸克网盘、115网盘、天翼云盘挂载教程，Jellyfin/Video Station影音播放教程，网盘挂载工具对比评测，从入门到精通一站式学习。">
+<meta name="keywords" content="群晖NAS教程,网盘挂载教程,CloudMount教程,百度网盘挂载,阿里云盘挂载,Jellyfin教程,Video Station教程,群晖套件安装,NAS使用教程">
+<link rel="canonical" href="https://beatwind.github.io/tutorials.html">
+<meta property="og:title" content="群晖NAS网盘挂载教程合集 - CloudMount 使用教程大全">
+<meta property="og:description" content="百度网盘、阿里云盘、夸克网盘等8大网盘挂载教程，Jellyfin/Video Station影音播放教程，一站式学习。">
+<meta property="og:url" content="https://beatwind.github.io/tutorials.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="CloudMount群晖NAS网盘挂载教程合集">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="群晖NAS网盘挂载教程合集 - CloudMount 使用教程大全">
+<meta name="twitter:description" content="百度网盘、阿里云盘等8大网盘挂载教程，Jellyfin/Video Station影音播放教程">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "群晖NAS网盘挂载教程合集",
+  "description": "CloudMount 使用教程大全，包含网盘挂载、影音播放、工具对比等教程",
+  "url": "https://beatwind.github.io/tutorials.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://beatwind.github.io/"},
+    {"@type": "ListItem", "position": 2, "name": "教程合集", "item": "https://beatwind.github.io/tutorials.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "CloudMount 群晖NAS网盘挂载教程列表",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "群晖NAS挂载百度网盘完整教程", "url": "https://beatwind.github.io/baidu-wangpan-mount.html"},
+    {"@type": "ListItem", "position": 2, "name": "群晖挂载阿里云盘教程 - 4K视频直接播放", "url": "https://beatwind.github.io/aliyun-drive-mount.html"},
+    {"@type": "ListItem", "position": 3, "name": "群晖挂载夸克网盘教程", "url": "https://beatwind.github.io/quark-drive-mount.html"},
+    {"@type": "ListItem", "position": 4, "name": "群晖挂载115网盘教程", "url": "https://beatwind.github.io/115-wangpan-mount.html"},
+    {"@type": "ListItem", "position": 5, "name": "群晖挂载天翼云盘教程", "url": "https://beatwind.github.io/tianyi-cloud-drive-mount.html"},
+    {"@type": "ListItem", "position": 6, "name": "Jellyfin播放网盘视频完整教程", "url": "https://beatwind.github.io/jellyfin-cloud-drive.html"},
+    {"@type": "ListItem", "position": 7, "name": "Video Station播放网盘视频教程", "url": "https://beatwind.github.io/video-station-cloud-drive.html"},
+    {"@type": "ListItem", "position": 8, "name": "网盘挂载工具对比：CloudMount vs CloudDrive2 vs Alist", "url": "https://beatwind.github.io/compare-cloudmount-clouddrive2-alist.html"},
+    {"@type": "ListItem", "position": 9, "name": "群晖NAS扩容方案 - 网盘挂载扩容不换硬盘", "url": "https://beatwind.github.io/nas-storage-expansion.html"},
+    {"@type": "ListItem", "position": 10, "name": "群晖Docker挂载网盘教程", "url": "https://beatwind.github.io/docker-cloud-drive-mount.html"},
+    {"@type": "ListItem", "position": 11, "name": "群晖套件安装教程 - SPK手动安装", "url": "https://beatwind.github.io/synology-package-install.html"},
+    {"@type": "ListItem", "position": 12, "name": "网盘跨盘传输教程", "url": "https://beatwind.github.io/cross-drive-transfer.html"},
+    {"@type": "ListItem", "position": 13, "name": "群晖挂载UC网盘教程", "url": "https://beatwind.github.io/uc-wangpan-mount.html"},
+    {"@type": "ListItem", "position": 14, "name": "群晖挂载迅雷网盘教程", "url": "https://beatwind.github.io/xunlei-wangpan-mount.html"},
+    {"@type": "ListItem", "position": 15, "name": "群晖挂载PikPak教程", "url": "https://beatwind.github.io/pikpak-mount.html"}
+  ]
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:960px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:36px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h2{font-size:22px;font-weight:700}
+.subtitle{color:#9ca3af;margin-bottom:40px;font-size:16px}
+.section-title{font-size:22px;margin:50px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+.tutorial-card{display:block;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:28px;margin-bottom:20px;text-decoration:none;color:inherit;transition:all 0.3s}
+.tutorial-card:hover{border-color:#3b82f6;transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.15)}
+.tutorial-card-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:12px}
+.tutorial-icon{font-size:32px;flex-shrink:0}
+.tutorial-card h3{font-size:18px;color:#f1f5f9;margin-bottom:8px}
+.tutorial-card p{font-size:14px;color:#9ca3af;line-height:1.6;margin:0}
+.tutorial-tag{display:inline-block;background:rgba(59,130,246,0.15);color:#60a5fa;font-size:12px;padding:2px 10px;border-radius:20px;margin-top:10px}
+.tutorial-arrow{color:#3b82f6;font-size:14px;margin-top:12px;display:inline-block}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:40px}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.faq-a{color:#d1d5db;font-size:14px}
+.faq-a a{color:#60a5fa;text-decoration:none}
+.faq-a a:hover{text-decoration:underline}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:30px 0}
+.btn:hover{opacity:0.9}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h2,.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+.intro-box{background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(139,92,246,0.08));padding:28px;border-radius:12px;border:1px solid rgba(59,130,246,0.3);margin-bottom:40px}
+.intro-box p{color:#d1d5db;font-size:15px;margin-bottom:12px}
+.intro-box p:last-child{margin-bottom:0}
+.intro-box a{color:#60a5fa;text-decoration:none}
+.intro-box a:hover{text-decoration:underline}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px}
+.tag-cloud a{display:inline-block;background:#1e293b;border:1px solid #334155;color:#9ca3af;padding:6px 16px;border-radius:20px;font-size:13px;text-decoration:none;transition:all 0.2s}
+.tag-cloud a:hover{border-color:#3b82f6;color:#60a5fa;background:rgba(59,130,246,0.1)}
+.quick-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px}
+.quick-nav-item{background:#1e293b;border:1px solid #334155;border-radius:10px;padding:20px;text-decoration:none;color:inherit;transition:all 0.2s}
+.quick-nav-item:hover{border-color:#3b82f6;transform:translateY(-1px)}
+.quick-nav-item h4{font-size:14px;color:#3b82f6;margin-bottom:6px}
+.quick-nav-item p{font-size:12px;color:#9ca3af;margin:0}
+.step-guide{background:#1e293b;padding:30px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.step-guide h2,.step-guide h3{color:#3b82f6;margin-bottom:20px;font-size:18px}
+.step-guide ol{margin-left:20px}
+.step-guide li{margin-bottom:12px;color:#d1d5db;font-size:14px}
+.step-guide li a{color:#60a5fa;text-decoration:none}
+.step-guide li a:hover{text-decoration:underline}
+.step-guide .step-label{display:inline-block;background:rgba(59,130,246,0.15);color:#60a5fa;font-size:12px;padding:2px 10px;border-radius:20px;margin-right:8px}
+.cross-link{font-size:13px;color:#6b7280;margin-top:8px}
+.cross-link a{color:#60a5fa;text-decoration:none}
+.cross-link a:hover{text-decoration:underline}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:16px}
+.related-grid a{display:block;background:#0a0f1e;border:1px solid #334155;border-radius:8px;padding:14px;text-decoration:none;color:#9ca3af;font-size:13px;transition:all 0.2s}
+.related-grid a:hover{border-color:#3b82f6;color:#60a5fa}
+.related-grid a strong{display:block;color:#f1f5f9;font-size:14px;margin-bottom:4px}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首页</a> / 教程合集</div>
+  <h1>群晖NAS网盘挂载教程合集</h1>
+  <p class="subtitle">从入门到精通，一站式学习如何用 CloudMount 把网盘挂载到群晖NAS，覆盖8大网盘、影音播放、工具对比等全场景</p>
+
+  <div class="intro-box">
+    <p>CloudMount 是一款专为 <a href="/">群晖NAS</a> 打造的网盘挂载套件，支持将<a href="/baidu-wangpan-mount.html">百度网盘</a>、<a href="/aliyun-drive-mount.html">阿里云盘</a>、<a href="/quark-drive-mount.html">夸克网盘</a>、<a href="/115-wangpan-mount.html">115网盘</a>、<a href="/tianyi-cloud-drive-mount.html">天翼云盘</a>等8大网盘一键挂载到NAS本地目录。</p>
+    <p>挂载后可以在 <a href="/">File Station</a> 中直接管理云端文件，用 <a href="/video-station-cloud-drive.html">Video Station</a> 或 <a href="/jellyfin-cloud-drive.html">Jellyfin</a> 在线播放网盘视频，还能通过 <a href="/compare-cloudmount-clouddrive2-alist.html">工具对比</a> 了解 CloudMount 与其他方案的区别。</p>
+    <p>不知道从哪开始？先看下方的<strong>新手推荐路线</strong>，3步即可上手。</p>
+  </div>
+
+  <div class="tag-cloud">
+    <a href="/baidu-wangpan-mount.html">百度网盘挂载</a>
+    <a href="/aliyun-drive-mount.html">阿里云盘挂载</a>
+    <a href="/quark-drive-mount.html">夸克网盘挂载</a>
+    <a href="/115-wangpan-mount.html">115网盘挂载</a>
+    <a href="/tianyi-cloud-drive-mount.html">天翼云盘挂载</a>
+    <a href="/jellyfin-cloud-drive.html">Jellyfin教程</a>
+    <a href="/video-station-cloud-drive.html">Video Station教程</a>
+    <a href="/compare-cloudmount-clouddrive2-alist.html">工具对比评测</a>
+    <a href="/#features">核心功能</a>
+    <a href="/#install">安装教程</a>
+    <a href="/#download">下载地址</a>
+    <a href="/#faq">常见问题</a>
+  </div>
+
+  <div class="step-guide">
+    <h2>新手推荐路线（3步上手）</h2>
+    <ol>
+      <li><span class="step-label">第1步</span>前往<a href="/#download">下载页面</a>获取 CloudMount SPK 安装包，参考<a href="/#install">3分钟安装教程</a>完成安装。</li>
+      <li><span class="step-label">第2步</span>选择你要挂载的网盘，查看对应教程：<a href="/baidu-wangpan-mount.html">百度网盘</a> · <a href="/aliyun-drive-mount.html">阿里云盘</a> · <a href="/quark-drive-mount.html">夸克网盘</a> · <a href="/115-wangpan-mount.html">115网盘</a> · <a href="/tianyi-cloud-drive-mount.html">天翼云盘</a>。</li>
+      <li><span class="step-label">第3步</span>挂载完成后，用<a href="/video-station-cloud-drive.html">Video Station</a>或<a href="/jellyfin-cloud-drive.html">Jellyfin</a>播放网盘视频。纠结选哪个？看<a href="/video-station-cloud-drive.html">两者对比</a>。</li>
+    </ol>
+  </div>
+
+  <div class="quick-nav">
+    <a href="/#features" class="quick-nav-item">
+      <h4>核心功能</h4>
+      <p>8大网盘、跨盘传输、File Station集成</p>
+    </a>
+    <a href="/#install" class="quick-nav-item">
+      <h4>安装教程</h4>
+      <p>SPK一键安装，3分钟完成部署</p>
+    </a>
+    <a href="/#download" class="quick-nav-item">
+      <h4>立即下载</h4>
+      <p>百度网盘下载SPK安装包</p>
+    </a>
+    <a href="/#faq" class="quick-nav-item">
+      <h4>常见问题</h4>
+      <p>型号支持、存储占用、会员要求</p>
+    </a>
+    <a href="/#guestbook" class="quick-nav-item">
+      <h4>留言反馈</h4>
+      <p>遇到问题？在这里留言交流</p>
+    </a>
+    <a href="/compare-cloudmount-clouddrive2-alist.html" class="quick-nav-item">
+      <h4>工具对比</h4>
+      <p>CloudMount vs CloudDrive2 vs Alist</p>
+    </a>
+  </div>
+
+  <h2 class="section-title">网盘挂载教程</h2>
+
+  <a href="/baidu-wangpan-mount.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">📁</div>
+      <div>
+        <h3>群晖NAS挂载百度网盘完整教程</h3>
+        <p>完整的百度网盘挂载教程，从安装到使用，包含 Video Station 播放、Jellyfin 集成、Docker 挂载、常见问题解答。适合百度网盘重度用户。</p>
+        <span class="tutorial-tag">热门教程</span>
+        <span class="tutorial-tag">百度网盘</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/aliyun-drive-mount.html">阿里云盘挂载</a> · <a href="/jellyfin-cloud-drive.html">Jellyfin播放百度网盘视频</a> · <a href="/video-station-cloud-drive.html">Video Station播放</a> · <a href="/compare-cloudmount-clouddrive2-alist.html">工具对比</a></div>
+
+  <a href="/aliyun-drive-mount.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">☁️</div>
+      <div>
+        <h3>群晖挂载阿里云盘教程 - 4K视频直接播放</h3>
+        <p>阿里云盘不限速挂载到群晖NAS完整教程，4K视频流畅播放，Jellyfin/Plex Docker容器直接访问，与百度网盘互传文件。</p>
+        <span class="tutorial-tag">热门教程</span>
+        <span class="tutorial-tag">阿里云盘</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/quark-drive-mount.html">夸克网盘挂载</a> · <a href="/jellyfin-cloud-drive.html">Jellyfin播放教程</a> · <a href="/video-station-cloud-drive.html">Video Station播放</a></div>
+
+  <a href="/quark-drive-mount.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">🔍</div>
+      <div>
+        <h3>群晖挂载夸克网盘教程</h3>
+        <p>夸克网盘挂载到群晖NAS教程，速度快不限速，适合存储和播放大容量视频文件，跨盘传输最佳搭档。</p>
+        <span class="tutorial-tag">夸克网盘</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/aliyun-drive-mount.html">阿里云盘挂载</a> · <a href="/115-wangpan-mount.html">115网盘挂载</a> · <a href="/jellyfin-cloud-drive.html">Jellyfin教程</a></div>
+
+  <a href="/115-wangpan-mount.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">💾</div>
+      <div>
+        <h3>群晖挂载115网盘教程 - 离线下载资源直接播放</h3>
+        <p>115网盘挂载到群晖NAS完整教程，115离线下载资源直接在群晖播放，不用下载到本地，支持Video Station和Jellyfin。</p>
+        <span class="tutorial-tag">115网盘</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/tianyi-cloud-drive-mount.html">天翼云盘挂载</a> · <a href="/video-station-cloud-drive.html">Video Station播放</a> · <a href="/jellyfin-cloud-drive.html">Jellyfin教程</a></div>
+
+  <a href="/tianyi-cloud-drive-mount.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">📡</div>
+      <div>
+        <h3>群晖挂载天翼云盘教程 - 电信用户速度快</h3>
+        <p>天翼云盘挂载到群晖NAS教程，电信宽带用户速度快稳定性好，适合数据备份和家庭影音库。</p>
+        <span class="tutorial-tag">天翼云盘</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/115-wangpan-mount.html">115网盘挂载</a> · <a href="/quark-drive-mount.html">夸克网盘挂载</a> · <a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/aliyun-drive-mount.html">阿里云盘挂载</a></div>
+
+  <h2 class="section-title">影音播放教程</h2>
+
+  <a href="/jellyfin-cloud-drive.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">🎬</div>
+      <div>
+        <h3>Jellyfin播放百度网盘/阿里云盘视频完整教程</h3>
+        <p>用CloudMount挂载网盘后，Jellyfin直接扫描播放网盘视频，无需下载。包含Docker卷配置、媒体库添加、性能优化完整步骤。</p>
+        <span class="tutorial-tag">热门教程</span>
+        <span class="tutorial-tag">Jellyfin</span>
+        <span class="tutorial-tag">Docker</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/video-station-cloud-drive.html">Video Station播放教程</a> · <a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/aliyun-drive-mount.html">阿里云盘挂载</a> · <a href="/#usecases">更多使用场景</a></div>
+
+  <a href="/video-station-cloud-drive.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">📺</div>
+      <div>
+        <h3>Video Station播放网盘视频 - 不用下载直接看</h3>
+        <p>群晖Video Station直接播放百度网盘、阿里云盘视频教程，自动刮削海报字幕，多端播放，不占本地存储空间。含Video Station与Jellyfin对比指南。</p>
+        <span class="tutorial-tag">Video Station</span>
+        <span class="tutorial-tag">影音播放</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/jellyfin-cloud-drive.html">Jellyfin播放教程</a> · <a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/aliyun-drive-mount.html">阿里云盘挂载</a> · <a href="/#features">核心功能</a></div>
+
+  <h2 class="section-title">工具对比与选择</h2>
+
+  <a href="/compare-cloudmount-clouddrive2-alist.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">⚖️</div>
+      <div>
+        <h3>2026网盘挂载工具对比：CloudMount vs CloudDrive2 vs Alist</h3>
+        <p>群晖NAS三款主流网盘挂载工具全方位对比评测：支持网盘数量、功能完整性、性能稳定性、易用性、价格对比。帮你选择最适合的方案。</p>
+        <span class="tutorial-tag">评测对比</span>
+        <span class="tutorial-tag">CloudDrive2</span>
+        <span class="tutorial-tag">Alist</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/aliyun-drive-mount.html">阿里云盘挂载</a> · <a href="/jellyfin-cloud-drive.html">Jellyfin教程</a> · <a href="/#features">CloudMount功能特性</a></div>
+
+  <h2 class="section-title">进阶玩法</h2>
+
+  <a href="/nas-storage-expansion.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">💽</div>
+      <div>
+        <h3>群晖NAS扩容方案 - 网盘挂载扩容不换硬盘</h3>
+        <p>不用换硬盘、不加扩展柜，用 CloudMount 把百度网盘、阿里云盘挂载到群晖NAS，瞬间扩容几个TB。三种扩容方案对比，最佳扩容组合推荐。</p>
+        <span class="tutorial-tag">热门教程</span>
+        <span class="tutorial-tag">NAS扩容</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/aliyun-drive-mount.html">阿里云盘挂载</a> · <a href="/#features">核心功能</a></div>
+
+  <a href="/docker-cloud-drive-mount.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">🐳</div>
+      <div>
+        <h3>群晖Docker挂载网盘教程 - Jellyfin/Emby/Plex访问网盘</h3>
+        <p>Docker容器直接访问网盘文件完整教程，包含 Jellyfin、Emby、Plex 的 Docker 卷映射配置、docker-compose 示例、性能优化技巧。</p>
+        <span class="tutorial-tag">Docker</span>
+        <span class="tutorial-tag">进阶教程</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/jellyfin-cloud-drive.html">Jellyfin教程</a> · <a href="/video-station-cloud-drive.html">Video Station教程</a> · <a href="/nas-storage-expansion.html">NAS扩容方案</a></div>
+
+  <a href="/synology-package-install.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">📦</div>
+      <div>
+        <h3>群晖套件安装教程 - SPK手动安装完整步骤</h3>
+        <p>以CloudMount为例，详细演示群晖NAS套件手动安装的每一步操作，包含前提条件、常见安装错误解决方法，新手3分钟完成安装。</p>
+        <span class="tutorial-tag">新手必看</span>
+        <span class="tutorial-tag">套件安装</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/#install">3分钟安装教程</a> · <a href="/#download">下载地址</a> · <a href="/#faq">常见问题</a></div>
+
+  <a href="/cross-drive-transfer.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">🔄</div>
+      <div>
+        <h3>网盘跨盘传输教程 - 百度网盘阿里云盘互传不占本地空间</h3>
+        <p>用CloudMount在百度网盘、阿里云盘、夸克网盘之间直接互传文件，不需要下载到本地再上传。缓存代理模式不占NAS存储，支持断点续传。</p>
+        <span class="tutorial-tag">跨盘传输</span>
+        <span class="tutorial-tag">热门功能</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/aliyun-drive-mount.html">阿里云盘挂载</a> · <a href="/nas-storage-expansion.html">NAS扩容方案</a></div>
+
+  <div class="section-title">更多网盘教程</div>
+
+  <a href="/uc-wangpan-mount.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">🔍</div>
+      <div>
+        <h3>群晖挂载UC网盘教程 - UC浏览器资源直接管理</h3>
+        <p>UC网盘与UC浏览器深度整合，挂载到群晖NAS后浏览器里收藏的资源直接在File Station管理，支持Video Station在线播放和跨盘传输。</p>
+        <span class="tutorial-tag">UC网盘</span>
+        <span class="tutorial-tag">浏览器资源</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/quark-drive-mount.html">夸克网盘挂载</a> · <a href="/cross-drive-transfer.html">跨盘传输</a> · <a href="/video-station-cloud-drive.html">Video Station播放</a></div>
+
+  <a href="/xunlei-wangpan-mount.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">⚡</div>
+      <div>
+        <h3>群晖挂载迅雷网盘教程 - 离线下载资源直接播放</h3>
+        <p>迅雷网盘挂载到群晖NAS，种子和离线下载的影视资源直接在NAS上管理，配合Video Station和Jellyfin实现在线播放。</p>
+        <span class="tutorial-tag">迅雷网盘</span>
+        <span class="tutorial-tag">离线下载</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/115-wangpan-mount.html">115网盘挂载</a> · <a href="/jellyfin-cloud-drive.html">Jellyfin播放</a> · <a href="/nas-storage-expansion.html">NAS扩容</a></div>
+
+  <a href="/pikpak-mount.html" class="tutorial-card">
+    <div class="tutorial-card-header">
+      <div class="tutorial-icon" aria-hidden="true">🌍</div>
+      <div>
+        <h3>群晖PikPak挂载教程 - 海外磁力资源NAS直接使用</h3>
+        <p>PikPak海外高速存储挂载到群晖NAS，磁力种子离线下载后直接在NAS上读取，高清资源串流播放，可跨盘转存到国内网盘。</p>
+        <span class="tutorial-tag">PikPak</span>
+        <span class="tutorial-tag">磁力离线</span>
+      </div>
+    </div>
+    <span class="tutorial-arrow">查看教程 →</span>
+  </a>
+
+  <div class="cross-link">相关教程：<a href="/cross-drive-transfer.html">跨盘传输</a> · <a href="/docker-cloud-drive-mount.html">Docker挂载</a> · <a href="/compare-cloudmount-clouddrive2-alist.html">工具对比</a></div>
+
+  <div class="section-title">常见问题</div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：CloudMount 支持哪些群晖NAS型号？</div>
+    <div class="faq-a">A：支持所有 x86_64 架构的群晖NAS，包括 DS220+、DS920+、DS224+、DS1522+、DS423+ 等 Plus 系列和 XS 系列。ARM 架构的 value 系列（如 DS220j、DS223j）暂不支持。详情见<a href="/#faq">首页常见问题</a>。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：挂载网盘后会在 NAS 本地占用存储空间吗？</div>
+    <div class="faq-a">A：几乎不会。文件实际存储在云端，仅在读取或传输时使用少量缓存空间（默认1GB上限），缓存会在空闲时自动清理。更多原理见<a href="/#features">功能特性</a>。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：CloudMount 是免费的吗？</div>
+    <div class="faq-a">A：是的，CloudMount 完全免费，无广告，无功能限制。x86_64 架构用户可以直接<a href="/#download">下载 SPK 安装包</a>使用。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：安装 CloudMount 需要命令行操作吗？</div>
+    <div class="faq-a">A：不需要。CloudMount 以 SPK 套件包形式安装，在群晖套件中心「手动安装」即可，全程图形界面操作。具体步骤见<a href="/#install">3分钟安装教程</a>。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：可以同时挂载多个网盘吗？</div>
+    <div class="faq-a">A：可以。CloudMount 支持同时挂载<a href="/baidu-wangpan-mount.html">百度网盘</a>、<a href="/aliyun-drive-mount.html">阿里云盘</a>、<a href="/quark-drive-mount.html">夸克网盘</a>、<a href="/115-wangpan-mount.html">115网盘</a>、<a href="/tianyi-cloud-drive-mount.html">天翼云盘</a>、UC网盘、迅雷网盘、PikPak 共8个网盘，每个网盘独立挂载到不同目录。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：CloudMount 和 CloudDrive2、Alist 相比哪个好？</div>
+    <div class="faq-a">A：三款工具各有优势，CloudMount 专为群晖设计安装最简单，CloudDrive2 功能全面但配置复杂，Alist 开源免费但需额外配置。详细对比见<a href="/compare-cloudmount-clouddrive2-alist.html">工具对比评测</a>。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：挂载后能用 Jellyfin 或 Video Station 播放网盘视频吗？</div>
+    <div class="faq-a">A：可以。挂载后的目录可以直接被 <a href="/jellyfin-cloud-drive.html">Jellyfin</a> 和 <a href="/video-station-cloud-drive.html">Video Station</a> 访问，无需下载即可在线播放网盘中的视频。</div>
+  </div>
+
+  <a href="/" class="btn">← 返回首页下载 CloudMount</a>
+
+  <div class="related">
+    <h2>全站导航</h2>
+    <div class="related-grid">
+      <a href="/"><strong>首页</strong>CloudMount 产品介绍与下载</a>
+      <a href="/#features"><strong>核心功能</strong>8大网盘、跨盘传输、Docker集成</a>
+      <a href="/#services"><strong>支持网盘</strong>百度/阿里/夸克/115等8大网盘</a>
+      <a href="/#usecases"><strong>使用场景</strong>影音播放、数据备份、Docker扩容</a>
+      <a href="/#install"><strong>安装教程</strong>SPK一键安装，3分钟完成</a>
+      <a href="/#download"><strong>立即下载</strong>百度网盘下载SPK安装包</a>
+      <a href="/#faq"><strong>常见问题</strong>型号支持、存储、会员等</a>
+      <a href="/#guestbook"><strong>留言板</strong>用户反馈与交流</a>
+    </div>
+  </div>
+
+  <div class="related" style="margin-top:20px">
+    <h2>按网盘查找教程</h2>
+    <div class="related-grid">
+      <a href="/baidu-wangpan-mount.html"><strong>百度网盘</strong>国内用户量最大的网盘</a>
+      <a href="/aliyun-drive-mount.html"><strong>阿里云盘</strong>不限速，4K视频流畅播放</a>
+      <a href="/quark-drive-mount.html"><strong>夸克网盘</strong>速度快，跨盘传输首选</a>
+      <a href="/115-wangpan-mount.html"><strong>115网盘</strong>离线下载资源直接播放</a>
+      <a href="/tianyi-cloud-drive-mount.html"><strong>天翼云盘</strong>电信用户速度快</a>
+      <a href="/compare-cloudmount-clouddrive2-alist.html"><strong>工具对比</strong>CloudMount vs CloudDrive2 vs Alist</a>
+      <a href="/nas-storage-expansion.html"><strong>NAS扩容</strong>网盘挂载扩容不换硬盘</a>
+      <a href="/docker-cloud-drive-mount.html"><strong>Docker挂载</strong>Jellyfin/Emby/Plex访问网盘</a>
+      <a href="/synology-package-install.html"><strong>套件安装</strong>SPK手动安装完整步骤</a>
+      <a href="/cross-drive-transfer.html"><strong>跨盘传输</strong>网盘间互传不占本地空间</a>
+      <a href="/uc-wangpan-mount.html"><strong>UC网盘</strong>UC浏览器资源直接管理</a>
+      <a href="/xunlei-wangpan-mount.html"><strong>迅雷网盘</strong>离线下载资源直接播放</a>
+      <a href="/pikpak-mount.html"><strong>PikPak</strong>海外磁力离线存储</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>CloudMount - 群晖NAS网盘挂载工具</p>
+  <p style="margin-top:10px">
+    <a href="/">首页</a> | <a href="/tutorials.html">教程合集</a> | <a href="/#features">功能</a> | <a href="/#download">下载</a> | <a href="/#faq">FAQ</a> | <a href="/#guestbook">留言板</a>
+  </p>
+  <p style="margin-top:10px;font-size:12px">
+    <a href="/baidu-wangpan-mount.html">百度网盘</a> · <a href="/aliyun-drive-mount.html">阿里云盘</a> · <a href="/quark-drive-mount.html">夸克网盘</a> · <a href="/115-wangpan-mount.html">115网盘</a> · <a href="/tianyi-cloud-drive-mount.html">天翼云盘</a> · <a href="/jellyfin-cloud-drive.html">Jellyfin</a> · <a href="/video-station-cloud-drive.html">Video Station</a> · <a href="/compare-cloudmount-clouddrive2-alist.html">工具对比</a> · <a href="/nas-storage-expansion.html">NAS扩容</a> · <a href="/docker-cloud-drive-mount.html">Docker挂载</a> · <a href="/synology-package-install.html">套件安装</a> · <a href="/cross-drive-transfer.html">跨盘传输</a> · <a href="/uc-wangpan-mount.html">UC网盘</a> · <a href="/xunlei-wangpan-mount.html">迅雷网盘</a> · <a href="/pikpak-mount.html">PikPak</a>
+  </p>
+</footer>
+</body>
+</html>

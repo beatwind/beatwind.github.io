@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+
+    <url>
+        <loc>https://beatwind.github.io/</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <mobile:mobile/>
+        <image:image>
+            <image:loc>https://beatwind.github.io/screenshots/2.png</image:loc>
+            <image:title>CloudMount 网盘管理界面 8大网盘已挂载</image:title>
+            <image:caption>百度网盘、阿里云盘、夸克网盘等8个网盘挂载到群晖NAS本地目录</image:caption>
+            <image:license>https://beatwind.github.io/</image:license>
+        </image:image>
+        <image:image>
+            <image:loc>https://beatwind.github.io/screenshots/下载.png</image:loc>
+            <image:title>CloudMount 系统状态仪表盘</image:title>
+            <image:caption>实时监控系统健康、连接数、挂载数量、缓存使用</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://beatwind.github.io/screenshots/3.png</image:loc>
+            <image:title>CloudMount 跨盘传输界面</image:title>
+            <image:caption>百度网盘与夸克网盘之间直接传输文件不占本地空间</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://beatwind.github.io/screenshots/下载4.png</image:loc>
+            <image:title>CloudMount 传输任务管理</image:title>
+            <image:caption>传输任务进度追踪与缓存状态监控</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://beatwind.github.io/screenshots/5.png</image:loc>
+            <image:title>CloudMount 下载管理界面</image:title>
+            <image:caption>网盘文件下载到NAS本地支持断点续传</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://beatwind.github.io/screenshots/6.png</image:loc>
+            <image:title>CloudMount 上传管理界面</image:title>
+            <image:caption>NAS文件上传到网盘双栏操作</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://beatwind.github.io/screenshots/8.png</image:loc>
+            <image:title>群晖 File Station 集成 CloudMount</image:title>
+            <image:caption>网盘文件夹在File Station中原生显示可被Docker容器访问</image:caption>
+        </image:image>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/tutorials.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/baidu-wangpan-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/aliyun-drive-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/quark-drive-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/jellyfin-cloud-drive.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/compare-cloudmount-clouddrive2-alist.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/115-wangpan-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/tianyi-cloud-drive-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/video-station-cloud-drive.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/nas-storage-expansion.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/docker-cloud-drive-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/synology-package-install.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/cross-drive-transfer.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/uc-wangpan-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/xunlei-wangpan-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/pikpak-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/en/uc-wangpan-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/en/xunlei-wangpan-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/en/pikpak-mount.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/#tutorials</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/#features</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/#services</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/#install</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/#download</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/#faq</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/#guestbook</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+        <mobile:mobile/>
+    </url>
+
+</urlset>

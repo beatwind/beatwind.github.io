@@ -1,0 +1,17 @@
+{
+  "name": "CloudMount - 群晖NAS网盘挂载工具",
+  "short_name": "CloudMount",
+  "description": "群晖NAS网盘挂载工具，支持百度网盘、阿里云盘等8大网盘一键挂载到本地目录",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0f1e",
+  "theme_color": "#0a0f1e",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "https://beatwind.github.io/screenshots/2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

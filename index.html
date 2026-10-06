@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0f1e">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://beatwind.github.io">
+    <link rel="dns-prefetch" href="https://beatwind.github.io">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- ===== SEO Meta ===== -->
+    <title>CloudMount 群晖NAS网盘挂载工具 - 百度网盘/阿里云盘一键挂载到本地目录</title>
+    <meta name="description" content="CloudMount 是一款群晖NAS网盘挂载工具，支持百度网盘、阿里云盘、夸克网盘、115网盘、天翼云盘等8大主流网盘一键挂载到NAS本地目录，在File Station中直接管理云端文件，支持跨盘传输、Video Station在线播放，不占本地存储空间。x86_64架构免费使用。">
+    <meta name="keywords" content="CloudMount,群晖NAS,网盘挂载,百度网盘挂载,阿里云盘挂载,夸克网盘挂载,NAS扩容,跨盘传输,File Station,WebDAV挂载,群晖套件,SPK安装包,x86_64,DS220+,DS920+,DS224+,Docker存储扩展,Video Station,NAS存储扩容,115网盘,天翼云盘,UC网盘,迅雷网盘,PikPak,FUSE挂载">
+    <meta name="author" content="CloudMount">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    <meta name="language" content="zh-CN">
+    <meta name="revisit-after" content="3 days">
+    <meta name="rating" content="general">
+    <meta name="distribution" content="global">
+    <link rel="canonical" href="https://beatwind.github.io/">
+    <meta name="google-site-verification" content="Z8N5_S6hTgKyCcLpnulBFG7-b5KX02TJvCI2VuFra2c" />
+
+    <!-- ===== Open Graph (微信/微博/QQ分享卡片) ===== -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="CloudMount">
+    <meta property="og:title" content="群晖NAS网盘挂载神器 CloudMount - 8大网盘一键挂载到本地">
+    <meta property="og:description" content="把百度网盘、阿里云盘、夸克网盘等8大网盘挂载到群晖NAS本地目录，File Station直接管理，Video Station在线播放，不占本地空间。">
+    <meta property="og:url" content="https://beatwind.github.io/">
+    <meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+    <meta property="og:image:alt" content="CloudMount网盘管理界面 - 8个网盘已挂载">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- ===== Twitter Card ===== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CloudMount 群晖NAS网盘挂载工具">
+    <meta name="twitter:description" content="8大网盘一键挂载到群晖NAS本地目录，File Station直接管理，不占本地存储。">
+    <meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+
+    <!-- ===== Structured Data (JSON-LD) ===== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "CloudMount",
+        "operatingSystem": "Synology DSM (x86_64)",
+        "softwareVersion": "1.0.0",
+        "screenshot": "https://beatwind.github.io/screenshots/2.png",
+        "applicationCategory": "UtilitiesApplication",
+        "description": "群晖NAS网盘挂载工具，支持百度网盘、阿里云盘、夸克网盘等8大主流网盘挂载到NAS本地目录，在File Station中直接管理云端文件，支持跨盘传输和在线播放。",
+        "url": "https://beatwind.github.io/",
+        "downloadUrl": "https://pan.baidu.com/s/1pFYDyEBpJLTXRis4fogOZg?pwd=9wdx",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "56",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "featureList": [
+            "百度网盘挂载到NAS本地目录",
+            "阿里云盘挂载到NAS本地目录",
+            "夸克网盘挂载到NAS本地目录",
+            "115网盘挂载到NAS本地目录",
+            "天翼云盘挂载到NAS本地目录",
+            "UC网盘挂载到NAS本地目录",
+            "迅雷网盘挂载到NAS本地目录",
+            "PikPak挂载到NAS本地目录",
+            "跨盘传输，网盘间直接互传不占本地空间",
+            "File Station原生集成",
+            "Video Station在线播放网盘视频",
+            "Docker容器访问挂载目录",
+            "下载管理支持断点续传",
+            "上传管理双栏操作",
+            "系统状态实时监控"
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "CloudMount 支持哪些群晖 NAS 型号？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "CloudMount 的 SPK 安装包为 x86_64 架构，支持所有搭载 Intel/AMD 处理器的群晖 NAS 型号，包括 DS220+、DS920+、DS1522+、DS224+、DS423+ 等 Plus 系列及 XS 系列。基于 ARM 架构的 value 系列（如 DS220j、DS223j 等）暂不支持。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "挂载网盘后会占用 NAS 本地存储空间吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "几乎不会。CloudMount 采用 FUSE 技术将网盘挂载为虚拟目录，文件实际存储在云端，仅在读取或传输时使用少量缓存空间，默认 1GB 缓存上限，缓存会在空闲时自动清理。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "使用 CloudMount 需要开通网盘会员吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "基础挂载功能不需要网盘会员即可使用。但部分网盘（如百度网盘）对非会员有下载速度限制，建议对速度有要求的用户开通相应网盘的会员服务以获得最佳体验。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "跨盘传输是如何工作的？速度怎么样？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "跨盘传输采用缓存代理模式：先从源网盘下载文件到 NAS 缓存，再上传到目标网盘。传输速度取决于两个网盘的 API 限速。夸克网盘和天翼云盘速度较快，可达 8MB/s 以上；百度网盘非会员速度约 200KB/s。支持自动重试机制确保传输可靠性。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "安装时提示发布者不受信任怎么办？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "这是群晖 DSM 对非官方套件的正常安全提示。在安装弹窗中点击继续安装即可，不影响正常使用。如无法安装，可在 DSM 控制面板的安全设置中允许安装任何发布者的套件。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "挂载的网盘能被其他 NAS 应用访问吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "可以。挂载后的网盘目录出现在 /volume1/ 下，与普通 NAS 文件夹无异。Video Station、Music Station、Synology Photos、Docker 容器等均可直接访问这些目录，实现媒体在线播放、容器存储扩展等功能。"
+                }
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "首页",
+                "item": "https://beatwind.github.io/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "功能特性",
+                "item": "https://beatwind.github.io/#features"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "安装教程",
+                "item": "https://beatwind.github.io/#install"
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "下载",
+                "item": "https://beatwind.github.io/#download"
+            }
+        ]
+    }
+    </script>
+
+    <!-- ===== Performance & PWA hints ===== -->
+    <meta name="theme-color" content="#0F1923">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CloudMount">
+
+    <!-- ===== 国内搜索引擎验证码（需在各站长平台获取后替换） ===== -->
+    <!-- 百度搜索资源平台：https://ziyuan.baidu.com 添加站点后获取验证码 -->
+    <meta name="baidu-site-verification" content="codeva-cloudmount-nas">
+    <!-- 搜狗站长平台：https://zhanzhang.sogou.com -->
+    <meta name="sogou_site_verification" content="cloudmount-sogou-verify">
+    <!-- 360站长平台：https://zhanzhang.so.com -->
+    <meta name="360-site-verification" content="cloudmount-360-verify">
+    <!-- 神马搜索（UC）：https://z.sm.cn -->
+    <meta name="shenma-site-verification" content="cloudmount-shenma-verify">
+    <!-- 头条搜索：https://zhanzhang.toutiao.com -->
+    <meta name="bytedance-verification" content="cloudmount-toutiao-verify">
+
+    <!-- ===== 百度搜索专属优化 ===== -->
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="mobile-agent" content="format=html5; url=https://beatwind.github.io/">
+    <meta name="baidu_union_verify" content="cloudmount-baidu-union">
+    <meta name="Baiduspider" content="index,follow">
+    <meta name="Sogouspider" content="index,follow">
+    <meta name="360spider" content="index,follow">
+    <meta name="Bytespider" content="index,follow">
+    <meta name="Yisouspider" content="index,follow">
+    <meta name="Sogou web spider" content="index,follow">
+
+    <!-- ===== 搜索引擎自动推送 ===== -->
+    <!-- 百度自动推送 -->
+    <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+    <!-- 360搜索自动收录 -->
+    <script>
+    (function(){
+        var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+        document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066CC;
+            --primary-dark: #004499;
+            --primary-light: #3385D6;
+            --accent: #00C896;
+            --accent-dark: #00A578;
+            --bg-dark: #0F1923;
+            --bg-darker: #0A1218;
+            --bg-card: #1A242E;
+            --text-primary: #E8EEF2;
+            --text-secondary: #8A99A8;
+            --text-muted: #5A6878;
+            --border: #2A3440;
+            --gradient-hero: linear-gradient(135deg, #0F1923 0%, #1A2A3E 50%, #0D4A7A 100%);
+            --gradient-accent: linear-gradient(135deg, #0066CC 0%, #00C896 100%);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.25);
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ============ NAV ============ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 25, 35, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 14px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            background: var(--gradient-accent);
+            color: white;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+            padding: 100px 24px 60px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 200, 150, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 200, 150, 0.12);
+            border: 1px solid rgba(0, 200, 150, 0.3);
+            color: var(--accent);
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 28px;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 .highlight {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: white;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 30px rgba(0, 102, 204, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 102, 204, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 14px 36px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            margin-top: 56px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .num {
+            font-size: 36px;
+            font-weight: 800;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-stat .label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ============ SECTION COMMON ============ */
+        section {
+            padding: 90px 24px;
+        }
+
+        .section-container {
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--accent);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin-bottom: 56px;
+        }
+
+        /* ============ PAIN POINTS ============ */
+        .pain-points {
+            background: var(--bg-darker);
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .pain-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .pain-card:hover {
+            border-color: rgba(0, 200, 150, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .pain-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .pain-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .pain-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .pain-card .solution {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ============ FEATURES ============ */
+        .feature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .feature-block:nth-child(even) .feature-text {
+            order: 2;
+        }
+
+        .feature-text .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.15), rgba(0, 200, 150, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .feature-text h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .feature-text p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .feature-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .feature-image img {
+            width: 100%;
+            display: block;
+        }
+
+        .feature-image-label {
+            padding: 12px 18px;
+            font-size: 13px;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+        }
+
+        /* ============ CLOUD SERVICES ============ */
+        .cloud-services {
+            background: var(--bg-darker);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: rgba(0, 102, 204, 0.4);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            margin: 0 auto 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .service-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .service-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ============ USE CASES ============ */
+        .usecase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .usecase-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            transition: all 0.3s;
+        }
+
+        .usecase-card:hover {
+            border-color: rgba(0, 200, 150, 0.25);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .usecase-icon {
+            font-size: 40px;
+            margin-bottom: 18px;
+        }
+
+        .usecase-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .usecase-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* ============ INSTALL GUIDE ============ */
+        .install-guide {
+            background: var(--bg-darker);
+        }
+
+        .install-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .install-step {
+            display: flex;
+            gap: 24px;
+            padding: 28px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .install-step:last-child {
+            border-bottom: none;
+        }
+
+        .step-num {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--gradient-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .step-content .step-note {
+            margin-top: 10px;
+            padding: 12px 16px;
+            background: rgba(0, 102, 204, 0.08);
+            border: 1px solid rgba(0, 102, 204, 0.15);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--primary-light);
+        }
+
+        /* ============ DOWNLOAD ============ */
+        .download-section {
+            text-align: center;
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .download-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .download-content h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .download-content p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .download-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .download-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .download-file {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .file-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(0, 102, 204, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .file-info h4 {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .file-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin: 2px 0 0;
+        }
+
+        .download-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .download-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-accent);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(0, 102, 204, 0.35);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 102, 204, 0.5);
+        }
+
+        .download-password {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .download-password code {
+            background: var(--bg-darker);
+            padding: 3px 10px;
+            border-radius: 6px;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 15px;
+            margin-left: 6px;
+        }
+
+        /* ============ FAQ ============ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+        }
+
+        .faq-item summary {
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .faq-item summary:hover {
+            color: var(--accent);
+        }
+
+        .faq-item summary::after {
+            content: '+';
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            margin-top: 14px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--bg-darker);
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        footer .footer-links {
+            margin-top: 12px;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        footer .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 38px; }
+            .hero p { font-size: 16px; }
+            .section-title { font-size: 32px; }
+            .pain-grid, .usecase-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-block { grid-template-columns: 1fr; gap: 32px; }
+            .feature-block:nth-child(even) .feature-text { order: 1; }
+            .nav-links { display: none; }
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+            .download-info { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+    <div class="nav-container">
+        <div class="logo">CloudMount</div>
+        <ul class="nav-links">
+            <li><a href="#features">功能特性</a></li>
+            <li><a href="#services">支持网盘</a></li>
+            <li><a href="#usecases">使用场景</a></li>
+            <li><a href="#install">安装教程</a></li>
+            <li><a href="/tutorials.html">教程合集</a></li>
+            <li><a href="#guestbook">留言反馈</a></li>
+            <li><a href="#faq">常见问题</a></li>
+        </ul>
+        <a href="#download" class="nav-cta">立即下载</a>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            专为群晖 NAS 打造 · x86_64 架构
+        </div>
+        <h1>
+            8大网盘一键挂载到<br>
+            <span class="highlight">群晖NAS本地目录</span>
+        </h1>
+        <p>
+            CloudMount 让百度网盘、阿里云盘、夸克网盘等8大主流网盘化身 NAS 本地文件夹，
+            在 File Station 中直接浏览、播放、管理，释放本地存储空间。
+        </p>
+        <div class="hero-buttons">
+            <a href="#download" class="btn-primary">立即下载 SPK 安装包</a>
+            <a href="#features" class="btn-secondary">查看功能</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="num">8+</div>
+                <div class="label">支持网盘</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">0</div>
+                <div class="label">本地存储占用</div>
+            </div>
+            <div class="hero-stat">
+                <div class="num">100%</div>
+                <div class="label">原生 File Station 集成</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PAIN POINTS ===== -->
+<section class="pain-points">
+    <div class="section-container">
+        <div class="section-tag">痛点解决</div>
+        <h2 class="section-title">NAS 用户的网盘管理困境</h2>
+        <p class="section-subtitle">你是否也遇到过这些问题？CloudMount 一次性解决所有网盘管理难题。</p>
+        <div class="pain-grid">
+            <div class="pain-card">
+                <div class="pain-icon" aria-hidden="true">💾</div>
+                <h3>NAS存储空间有限</h3>
+                <p>硬盘容量就那么大，电影、音乐、照片、文档挤爆存储空间，换硬盘成本高昂。</p>
+                <div class="solution">→ 网盘挂载为本地目录，TB级云端空间即用即取</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon" aria-hidden="true">📂</div>
+                <h3>网盘分散管理混乱</h3>
+                <p>百度网盘存照片、阿里云盘存电影、夸克网盘存资料……多个客户端来回切换，效率低下。</p>
+                <div class="solution">→ 统一挂载到NAS，一个界面管理所有网盘</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon" aria-hidden="true">🔄</div>
+                <h3>跨网盘迁移极麻烦</h3>
+                <p>想把文件从一个网盘转到另一个？先下载到本地，再上传到目标网盘，费时费流量。</p>
+                <div class="solution">→ 跨盘直传，不占本地空间，无需来回下载</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section id="features">
+    <div class="section-container">
+        <div class="section-tag">核心功能</div>
+        <h2 class="section-title">强大功能，一目了然</h2>
+        <p class="section-subtitle">从系统状态监控到跨盘传输，CloudMount 提供完整的网盘挂载管理解决方案。</p>
+
+        <!-- Feature 1: Multi-cloud Mounting -->
+        <div class="feature-block">
+            <div class="feature-text">
+                <div class="feature-icon" aria-hidden="true">☁️</div>
+                <h3>8大网盘一键挂载</h3>
+                <p>将主流网盘服务挂载为 NAS 本地目录，在 File Station 中像操作本地文件一样管理云端数据。</p>
+                <ul class="feature-list">
+                    <li>百度网盘、阿里云盘、夸克网盘、115网盘</li>
+                    <li>天翼云盘、UC网盘、迅雷网盘、PikPak</li>
+                    <li>挂载路径自定义，统一管理</li>
+                    <li>实时上传速度监控，连接状态可视化</li>
+                    <li>FUSE 权限全自动化（v4.34.538起）</li>
+                </ul>
+            </div>
+            <div class="feature-image">
+                <img src="screenshots/2.png" alt="网盘管理界面 - 8大网盘已挂载">
+                <div class="feature-image-label">网盘管理界面 · 8个网盘全部已挂载状态</div>
+            </div>
+        </div>
+
+        <!-- Feature 2: System Dashboard -->
+        <div class="feature-block">
+            <div class="feature-image">
+                <img src="screenshots/下载.png" alt="系统状态仪表盘">
+                <div class="feature-image-label">系统状态仪表盘 · 实时监控运行状况</div>
+            </div>
+            <div class="feature-text">
+                <div class="feature-icon" aria-hidden="true">📊</div>
+                <h3>实时系统状态监控</h3>
+                <p>可视化仪表盘展示系统运行状态，一切尽在掌握。</p>
+                <ul class="feature-list">
+                    <li>系统健康状态实时检测</li>
+                    <li>版本号、运行时间、连接数一目了然</li>
+                    <li>已挂载网盘数量统计</li>
+                    <li>缓存容量与导入队列监控</li>
+                    <li>Hook 推送设置与通知公告</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Feature 3: Cross-cloud Transfer -->
+        <div class="feature-block">
+            <div class="feature-text">
+                <div class="feature-icon" aria-hidden="true">🔄</div>
+                <h3>跨盘传输 · 网盘互传</h3>
+                <p>双栏文件管理器，直接在两个网盘之间传输文件，无需下载到本地。</p>
+                <ul class="feature-list">
+                    <li>双向传输：左→右 / 右→左 一键操作</li>
+                    <li>批量选择文件，支持全选</li>
+                    <li>传输进度实时显示，缓存状态可视化</li>
+                    <li>自动重试机制，确保传输可靠性</li>
+                    <li>传输任务列表管理，支持暂停/取消</li>
+                </ul>
+            </div>
+            <div class="feature-image">
+                <img src="screenshots/3.png" alt="跨盘传输界面 - 双栏文件管理器">
+                <div class="feature-image-label">跨盘传输界面 · 百度网盘 ↔ 夸克网盘 直传</div>
+            </div>
+        </div>
+
+        <!-- Feature 4: Transfer Task Management -->
+        <div class="feature-block">
+            <div class="feature-image">
+                <img src="screenshots/下载4.png" alt="传输任务管理界面">
+                <div class="feature-image-label">传输任务管理 · 实时进度与缓存状态</div>
+            </div>
+            <div class="feature-text">
+                <div class="feature-icon" aria-hidden="true">📋</div>
+                <h3>传输任务全程追踪</h3>
+                <p>完整的传输任务管理系统，每个文件的状态都清晰可见。</p>
+                <ul class="feature-list">
+                    <li>任务状态：进行中 / 已完成 / 失败 分类筛选</li>
+                    <li>实时速度与缓存进度显示</li>
+                    <li>已完成/失败任务数量统计</li>
+                    <li>队列任务管理，最多100个排队</li>
+                    <li>一键清除已完成任务</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Feature 5: Download Management -->
+        <div class="feature-block">
+            <div class="feature-text">
+                <div class="feature-icon" aria-hidden="true">⬇️</div>
+                <h3>下载管理</h3>
+                <p>从网盘直接下载文件到 NAS 本地指定目录，支持断点续传。</p>
+                <ul class="feature-list">
+                    <li>自定义默认下载保存目录</li>
+                    <li>下载进度实时追踪</li>
+                    <li>支持断点续传（incomplete 临时目录）</li>
+                    <li>下载任务状态分类：下载中/已完成/失败</li>
+                    <li>已下载文件列表直接浏览</li>
+                </ul>
+            </div>
+            <div class="feature-image">
+                <img src="screenshots/5.png" alt="下载管理界面">
+                <div class="feature-image-label">下载管理界面 · 下载目录配置与任务追踪</div>
+            </div>
+        </div>
+
+        <!-- Feature 6: Upload Management -->
+        <div class="feature-block">
+            <div class="feature-image">
+                <img src="screenshots/6.png" alt="上传管理界面">
+                <div class="feature-image-label">上传管理界面 · NAS本地 ↔ 网盘 双栏操作</div>
+            </div>
+            <div class="feature-text">
+                <div class="feature-icon" aria-hidden="true">⬆️</div>
+                <h3>上传管理</h3>
+                <p>将 NAS 本地文件上传到任意已挂载的网盘，双栏操作直观高效。</p>
+                <ul class="feature-list">
+                    <li>NAS本地文件 ↔ 网盘 双栏浏览</li>
+                    <li>批量选择文件上传</li>
+                    <li>支持全选与搜索文件</li>
+                    <li>文件大小与时间信息完整展示</li>
+                    <li>一键传输按钮，操作极简</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Feature 7: File Station Integration -->
+        <div class="feature-block">
+            <div class="feature-text">
+                <div class="feature-icon" aria-hidden="true">📁</div>
+                <h3>原生 File Station 集成</h3>
+                <p>挂载后的网盘直接出现在群晖 File Station 中，与其他 NAS 文件夹完全一致。</p>
+                <ul class="feature-list">
+                    <li>网盘文件夹在 File Station 中直接可见</li>
+                    <li>支持 File Station 所有文件操作</li>
+                    <li>可被其他 NAS 应用调用（如 Video Station、Music Station）</li>
+                    <li>媒体文件直接在线播放，无需下载</li>
+                    <li>与 Docker、媒体库等共享目录无缝协作</li>
+                </ul>
+            </div>
+            <div class="feature-image">
+                <img src="screenshots/8.png" alt="群晖 File Station 集成">
+                <div class="feature-image-label">群晖 File Station · 网盘文件夹原生集成</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SUPPORTED SERVICES ===== -->
+<section id="services" class="cloud-services">
+    <div class="section-container">
+        <div class="section-tag">支持网盘</div>
+        <h2 class="section-title">8大主流网盘全覆盖</h2>
+        <p class="section-subtitle">国内主流云存储服务一站式支持，挂载后即可在 NAS 上直接访问。</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #2B7CD3, #1A5BA8);" aria-hidden="true">百</div>
+                <div class="service-name">百度网盘</div>
+                <div class="service-desc">国内最大云存储</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #615CED, #4B45CC);" aria-hidden="true">阿</div>
+                <div class="service-name">阿里云盘</div>
+                <div class="service-desc">不限速云存储</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #7B5FFF, #5C3FDD);" aria-hidden="true">夸</div>
+                <div class="service-name">夸克网盘</div>
+                <div class="service-desc">高速传输</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #0096E6, #0077B6);" aria-hidden="true">115</div>
+                <div class="service-name">115网盘</div>
+                <div class="service-desc">大容量存储</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #E60012, #B8000E);" aria-hidden="true">天</div>
+                <div class="service-name">天翼云盘</div>
+                <div class="service-desc">电信级安全</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #FF6B35, #E55100);" aria-hidden="true">UC</div>
+                <div class="service-name">UC网盘</div>
+                <div class="service-desc">UC浏览器集成</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #00BFA6, #00897B);" aria-hidden="true">迅</div>
+                <div class="service-name">迅雷网盘</div>
+                <div class="service-desc">下载加速</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #9C27B0, #6A1B9A);" aria-hidden="true">P</div>
+                <div class="service-name">PikPak</div>
+                <div class="service-desc">海外高速存储</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== USE CASES ===== -->
+<section id="usecases">
+    <div class="section-container">
+        <div class="section-tag">使用场景</div>
+        <h2 class="section-title">CloudMount 能为你做什么？</h2>
+        <p class="section-subtitle">从影音媒体库到数据备份，满足 NAS 用户的多种需求。</p>
+        <div class="usecase-grid">
+            <div class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true">🎬</div>
+                <h3>影音媒体库扩展</h3>
+                <p>将网盘中的电影、音乐挂载到 NAS，配合 Video Station / Music Station 直接播放，无需占用本地硬盘。无损音乐（FLAC/WAV）直接串流。</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true">📦</div>
+                <h3>多网盘数据备份</h3>
+                <p>重要数据同时备份到多个网盘，跨盘传输功能让网盘间的数据同步变得简单，不消耗本地带宽。</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true">🔄</div>
+                <h3>网盘数据迁移</h3>
+                <p>从一个网盘迁移到另一个网盘？跨盘直传功能免去下载-上传的繁琐步骤，省时省力。</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true">🖥️</div>
+                <h3>Docker 容器存储</h3>
+                <p>挂载的网盘目录可被 Docker 容器访问，为容器提供几乎无限的存储空间，适合下载器、媒体管理等场景。</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true">📸</div>
+                <h3>照片集中管理</h3>
+                <p>将分散在各网盘的照片统一挂载到 NAS，配合 Synology Photos 集中管理，一网打尽所有回忆。</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true">📚</div>
+                <h3>资源统一索引</h3>
+                <p>所有网盘文件在 File Station 中统一索引，配合 NAS 的搜索功能，快速找到散落在各网盘中的文件。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== INSTALL GUIDE ===== -->
+<section id="install" class="install-guide">
+    <div class="section-container">
+        <div class="section-tag">安装教程</div>
+        <h2 class="section-title">3步完成安装</h2>
+        <p class="section-subtitle">群晖 NAS 套件手动安装流程，简单快捷。</p>
+        <div class="install-steps">
+            <div class="install-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>下载 SPK 安装包</h3>
+                    <p>从下方百度网盘链接下载 <code>webdav-mounter_x86_64.spk</code> 文件到本地电脑。</p>
+                    <div class="step-note">提示：提取码为 9wdx，建议使用百度网盘客户端下载以获得更稳定速度。</div>
+                </div>
+            </div>
+            <div class="install-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>群晖套件中心手动安装</h3>
+                    <p>登录群晖 DSM 管理界面 → 打开「套件中心」→ 点击右上角「手动安装」→ 选择下载好的 .spk 文件 → 点击下一步完成安装。</p>
+                    <div class="step-note">提示：安装过程中可能提示「发布者不受信任」，此为正常现象，点击「继续安装」即可。需在 DSM 控制面板中开启 SSH 或允许第三方套件安装。</div>
+                </div>
+            </div>
+            <div class="install-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>打开 CloudMount 并添加网盘</h3>
+                    <p>安装完成后在 DSM 主菜单找到 CloudMount 图标并打开 → 点击「网盘」→「新增」→ 选择网盘服务并登录授权 → 设置挂载路径 → 完成挂载。</p>
+                    <div class="step-note">提示：建议挂载路径使用 /volume1/网盘名称 的格式（如 /volume1/baidu），方便 File Station 中统一管理。FUSE 挂载权限已全自动化，无需手动配置。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== DOWNLOAD ===== -->
+<section id="download" class="download-section">
+    <div class="download-content">
+        <div class="section-tag" style="margin-bottom: 16px;">立即获取</div>
+        <h2>开始使用 CloudMount</h2>
+        <p>下载 SPK 安装包，3分钟内完成安装，立即释放 NAS 存储潜力。</p>
+        <div class="download-box">
+            <div class="download-info">
+                <div class="download-file">
+                    <div class="file-icon" aria-hidden="true">📦</div>
+                    <div class="file-info">
+                        <h4>webdav-mounter_x86_64.spk</h4>
+                        <p>群晖NAS套件安装包 · x86_64架构</p>
+                    </div>
+                </div>
+                <div class="download-meta">
+                    <span>📦 SPK 格式</span>
+                    <span>🖥️ x86_64</span>
+                    <span>🔄 v4.35+</span>
+                </div>
+            </div>
+            <a href="https://pan.baidu.com/s/1pFYDyEBpJLTXRis4fogOZg?pwd=9wdx" target="_blank" rel="nofollow noopener" class="download-btn">
+                百度网盘下载 →
+            </a>
+            <div class="download-password">
+                提取码：<code>9wdx</code>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== GUESTBOOK ===== -->
+<section id="guestbook" class="install-guide">
+    <div class="section-container">
+        <div class="section-tag">留言板</div>
+        <h2 class="section-title">留下你的声音</h2>
+        <p class="section-subtitle">安装使用了？遇到问题了？有建议？在这里留言，和群晖玩家一起交流。</p>
+
+        <!-- Feedback Form -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 36px;">
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">快速留言</h3>
+            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 24px;">填写下方表单提交留言，无需注册，即填即显示。</p>
+            <form id="feedbackForm" style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div>
+                        <label style="font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; display: block;">昵称 *</label>
+                        <input type="text" id="msgName" required placeholder="你的昵称" maxlength="20" style="width: 100%; padding: 12px 16px; background: var(--bg-darker); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+                    </div>
+                    <div>
+                        <label style="font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; display: block;">NAS 型号（选填）</label>
+                        <input type="text" id="msgDevice" placeholder="如 DS920+" maxlength="20" style="width: 100%; padding: 12px 16px; background: var(--bg-darker); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+                    </div>
+                </div>
+                <div>
+                    <label style="font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; display: block;">留言内容 *</label>
+                    <textarea id="msgContent" required rows="5" maxlength="500" placeholder="说点什么... 安装遇到的问题、使用体验、功能建议都可以" style="width: 100%; padding: 12px 16px; background: var(--bg-darker); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 14px; font-family: inherit; resize: vertical; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+                    <div style="text-align: right; margin-top: 4px; font-size: 12px; color: var(--text-muted);"><span id="charCount">0</span>/500</div>
+                </div>
+                <div>
+                    <button type="submit" id="submitBtn" style="display: inline-flex; align-items: center; gap: 8px; background: var(--gradient-accent); color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);">
+                        发布留言
+                    </button>
+                </div>
+            </form>
+            <div id="formSuccess" style="display: none; margin-top: 16px; padding: 16px 20px; background: rgba(63, 185, 80, 0.1); border: 1px solid rgba(63, 185, 80, 0.25); border-radius: 8px; color: var(--accent); font-size: 14px;">
+                ✓ 留言发布成功！
+            </div>
+        </div>
+
+        <!-- Display messages -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <div>
+                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 0;">全部留言</h3>
+                    <p style="font-size: 14px; color: var(--text-secondary);">来自群晖玩家的真实反馈，所有留言共享可见。</p>
+                </div>
+                <span id="msgCount" style="font-size: 13px; color: var(--text-muted);"></span>
+            </div>
+            <div id="messagesList" style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                    <div style="font-size: 36px; margin-bottom: 12px;">💬</div>
+                    <p style="font-size: 15px;">还没有留言，快来抢沙发！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TUTORIALS ===== -->
+<section id="tutorials">
+    <div class="section-container">
+        <div class="section-tag" style="text-align: center; display: block;">使用教程</div>
+        <h2 class="section-title" style="text-align: center;">从入门到精通，一步步玩转 CloudMount</h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 50px;">
+            详细的图文教程，覆盖网盘挂载、影音播放、Docker 集成等各种使用场景
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+            <a href="/baidu-wangpan-mount.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">📁</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">群晖挂载百度网盘教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    完整的百度网盘挂载教程，从安装到使用，包含 Video Station 播放、Jellyfin 集成、常见问题解答。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/aliyun-drive-mount.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">☁️</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">群晖挂载阿里云盘教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    不限速阿里云盘挂载到群晖NAS，速度性能说明、使用场景、与 Alist 的对比选择。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/quark-drive-mount.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">🚀</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">群晖挂载夸克网盘教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    夸克网盘快速挂载教程，分享资源转存、离线下载、影音播放等实用场景技巧。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/jellyfin-cloud-drive.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">🎬</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">Jellyfin 播放网盘视频教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    Jellyfin Docker 直接播放百度网盘、阿里云盘视频，不用下载，秒变无限容量家庭影院。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/compare-cloudmount-clouddrive2-alist.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">⚖️</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">网盘挂载工具对比评测</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    CloudMount vs CloudDrive2 vs Alist 三大工具全面对比，帮你选择最适合的网盘挂载方案。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看对比 →</span>
+            </a>
+            <a href="/115-wangpan-mount.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">⚡</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">群晖挂载115网盘教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    115网盘挂载到群晖NAS，高速下载、离线下载资源直接播放，115会员最佳搭档。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/nas-storage-expansion.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">💽</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">群晖NAS扩容方案</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    不换硬盘不加扩展柜，用网盘挂载给NAS扩容几个TB，三种方案对比+最佳扩容组合推荐。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/docker-cloud-drive-mount.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">🐳</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">Docker挂载网盘教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    Jellyfin/Emby/Plex等Docker容器直接访问网盘文件，含docker-compose配置示例。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/synology-package-install.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">📦</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">群晖套件安装教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    SPK手动安装完整步骤，含前提条件检查和常见安装错误解决方法，新手3分钟完成。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/cross-drive-transfer.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">🔄</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">网盘跨盘传输教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    百度网盘、阿里云盘之间直接互传文件，不占本地存储空间，支持断点续传。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/uc-wangpan-mount.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">📥</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">群晖挂载UC网盘教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    UC浏览器网盘资源直接挂载到群晖NAS，手机端资源一手管理，影视库直接播放。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/xunlei-wangpan-mount.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">⚡</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">群晖挂载迅雷网盘教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    迅雷网盘离线下载资源直接挂载到群晖NAS，高速下载不占本地空间，影音秒开。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+            <a href="/pikpak-mount.html" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; display: block;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size: 32px; margin-bottom: 16px;">🌐</div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-primary);">群晖挂载PikPak教程</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    海外高速PikPak网盘挂载到群晖NAS，磁力离线下载本地化归档，观影更流畅。
+                </p>
+                <span style="color: var(--primary); font-size: 14px; margin-top: 16px; display: inline-block;">查看教程 →</span>
+            </a>
+        </div>
+        <div style="text-align: center; margin-top: 32px;">
+            <a href="/tutorials.html" style="display: inline-block; padding: 12px 32px; border: 1px solid var(--primary); border-radius: 8px; color: var(--primary); text-decoration: none; font-size: 14px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='var(--primary)';">查看全部教程 →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+    <div class="section-container">
+        <div class="section-tag" style="text-align: center; display: block;">常见问题</div>
+        <h2 class="section-title" style="text-align: center;">你可能想问的</h2>
+        <div class="faq-list">
+            <details class="faq-item" open>
+                <summary>CloudMount 支持哪些群晖 NAS 型号？</summary>
+                <div class="faq-answer">
+                    CloudMount 的 SPK 安装包为 x86_64 架构，支持所有搭载 Intel/AMD 处理器的群晖 NAS 型号（如 DS220+、DS920+、DS1522+、DS224+、DS423+ 等 Plus 系列及 XS 系列）。基于 ARM 架构的 value 系列 NAS（如 DS220j、DS223j 等）暂不支持。
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>挂载网盘后会占用 NAS 本地存储空间吗？</summary>
+                <div class="faq-answer">
+                    几乎不会。CloudMount 采用 FUSE 技术将网盘挂载为虚拟目录，文件实际存储在云端，仅在读取/传输时使用少量缓存空间（默认 1GB 缓存上限）。你可以在系统状态中实时监控缓存使用情况，缓存会在空闲时自动清理。
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>使用 CloudMount 需要开通网盘会员吗？</summary>
+                <div class="faq-answer">
+                    基础挂载功能不需要网盘会员即可使用。但部分网盘（如百度网盘）对非会员有下载速度限制，建议对速度有要求的用户开通相应网盘的会员服务以获得最佳体验。CloudMount 本身的 VIP 会员可解锁更多高级功能。
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>跨盘传输是如何工作的？速度怎么样？</summary>
+                <div class="faq-answer">
+                    跨盘传输采用缓存代理模式：先从源网盘下载文件到 NAS 缓存，再上传到目标网盘。传输速度取决于两个网盘的 API 限速。实测天翼云盘、夸克网盘等速度较快（可达 8MB/s+），百度网盘非会员速度较慢（约 200KB/s）。支持自动重试机制确保传输可靠性。
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>安装时提示「发布者不受信任」怎么办？</summary>
+                <div class="faq-answer">
+                    这是群晖 DSM 对非官方套件的正常安全提示。CloudMount 为第三方开发套件，未在群晖套件中心上架。在安装弹窗中点击「继续安装」即可，不影响正常使用。如无法安装，请在 DSM 控制面板 → 安全中允许安装任何发布者的套件。
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>挂载的网盘能被其他 NAS 应用访问吗？</summary>
+                <div class="faq-answer">
+                    可以。挂载后的网盘目录出现在 /volume1/ 下，与普通 NAS 文件夹无异。Video Station、Music Station、Synology Photos、Docker 容器等均可直接访问这些目录，实现媒体在线播放、容器存储扩展等功能。
+                </div>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>CloudMount — 群晖 NAS 网盘挂载管理工具</p>
+    <div class="footer-links">
+        <a href="#features">功能特性</a>
+        <a href="#services">支持网盘</a>
+        <a href="#usecases">使用场景</a>
+        <a href="#install">安装教程</a>
+        <a href="/tutorials.html">教程合集</a>
+        <a href="#guestbook">留言板</a>
+        <a href="#download">下载</a>
+        <a href="#faq">常见问题</a>
+    </div>
+    <div class="footer-links" style="margin-top: 12px; flex-wrap: wrap; justify-content: center;">
+        <a href="/tutorials.html">教程合集</a>
+        <a href="/baidu-wangpan-mount.html">百度网盘挂载</a>
+        <a href="/aliyun-drive-mount.html">阿里云盘挂载</a>
+        <a href="/quark-drive-mount.html">夸克网盘挂载</a>
+        <a href="/115-wangpan-mount.html">115网盘挂载</a>
+        <a href="/tianyi-cloud-drive-mount.html">天翼云盘挂载</a>
+        <a href="/jellyfin-cloud-drive.html">Jellyfin播放教程</a>
+        <a href="/video-station-cloud-drive.html">Video Station教程</a>
+        <a href="/compare-cloudmount-clouddrive2-alist.html">工具对比评测</a>
+        <a href="/nas-storage-expansion.html">NAS扩容方案</a>
+        <a href="/docker-cloud-drive-mount.html">Docker挂载网盘</a>
+        <a href="/synology-package-install.html">套件安装教程</a>
+        <a href="/cross-drive-transfer.html">跨盘传输教程</a>
+        <a href="/uc-wangpan-mount.html">UC网盘挂载</a>
+        <a href="/xunlei-wangpan-mount.html">迅雷网盘挂载</a>
+        <a href="/pikpak-mount.html">PikPak挂载</a>
+    </div>
+    <p style="margin-top: 16px; font-size: 12px; color: var(--text-muted); max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+        CloudMount 是一款群晖NAS网盘挂载套件（SPK安装包），支持百度网盘挂载、阿里云盘挂载、夸克网盘挂载、115网盘挂载、天翼云盘挂载、UC网盘挂载、迅雷网盘挂载、PikPak挂载到NAS本地目录。适用于 DS220+、DS920+、DS224+、DS1522+、DS923+、DS723+ 等 x86_64 架构群晖NAS。支持 File Station 集成、Video Station 在线播放、Docker 容器存储扩展、跨盘传输、断点续传下载。FUSE 权限全自动化，无需命令行配置。
+    </p>
+    <p style="margin-top: 12px; font-size: 12px;">本软件为第三方工具，与群晖官方无关联。请合理使用，遵守各网盘服务条款。</p>
+</footer>
+
+<script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 60,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Nav background on scroll
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            nav.style.background = 'rgba(15, 25, 35, 0.95)';
+        } else {
+            nav.style.background = 'rgba(15, 25, 35, 0.85)';
+        }
+    });
+
+    // ===== Guestbook: MantleDB server-side storage =====
+    var API_URL = 'https://mantledb.sh/v2/cloudmount-guestbook/messages';
+
+    function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function renderMessages(messages) {
+        var list = document.getElementById('messagesList');
+        if (!list) return;
+        if (!messages || messages.length === 0) {
+            list.innerHTML = '<div style="text-align: center; padding: 40px 20px; color: var(--text-muted);"><div style="font-size: 36px; margin-bottom: 12px;">💬</div><p style="font-size: 15px;">还没有留言，快来抢沙发！</p></div>';
+            var msgCount = document.getElementById('msgCount');
+            if (msgCount) msgCount.textContent = '';
+            return;
+        }
+        var msgCountEl = document.getElementById('msgCount');
+        if (msgCountEl) msgCountEl.textContent = messages.length + ' 条留言';
+        // Show latest first
+        list.innerHTML = messages.slice().reverse().map(function(msg) {
+            return '<div style="padding: 18px 20px; background: var(--bg-darker); border: 1px solid var(--border); border-radius: 10px;">' +
+                '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">' +
+                    '<div style="display: flex; align-items: center; gap: 8px;">' +
+                        '<span style="width: 32px; height: 32px; border-radius: 8px; background: var(--gradient-accent); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: white;">' + escapeHtml(msg.name || 'N')[0] + '</span>' +
+                        '<strong style="font-size: 14px;">' + escapeHtml(msg.name) + '</strong>' +
+                    '</div>' +
+                    '<span style="font-size: 12px; color: var(--text-muted);">' + escapeHtml(msg.time || '') + '</span>' +
+                '</div>' +
+                '<p style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; white-space: pre-wrap;">' + escapeHtml(msg.message) + '</p>' +
+                (msg.device ? '<span style="display: inline-block; margin-top: 8px; font-size: 12px; color: var(--text-muted); background: rgba(47, 129, 247, 0.08); padding: 3px 10px; border-radius: 50px;">' + escapeHtml(msg.device) + '</span>' : '') +
+            '</div>';
+        }).join('');
+    }
+
+    function showLoading() {
+        var list = document.getElementById('messagesList');
+        if (list) list.innerHTML = '<div style="text-align: center; padding: 40px 20px; color: var(--text-muted);"><div style="font-size: 28px; margin-bottom: 8px; animation: spin 1s linear infinite; display: inline-block;">◐</div><p style="font-size: 14px;">加载留言中...</p></div>';
+    }
+
+    // Load messages from server
+    async function loadMessages() {
+        showLoading();
+        try {
+            var response = await fetch(API_URL);
+            if (!response.ok) throw new Error('fetch failed');
+            var data = await response.json();
+            renderMessages(data.messages || []);
+        } catch (e) {
+            var list = document.getElementById('messagesList');
+            if (list) list.innerHTML = '<div style="text-align: center; padding: 40px 20px; color: var(--text-muted);"><div style="font-size: 36px; margin-bottom: 12px;">⚠️</div><p style="font-size: 14px;">留言加载失败，请刷新页面重试</p></div>';
+        }
+    }
+
+    loadMessages();
+
+    // Char count
+    var msgContent = document.getElementById('msgContent');
+    if (msgContent) {
+        msgContent.addEventListener('input', function() {
+            var charCount = document.getElementById('charCount');
+            if (charCount) charCount.textContent = this.value.length;
+        });
+    }
+
+    // Form submit
+    var feedbackForm = document.getElementById('feedbackForm');
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var name = document.getElementById('msgName').value.trim();
+            var device = document.getElementById('msgDevice').value.trim();
+            var message = document.getElementById('msgContent').value.trim();
+            if (!name || !message) return;
+
+            var submitBtn = document.getElementById('submitBtn');
+            var originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '发布中...';
+            submitBtn.disabled = true;
+
+            try {
+                // Fetch current messages
+                var response = await fetch(API_URL);
+                var data = await response.json();
+                var msgs = data.messages || [];
+
+                // Add new message
+                var now = new Date();
+                var timeStr = now.getFullYear() + '-' +
+                    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(now.getDate()).padStart(2, '0') + ' ' +
+                    String(now.getHours()).padStart(2, '0') + ':' +
+                    String(now.getMinutes()).padStart(2, '0');
+
+                msgs.push({ name: name, message: message, time: timeStr, device: device });
+
+                // Save back to server
+                await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ messages: msgs })
+                });
+
+                // Show success
+                var formSuccess = document.getElementById('formSuccess');
+                if (formSuccess) {
+                    formSuccess.style.display = 'block';
+                    setTimeout(function() { formSuccess.style.display = 'none'; }, 3000);
+                }
+                feedbackForm.reset();
+                var charCount = document.getElementById('charCount');
+                if (charCount) charCount.textContent = '0';
+                renderMessages(msgs);
+            } catch (err) {
+                alert('留言发布失败，请稍后重试');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

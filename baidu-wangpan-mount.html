@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://beatwind.github.io">
+<link rel="dns-prefetch" href="https://beatwind.github.io">
+<title>群晖NAS挂载百度网盘详细教程 - CloudMount</title>
+<meta name="description" content="群晖NAS挂载百度网盘完整教程，使用CloudMount将百度网盘挂载为本地文件夹，支持File Station直接访问、Video Station播放、Docker挂载，DS920+ DS220+ DS224+通用教程。">
+<meta name="keywords" content="群晖挂载百度网盘,群晖NAS百度网盘,群晖百度网盘挂载教程,Synology Baidu Wangpan mount,CloudMount教程">
+<link rel="canonical" href="https://beatwind.github.io/baidu-wangpan-mount.html">
+<meta property="og:title" content="群晖NAS挂载百度网盘详细教程">
+<meta property="og:description" content="使用CloudMount一键将百度网盘挂载成群晖NAS本地文件夹">
+<meta property="og:url" content="https://beatwind.github.io/baidu-wangpan-mount.html">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="mobile-agent" content="format=html5;url=https://beatwind.github.io/baidu-wangpan-mount.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="群晖NAS挂载百度网盘教程">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="群晖NAS挂载百度网盘完整教程 - CloudMount">
+<meta name="twitter:description" content="使用CloudMount一键将百度网盘挂载为群晖NAS本地文件夹">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "群晖NAS挂载百度网盘教程",
+  "description": "使用CloudMount在群晖NAS上挂载百度网盘的完整步骤",
+  "step": [
+    {"@type": "HowToStep", "name": "下载安装包", "text": "去官网下载CloudMount SPK安装包"},
+    {"@type": "HowToStep", "name": "安装套件", "text": "在套件中心手动安装SPK文件"},
+    {"@type": "HowToStep", "name": "添加百度网盘", "text": "扫码登录百度网盘账号并挂载"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"教程合集","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"群晖挂载百度网盘教程","item":"https://beatwind.github.io/baidu-wangpan-mount.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"群晖挂载百度网盘需要开通百度网盘会员吗？","acceptedAnswer":{"@type":"Answer","text":"基础挂载功能不需要会员即可使用，但百度网盘对非会员有下载速度限制（约200KB/s），建议对速度有要求的用户开通百度网盘会员以获得最佳体验。"}},{"@type":"Question","name":"百度网盘挂载后可以在Video Station中播放视频吗？","acceptedAnswer":{"@type":"Answer","text":"可以。挂载后百度网盘目录出现在/volume1/下，在Video Station中添加挂载目录作为媒体文件夹即可直接播放网盘中的视频，支持自动刮削海报和字幕。"}},{"@type":"Question","name":"群晖挂载百度网盘会占用本地存储空间吗？","acceptedAnswer":{"@type":"Answer","text":"几乎不会。文件实际存储在百度网盘云端，仅在读取或传输时使用少量缓存空间，默认1GB缓存上限，缓存会在空闲时自动清理。"}},{"@type":"Question","name":"百度网盘挂载后Docker容器能访问吗？","acceptedAnswer":{"@type":"Answer","text":"可以。挂载后的目录在/volume1/下，Docker容器（如Jellyfin、Emby）可以直接挂载这些目录作为存储卷，实现网盘视频在线播放。"}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"群晖NAS挂载百度网盘完整教程","description":"使用CloudMount在群晖NAS上挂载百度网盘的完整步骤教程","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-08-31","dateModified":"2026-09-01","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/baidu-wangpan-mount.html"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.btn:hover{opacity:0.9}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首页</a> / 百度网盘挂载教程</div>
+  <h1>群晖NAS挂载百度网盘完整教程</h1>
+  <p class="subtitle">使用 CloudMount 一键将百度网盘挂载为群晖本地文件夹，File Station 直接管理，Video Station 直接播放</p>
+
+  <div class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">为什么要在群晖上挂载百度网盘？</a></li>
+      <li><a href="#method">常见挂载方式对比</a></li>
+      <li><a href="#install">CloudMount 安装教程（3步）</a></li>
+      <li><a href="#usage">使用场景与技巧</a></li>
+      <li><a href="#faq">常见问题 FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro">一、为什么要在群晖上挂载百度网盘？</h2>
+  <p>百度网盘是国内用户量最大的网盘，很多人在里面存了大量电影、音乐、资料。但有了群晖 NAS 之后，你可能会遇到这些痛点：</p>
+  <ul>
+    <li>网盘里的电影想看的时候得先下载到 NAS，太麻烦</li>
+    <li>NAS 硬盘空间不够，但网盘有好几 TB 空间浪费着</li>
+    <li>管理文件要分别开网盘客户端和 File Station，效率低</li>
+    <li>想在 Jellyfin/Video Station 里直接看网盘里的电影，做不到</li>
+  </ul>
+  <p>把百度网盘挂载成群晖的本地文件夹，这些问题就都解决了。</p>
+
+  <h2 id="method">二、常见挂载方式对比</h2>
+  <table style="width:100%;border-collapse:collapse;margin:20px 0">
+    <thead>
+      <tr style="background:#1e293b">
+        <th style="padding:12px;text-align:left;border:1px solid #334155">方案</th>
+        <th style="padding:12px;text-align:left;border:1px solid #334155">难度</th>
+        <th style="padding:12px;text-align:left;border:1px solid #334155">File Station集成</th>
+        <th style="padding:12px;text-align:left;border:1px solid #334155">Video Station</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:12px;border:1px solid #334155">CloudMount</td><td style="padding:12px;border:1px solid #334155">简单</td><td style="padding:12px;border:1px solid #334155">原生支持</td><td style="padding:12px;border:1px solid #334155">支持</td></tr>
+      <tr><td style="padding:12px;border:1px solid #334155">CloudDrive2</td><td style="padding:12px;border:1px solid #334155">中等</td><td style="padding:12px;border:1px solid #334155">支持</td><td style="padding:12px;border:1px solid #334155">支持</td></tr>
+      <tr><td style="padding:12px;border:1px solid #334155">Alist + WebDAV</td><td style="padding:12px;border:1px solid #334155">复杂</td><td style="padding:12px;border:1px solid #334155">不支持</td><td style="padding:12px;border:1px solid #334155">需配置</td></tr>
+      <tr><td style="padding:12px;border:1px solid #334155">百度网盘官方套件</td><td style="padding:12px;border:1px solid #334155">简单</td><td style="padding:12px;border:1px solid #334155">仅同步</td><td style="padding:12px;border:1px solid #334155">不支持</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="install">三、CloudMount 安装教程</h2>
+  
+  <h3>第一步：下载安装包</h3>
+  <p>访问 CloudMount 官网下载对应你群晖机型的 SPK 安装包。支持所有 x86_64 架构机型，包括：</p>
+  <ul>
+    <li>DS220+、DS920+、DS720+、DS420+</li>
+    <li>DS224+、DS423+、DS923+</li>
+    <li>DS1522+、DS1821+、DS1621+</li>
+    <li>以及其他 x86_64 架构的群晖机型</li>
+  </ul>
+  <div class="highlight">
+    <strong>注意：</strong>ARM 架构机型（如 DS223j、DS120j、DS218play 等）目前暂不支持。
+  </div>
+  <p><a class="btn" href="/">前往官网下载 →</a></p>
+
+  <h3>第二步：安装套件</h3>
+  <ol>
+    <li>打开群晖 DSM 管理界面</li>
+    <li>进入「套件中心」</li>
+    <li>点击右上角「手动安装」</li>
+    <li>选择下载的 SPK 文件</li>
+    <li>点击「下一步」，同意用户协议</li>
+    <li>点击「完成」</li>
+  </ol>
+  <p>安装完成后，你可以在群晖菜单中找到 CloudMount。</p>
+
+  <h3>第三步：添加百度网盘</h3>
+  <ol>
+    <li>打开 CloudMount</li>
+    <li>点击「添加网盘」</li>
+    <li>选择「百度网盘」</li>
+    <li>使用百度网盘 APP 扫码登录</li>
+    <li>设置挂载路径（默认 <code>/CloudMount/百度网盘</code>）</li>
+    <li>点击「确定」完成挂载</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>完成！</strong>现在打开 File Station，你就能在 <code>/CloudMount/百度网盘</code> 目录下看到你百度网盘里的所有文件了，跟本地文件夹一模一样。
+  </div>
+
+  <h2 id="usage">四、使用场景与技巧</h2>
+
+  <h3>1. Video Station 直接播放</h3>
+  <p>把电影存在百度网盘里，Video Station 可以直接索引和播放：</p>
+  <ol>
+    <li>打开 Video Station</li>
+    <li>进入「设置」→「视频库」</li>
+    <li>添加文件夹，选择挂载的百度网盘电影目录</li>
+    <li>确定后 Video Station 会自动扫描刮削</li>
+  </ol>
+
+  <h3>2. Jellyfin / Emby 挂载</h3>
+  <p>如果你用 Docker 版的 Jellyfin 或 Emby，可以直接把挂载目录映射到容器里：</p>
+  <ol>
+    <li>在 Docker 中编辑 Jellyfin 容器</li>
+    <li>添加挂载文件夹：<code>/volume1/CloudMount/百度网盘/电影</code> → <code>/media/baiduyun</code></li>
+    <li>重启容器</li>
+    <li>在 Jellyfin 中添加媒体库，选择 <code>/media/baiduyun</code></li>
+  </ol>
+
+  <h3>3. 文件管理技巧</h3>
+  <ul>
+    <li>挂载后可以直接在 File Station 中复制、移动、重命名文件</li>
+    <li>可以把多个百度网盘账号同时挂载，统一管理</li>
+    <li>支持和阿里云盘、夸克网盘等其他挂载的网盘之间互传文件</li>
+  </ul>
+
+  <h2 id="faq">五、常见问题 FAQ</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：挂载后下载速度怎么样？</div>
+    <p>A：取决于你的百度网盘会员等级和网络带宽。超级会员基本能跑满带宽，非会员会有限速。建议在使用高峰期避开拥堵时段。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：会被百度封号吗？</div>
+    <p>A：CloudMount 使用百度官方 API 接口，正常使用不会封号。但建议不要短时间内大量下载或频繁操作，避免触发风控。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：ARM 机型能用吗？</div>
+    <p>A：目前只支持 x86_64 架构的群晖机型，ARM 机型（DS223j、DS120j、DS218play 等）暂时不支持。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：数据安全吗？</div>
+    <p>A：CloudMount 只在本地运行，所有数据通过官方 API 传输，不经过第三方服务器。登录也是在百度官方页面完成的，账号密码不会泄露。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：免费吗？有没有功能限制？</div>
+    <p>A：完全免费，无广告，无功能限制。所有网盘都可以免费挂载。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：支持同时挂载多个百度网盘账号吗？</div>
+    <p>A：支持。你可以添加多个百度网盘账号，每个账号独立挂载到不同路径，统一在 File Station 中管理。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：群晖 DSM 7.x 支持吗？</div>
+    <p>A：支持 DSM 7.0 及以上所有版本，包括最新的 DSM 7.2。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：跟官方百度网盘套件有什么区别？</div>
+    <p>A：官方百度网盘套件只有同步功能，文件会占用本地空间。CloudMount 是纯挂载模式，不占用本地存储空间，而且 File Station 原生集成，体验更好。</p>
+  </div>
+
+  <p style="margin-top:40px;text-align:center">
+    <a class="btn" href="/">返回官网下载 CloudMount →</a>
+  </p>
+
+  <div class="related">
+    <h3>相关阅读</h3>
+    <ul>
+      <li><a href="/aliyun-drive-mount.html">群晖挂载阿里云盘教程</a></li>
+      <li><a href="/jellyfin-cloud-drive.html">Jellyfin播放网盘视频教程</a></li>
+      <li><a href="/video-station-cloud-drive.html">Video Station播放网盘视频</a></li>
+      <li><a href="/docker-cloud-drive-mount.html">Docker挂载网盘教程</a></li>
+      <li><a href="/nas-storage-expansion.html">群晖NAS扩容方案</a></li>
+      <li><a href="/cross-drive-transfer.html">网盘跨盘传输教程</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 CloudMount · 群晖NAS网盘挂载工具</p>
+  <p><a href="/">首页</a> | <a href="/baidu-wangpan-mount.html">百度网盘教程</a> | <a href="/aliyun-drive-mount.html">阿里云盘教程</a> | <a href="/compare-cloudmount-clouddrive2-alist.html">对比评测</a></p>
+</footer>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var bp = document.createElement('script');
+  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+(function(){
+  var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>
+</body>
+</html>

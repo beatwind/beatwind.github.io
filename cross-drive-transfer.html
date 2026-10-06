@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://beatwind.github.io">
+<link rel="dns-prefetch" href="https://beatwind.github.io">
+<title>网盘跨盘传输教程 - 百度网盘阿里云盘互传不占本地空间 CloudMount</title>
+<meta name="description" content="网盘跨盘传输完整教程，用CloudMount在百度网盘、阿里云盘、夸克网盘之间直接互传文件，不占本地存储空间。详细操作步骤和常见问题解答。">
+<meta name="keywords" content="网盘跨盘传输,百度网盘阿里云盘互传,网盘间互传文件,跨网盘传输,CloudMount跨盘传输,网盘文件搬家,不占本地空间传输">
+<link rel="canonical" href="https://beatwind.github.io/cross-drive-transfer.html">
+<meta property="og:title" content="网盘跨盘传输教程 - 网盘间互传不占本地空间">
+<meta property="og:description" content="用CloudMount在百度网盘、阿里云盘之间直接互传文件，不占本地存储">
+<meta property="og:url" content="https://beatwind.github.io/cross-drive-transfer.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="网盘跨盘传输教程">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="网盘跨盘传输教程 - 网盘间互传不占本地空间">
+<meta name="twitter:description" content="百度网盘、阿里云盘之间直接互传文件">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"网盘跨盘传输教程","description":"用CloudMount在网盘之间直接互传文件不占本地空间","step":[{"@type":"HowToStep","name":"安装CloudMount","text":"下载安装CloudMount套件"},{"@type":"HowToStep","name":"挂载多个网盘","text":"同时挂载源网盘和目标网盘"},{"@type":"HowToStep","name":"复制文件","text":"在File Station中从源网盘复制到目标网盘"},{"@type":"HowToStep","name":"等待传输完成","text":"CloudMount自动完成跨盘传输"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"教程合集","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"网盘跨盘传输教程","item":"https://beatwind.github.io/cross-drive-transfer.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"跨盘传输会占用NAS本地存储空间吗？","acceptedAnswer":{"@type":"Answer","text":"不会。CloudMount采用缓存代理模式，文件从源网盘读取后直接写入目标网盘，仅在传输过程中使用少量缓存空间，传输完成后自动清理。"}},"@type":"Question","name":"百度网盘文件怎么传到阿里云盘？","acceptedAnswer":{"@type":"Answer","text":"用CloudMount同时挂载百度网盘和阿里云盘，在File Station中直接从百度网盘目录复制文件到阿里云盘目录即可，CloudMount会自动完成跨盘传输。"}},{"@type":"Question","name":"跨盘传输速度怎么样？","acceptedAnswer":{"@type":"Answer","text":"取决于源网盘的下载速度和目标网盘的上传速度。百度网盘非会员下载限速约200KB/s，阿里云盘和夸克网盘不限速，传输速度更快。"}},{"@type":"Question","name":"跨盘传输中断了怎么办？","acceptedAnswer":{"@type":"Answer","text":"CloudMount支持断点续传，传输中断后重新复制即可从中断处继续。大文件传输建议在网络稳定时进行。"}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"网盘跨盘传输教程 - 百度网盘阿里云盘互传不占本地空间","description":"用CloudMount在网盘之间直接互传文件不占本地空间","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-08-31","dateModified":"2026-09-01","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/cross-drive-transfer.html"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.faq-a{color:#d1d5db;font-size:14px}
+.faq-a a{color:#60a5fa;text-decoration:none}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th{background:#1e293b;padding:12px;text-align:left;border:1px solid #334155;font-weight:600}
+td{padding:12px;border:1px solid #334155}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.btn:hover{opacity:0.9}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首页</a> / <a href="/tutorials.html">教程合集</a> / 网盘跨盘传输教程</div>
+  <h1>网盘跨盘传输教程 - 网盘间互传不占本地空间</h1>
+  <p class="subtitle">用 CloudMount 在百度网盘、阿里云盘、夸克网盘之间直接互传文件，不需要下载到本地再上传</p>
+
+  <div class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#why">为什么需要跨盘传输</a></li>
+      <li><a href="#principle">跨盘传输原理</a></li>
+      <li><a href="#steps">操作步骤</a></li>
+      <li><a href="#combos">常用跨盘传输组合</a></li>
+      <li><a href="#tips">传输优化技巧</a></li>
+      <li><a href="#faq">常见问题</a></li>
+    </ol>
+  </div>
+
+  <h2 id="why">一、为什么需要跨盘传输</h2>
+  <p>很多用户同时有多个网盘账号，比如百度网盘存了大量文件想搬到阿里云盘（不限速），或者想把夸克网盘的文件备份到天翼云盘。传统做法是：</p>
+  <ul>
+    <li>从源网盘下载文件到电脑 → 再上传到目标网盘（慢且占本地空间）</li>
+    <li>用各网盘的分享链接互相转存（操作繁琐，部分网盘不支持）</li>
+    <li>找第三方工具（大部分收费或有限制）</li>
+  </ul>
+  <p>用 CloudMount 挂载多个网盘后，在 File Station 里直接拖拽复制就能完成跨盘传输，文件从源网盘直接流到目标网盘，<strong>不占NAS本地存储</strong>。</p>
+
+  <h2 id="principle">二、跨盘传输原理</h2>
+  <div class="highlight">
+    <p>CloudMount 采用<strong>缓存代理模式</strong>：文件从源网盘下载到NAS内存缓存 → 立即上传到目标网盘 → 缓存自动清理。整个过程不写入NAS硬盘，仅在内存中短暂缓存。</p>
+  </div>
+  <p>这意味着即使你的NAS只有几百GB硬盘，也能完成几个TB的跨盘传输任务。</p>
+
+  <h2 id="steps">三、操作步骤</h2>
+  <h3>步骤1：安装CloudMount并挂载多个网盘</h3>
+  <p>参考<a href="/synology-package-install.html">套件安装教程</a>安装 CloudMount，然后挂载至少两个网盘。比如同时挂载<a href="/baidu-wangpan-mount.html">百度网盘</a>和<a href="/aliyun-drive-mount.html">阿里云盘</a>。</p>
+
+  <h3>步骤2：打开File Station</h3>
+  <p>在DSM中打开 File Station，你会看到挂载的网盘目录，例如：</p>
+  <ul>
+    <li><code>/volume1/baidu-netdisk/</code> — 百度网盘</li>
+    <li><code>/volume1/aliyun-drive/</code> — 阿里云盘</li>
+    <li><code>/volume1/quark-drive/</code> — 夸克网盘</li>
+  </ul>
+
+  <h3>步骤3：复制文件</h3>
+  <p>在 File Station 中打开源网盘目录，选中要传输的文件或文件夹，右键选择「复制到」，然后选择目标网盘的目录。或者直接拖拽到目标目录。</p>
+
+  <h3>步骤4：等待传输完成</h3>
+  <p>CloudMount 会自动处理跨盘传输，你可以在 File Station 的传输列表中查看进度。传输速度取决于源网盘下载速度和目标网盘上传速度。</p>
+
+  <div class="highlight">
+    <p>传输过程中不需要保持电脑开机，只要群晖NAS在运行就行。可以关闭浏览器，CloudMount会在后台继续传输。</p>
+  </div>
+
+  <h2 id="combos">四、常用跨盘传输组合</h2>
+  <table>
+    <thead>
+      <tr><th>传输方向</th><th>适用场景</th><th>速度参考</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>百度网盘 → 阿里云盘</td><td>把限速网盘的文件搬到不限速网盘</td><td>受百度下载限速影响</td></tr>
+      <tr><td>阿里云盘 → 百度网盘</td><td>分享给百度网盘用户</td><td>阿里下载快，百度上传一般</td></tr>
+      <tr><td>夸克网盘 → 阿里云盘</td><td>夸克资源搬到阿里做影音库</td><td>两边都不限速，很快</td></tr>
+      <tr><td>115网盘 → 阿里云盘</td><td>离线下载资源搬到不限速网盘</td><td>取决于115下载速度</td></tr>
+      <tr><td>任意网盘 → 天翼云盘</td><td>重要数据冷备份</td><td>天翼上传速度稳定</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="tips">五、传输优化技巧</h2>
+  <ul>
+    <li><strong>选择不限速网盘做中转</strong>：阿里云盘和夸克网盘都不限速，跨盘传输速度快</li>
+    <li><strong>避开高峰时段</strong>：晚上8-11点网盘速度可能变慢，凌晨速度最快</li>
+    <li><strong>分批传输大文件夹</strong>：一次传输太多文件可能超时，建议分批操作</li>
+    <li><strong>百度网盘会员加速</strong>：如果从百度网盘搬文件，开通会员下载速度更快</li>
+    <li><strong>使用跨盘传输做备份</strong>：重要文件同时在两个网盘各存一份，双重保险</li>
+  </ul>
+
+  <h2 id="faq">六、常见问题</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：跨盘传输会占用NAS本地存储空间吗？</div>
+    <div class="faq-a">A：不会。CloudMount采用缓存代理模式，文件在内存中中转后直接写入目标网盘，不写入NAS硬盘。传输完成后缓存自动清理。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：百度网盘文件怎么传到阿里云盘？</div>
+    <div class="faq-a">A：用CloudMount同时挂载百度网盘和阿里云盘，在File Station中从百度网盘目录复制文件到阿里云盘目录即可。详见上方<a href="#steps">操作步骤</a>。相关教程：<a href="/baidu-wangpan-mount.html">百度网盘挂载</a> · <a href="/aliyun-drive-mount.html">阿里云盘挂载</a></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：跨盘传输速度怎么样？</div>
+    <div class="faq-a">A：取决于源网盘下载速度和目标网盘上传速度。阿里云盘和夸克网盘不限速，传输速度快。百度网盘非会员下载限速约200KB/s，建议开通会员或使用<a href="/nas-storage-expansion.html">扩容方案</a>。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：跨盘传输中断了怎么办？</div>
+    <div class="faq-a">A：CloudMount支持断点续传，重新复制即可继续。建议大文件夹分批传输，避免因网络波动导致中断。</div>
+  </div>
+
+  <a href="/#download" class="btn">立即下载 CloudMount 开始跨盘传输 →</a>
+
+  <div class="related">
+    <h3>相关阅读</h3>
+    <ul>
+      <li><a href="/">CloudMount 官网首页 - 立即下载</a></li>
+      <li><a href="/tutorials.html">全部教程合集</a></li>
+      <li><a href="/baidu-wangpan-mount.html">群晖挂载百度网盘教程</a></li>
+      <li><a href="/aliyun-drive-mount.html">群晖挂载阿里云盘教程</a></li>
+      <li><a href="/nas-storage-expansion.html">群晖NAS扩容方案</a></li>
+      <li><a href="/compare-cloudmount-clouddrive2-alist.html">网盘挂载工具对比评测</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>CloudMount - 群晖NAS网盘挂载工具 | <a href="/">首页</a> | <a href="/tutorials.html">教程</a> | <a href="/#download">下载</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://beatwind.github.io">
+<link rel="dns-prefetch" href="https://beatwind.github.io">
+<title>群晖挂载115网盘教程 - CloudMount</title>
+<meta name="description" content="群晖NAS挂载115网盘完整教程，使用CloudMount将115网盘挂载为本地文件夹，115离线下载资源直接在群晖播放，支持Video Station、Jellyfin、Docker。">
+<meta name="keywords" content="群晖115网盘,115网盘挂载,群晖挂载115,115网盘NAS,115离线下载群晖,Synology 115 mount">
+<link rel="canonical" href="https://beatwind.github.io/115-wangpan-mount.html">
+<meta property="og:title" content="群晖挂载115网盘教程">
+<meta property="og:description" content="115网盘挂载到群晖NAS，离线下载资源直接播放">
+<meta property="og:url" content="https://beatwind.github.io/115-wangpan-mount.html">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="mobile-agent" content="format=html5;url=https://beatwind.github.io/115-wangpan-mount.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="群晖NAS挂载115网盘教程">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="群晖挂载115网盘教程 - 离线下载资源直接播放">
+<meta name="twitter:description" content="115网盘挂载到群晖NAS，离线下载资源直接播放">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"群晖挂载115网盘教程","step":[{"@type":"HowToStep","name":"下载安装","text":"下载CloudMount SPK并安装"},{"@type":"HowToStep","name":"添加115网盘","text":"登录115账号并挂载"},{"@type":"HowToStep","name":"使用","text":"File Station管理或影音播放"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"教程合集","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"群晖挂载115网盘教程","item":"https://beatwind.github.io/115-wangpan-mount.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"115网盘挂载到群晖后离线下载资源可以直接播放吗？","acceptedAnswer":{"@type":"Answer","text":"可以。115网盘的离线下载资源挂载到群晖后，可以直接在Video Station或Jellyfin中播放，无需下载到本地。"}},{"@type":"Question","name":"115网盘挂载需要115会员吗？","acceptedAnswer":{"@type":"Answer","text":"需要115网盘账号才能登录使用，建议使用115会员账号以获得更好的下载和播放体验。"}},{"@type":"Question","name":"115网盘和百度网盘可以互传文件吗？","acceptedAnswer":{"@type":"Answer","text":"可以。使用CloudMount的跨盘传输功能，可以在115网盘和百度网盘之间直接互传文件。"}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"群晖挂载115网盘教程 - 离线下载资源直接播放","description":"115网盘挂载到群晖NAS完整教程","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-08-31","dateModified":"2026-09-01","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/115-wangpan-mount.html"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首页</a> / 115网盘挂载教程</div>
+  <h1>群晖NAS挂载115网盘完整教程</h1>
+  <p class="subtitle">115会员最佳搭档：离线下载资源直接在群晖播放，不用下载、不占硬盘</p>
+
+  <div class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">115网盘挂载到群晖的优势</a></li>
+      <li><a href="#install">安装教程（3步）</a></li>
+      <li><a href="#offline">离线下载资源使用技巧</a></li>
+      <li><a href="#usage">使用场景</a></li>
+      <li><a href="#faq">常见问题 FAQ</a></li>
+      <li><a href="#related">相关阅读</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro">一、115网盘挂载到群晖的优势</h2>
+  <p>115网盘以大容量和离线下载著称，是很多资源党的首选。但115的客户端体验一般，挂载到群晖 NAS 之后体验会有质的飞跃：</p>
+  <ul>
+    <li><strong>离线下载秒看</strong>：115离线下载的资源，不用下载到本地，挂载后直接播放</li>
+    <li><strong>速度快</strong>：115网盘下载速度快，挂载后播放流畅</li>
+    <li><strong>空间大</strong>：115会员有好几 TB 空间，相当于给 NAS 扩容</li>
+    <li><strong>管理方便</strong>：File Station 统一管理所有网盘，不用开115客户端</li>
+    <li><strong>多端播放</strong>：电视、手机、电脑都能通过 Jellyfin/Video Station 播放</li>
+  </ul>
+
+  <h2 id="install">二、安装教程（3步搞定）</h2>
+
+  <h3>第一步：下载安装 CloudMount</h3>
+  <p>去官网下载对应你群晖机型的 SPK 安装包，支持所有 x86_64 架构机型。</p>
+  <p><a class="btn" href="/">前往官网下载 →</a></p>
+
+  <h3>第二步：安装套件</h3>
+  <ol>
+    <li>打开群晖 DSM → 套件中心</li>
+    <li>点击右上角「手动安装」</li>
+    <li>选择下载的 SPK 文件</li>
+    <li>下一步 → 同意协议 → 完成</li>
+  </ol>
+
+  <h3>第三步：添加115网盘</h3>
+  <ol>
+    <li>打开 CloudMount</li>
+    <li>点击「添加网盘」→ 选择「115网盘」</li>
+    <li>使用115 APP 扫码或输入账号密码登录</li>
+    <li>设置挂载路径，点击确定</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>完成！</strong>打开 File Station，你就能看到115网盘里的所有文件了。115离线下载的资源直接就能看到和播放。
+  </div>
+
+  <h2 id="offline">三、离线下载资源使用技巧</h2>
+
+  <h3>1. 离线下载后直接播放</h3>
+  <p>在115里用离线下载保存的电影、电视剧，挂载后在 File Station 里直接就能找到，用 Video Station 或 Jellyfin 直接播放，完全不需要下载到 NAS。</p>
+
+  <h3>2. 资源整理分类</h3>
+  <p>建议在115网盘里把资源按电影、电视剧、动漫等分类建好文件夹，挂载后目录结构一目了然，Jellyfin 刮削也更准确。</p>
+
+  <h3>3. 配合其他网盘使用</h3>
+  <p>可以同时挂载百度网盘、阿里云盘、115网盘等多个网盘，所有资源在 File Station 里统一管理。还可以在不同网盘之间互传文件。</p>
+
+  <h2 id="usage">四、使用场景</h2>
+
+  <h3>1. 家庭影院</h3>
+  <p>115离线下载的高清资源，挂载到群晖后用 Jellyfin 搭建家庭影院，电视、投影、手机、平板都能看。</p>
+
+  <h3>2. 资源备份迁移</h3>
+  <p>重要资源在115和本地之间双向备份，或者从115迁移到其他网盘，挂载后直接拖拽操作。</p>
+
+  <h3>3. 共享给家人</h3>
+  <p>通过群晖的共享功能，把115网盘里的影视资源共享给家人使用，每个人都有自己的播放进度和收藏。</p>
+
+  <h2 id="faq">五、常见问题 FAQ</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：115网盘挂载速度怎么样？</div>
+    <p>A：115网盘本身速度不错，会员速度更快。挂载后的实际速度取决于你的网络带宽和115账号等级，一般能跑到带宽的 60%-80%。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：必须要有115会员吗？</div>
+    <p>A：不是必须的，但115的很多功能（离线下载、大容量等）只有会员才有。而且会员的速度和稳定性都更好。如果你经常用115，建议开通会员。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：115离线下载的文件能直接挂载吗？</div>
+    <p>A：可以。离线下载保存到你自己的115网盘后，挂载目录里就能看到，跟普通文件一样使用。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：支持同时挂载多个115账号吗？</div>
+    <p>A：支持。可以添加多个115网盘账号，分别挂载到不同目录。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：115会不会封号？</div>
+    <p>A：CloudMount 使用官方 API 接口，正常使用不会有问题。但请遵守115的服务条款，合理使用。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：和百度网盘比哪个好？</div>
+    <p>A：各有优势。百度网盘资源多、用户基数大；115离线下载强、速度快。建议两个都挂载，按需使用。CloudMount 支持同时挂载多个网盘。</p>
+  </div>
+
+  <div id="related" class="related">
+    <h3>相关阅读</h3>
+    <ul>
+      <li><a href="/baidu-wangpan-mount.html">群晖挂载百度网盘详细教程</a></li>
+      <li><a href="/aliyun-drive-mount.html">群晖挂载阿里云盘教程</a></li>
+      <li><a href="/jellyfin-cloud-drive.html">Jellyfin播放网盘视频完整教程</a></li>
+      <li><a href="/video-station-cloud-drive.html">Video Station播放网盘视频</a></li>
+      <li><a href="/cross-drive-transfer.html">网盘跨盘传输教程</a></li>
+      <li><a href="/compare-cloudmount-clouddrive2-alist.html">网盘挂载工具对比评测</a></li>
+    </ul>
+  </div>
+
+  <p style="margin-top:40px;text-align:center">
+    <a class="btn" href="/">返回官网下载 →</a>
+  </p>
+</div>
+
+<footer>
+  <p>© 2026 CloudMount · 群晖NAS网盘挂载工具</p>
+  <p><a href="/">首页</a> | <a href="/115-wangpan-mount.html">115网盘教程</a> | <a href="/jellyfin-cloud-drive.html">Jellyfin教程</a> | <a href="/compare-cloudmount-clouddrive2-alist.html">对比评测</a></p>
+</footer>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var bp = document.createElement('script');
+  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+(function(){
+  var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>
+</body>
+</html>

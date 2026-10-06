@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://beatwind.github.io">
+<link rel="dns-prefetch" href="https://beatwind.github.io">
+<title>群晖Docker挂载网盘教程 - Jellyfin/Emby/Plex访问网盘 CloudMount</title>
+<meta name="description" content="群晖Docker容器挂载网盘目录完整教程，用CloudMount挂载百度网盘阿里云盘后，Jellyfin、Emby、Plex等Docker容器直接访问网盘文件，无需额外配置。">
+<meta name="keywords" content="群晖Docker挂载网盘,Docker访问网盘,Jellyfin Docker网盘,Emby网盘挂载,Plex Docker挂载,群晖Docker存储扩展,CloudMount Docker">
+<link rel="canonical" href="https://beatwind.github.io/docker-cloud-drive-mount.html">
+<meta property="og:title" content="群晖Docker挂载网盘教程 - Jellyfin/Emby/Plex访问网盘">
+<meta property="og:description" content="群晖Docker容器挂载网盘目录完整教程，Jellyfin、Emby、Plex直接访问网盘文件">
+<meta property="og:url" content="https://beatwind.github.io/docker-cloud-drive-mount.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="群晖Docker挂载网盘教程">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="群晖Docker挂载网盘教程 - Jellyfin/Emby/Plex访问网盘">
+<meta name="twitter:description" content="Docker容器直接访问网盘文件，无需额外配置">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"群晖Docker挂载网盘教程","description":"用CloudMount挂载网盘后Docker容器直接访问网盘文件","step":[{"@type":"HowToStep","name":"安装CloudMount","text":"下载SPK安装包并安装到群晖"},{"@type":"HowToStep","name":"挂载网盘","text":"登录网盘账号挂载为本地目录"},{"@type":"HowToStep","name":"配置Docker映射","text":"在Docker容器中映射网盘目录作为存储卷"},{"@type":"HowToStep","name":"验证访问","text":"在容器内确认能读取网盘文件"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"教程合集","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"Docker挂载网盘教程","item":"https://beatwind.github.io/docker-cloud-drive-mount.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Docker容器可以访问CloudMount挂载的网盘吗？","acceptedAnswer":{"@type":"Answer","text":"可以。CloudMount挂载的网盘目录出现在/volume1/下，在Docker容器配置中映射这些目录作为存储卷即可，容器内的应用可以像访问本地文件一样访问网盘文件。"}},{"@type":"Question","name":"Jellyfin Docker怎么挂载网盘目录？","acceptedAnswer":{"@type":"Answer","text":"在Docker中部署Jellyfin时，在卷映射中添加CloudMount挂载的网盘目录（如/volume1/baidu-netdisk映射为/media/baidu），Jellyfin会自动扫描其中的媒体文件。"}},{"@type":"Question","name":"Docker容器访问网盘速度怎么样？","acceptedAnswer":{"@type":"Answer","text":"取决于网盘速度。阿里云盘和夸克网盘不限速，Docker容器内播放4K视频也能流畅。百度网盘非会员限速约200KB/s，适合存不常访问的文件。"}},{"@type":"Question","name":"Emby和Plex的Docker容器也能访问网盘吗？","acceptedAnswer":{"@type":"Answer","text":"可以。Emby、Plex和Jellyfin一样都是Docker部署的媒体服务器，配置方法相同，在容器卷映射中添加网盘目录即可。"}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"群晖Docker挂载网盘完整教程","description":"Docker容器直接访问网盘文件完整教程","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-08-31","dateModified":"2026-09-01","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/docker-cloud-drive-mount.html"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+pre{background:#1e293b;padding:20px;border-radius:12px;border:1px solid #334155;overflow-x:auto;margin:15px 0}
+pre code{background:none;padding:0;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.faq-a{color:#d1d5db;font-size:14px}
+.faq-a a{color:#60a5fa;text-decoration:none}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th{background:#1e293b;padding:12px;text-align:left;border:1px solid #334155;font-weight:600}
+td{padding:12px;border:1px solid #334155}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.btn:hover{opacity:0.9}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首页</a> / <a href="/tutorials.html">教程合集</a> / Docker挂载网盘教程</div>
+  <h1>群晖Docker挂载网盘完整教程</h1>
+  <p class="subtitle">用 CloudMount 挂载网盘后，Jellyfin、Emby、Plex 等 Docker 容器直接访问网盘文件，无需额外配置</p>
+
+  <div class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">为什么要在Docker中访问网盘？</a></li>
+      <li><a href="#principle">原理说明</a></li>
+      <li><a href="#install">安装CloudMount并挂载网盘</a></li>
+      <li><a href="#jellyfin">Jellyfin Docker配置</a></li>
+      <li><a href="#emby-plex">Emby/Plex Docker配置</a></li>
+      <li><a href="#tips">性能优化技巧</a></li>
+      <li><a href="#faq">常见问题</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro">一、为什么要在Docker中访问网盘？</h2>
+  <p>群晖 NAS 最大的优势之一就是 Docker 支持。很多人在群晖上跑 <a href="/jellyfin-cloud-drive.html">Jellyfin</a>、Emby、Plex 等媒体服务器，但这些容器默认只能访问 NAS 本地存储。如果网盘里有大量视频想用 Jellyfin 播放，传统做法是先下载到本地再让容器扫描，既慢又占空间。</p>
+  <p>用 CloudMount 把网盘挂载到 NAS 本地目录后，Docker 容器可以直接映射这些目录，容器内的应用就能像访问本地文件一样读取网盘里的内容了。</p>
+
+  <h2 id="principle">二、原理说明</h2>
+  <div class="highlight">
+    <p>CloudMount 使用 FUSE 技术将网盘挂载为 <code>/volume1/</code> 下的虚拟目录。Docker 容器在创建时通过 <code>-v</code> 参数将这些目录映射到容器内部，容器内看到的就是普通文件夹，实际数据从网盘实时读取。</p>
+  </div>
+  <p>挂载后的目录示例：</p>
+  <pre><code>/volume1/baidu-netdisk/     ← 百度网盘
+/volume1/aliyun-drive/      ← 阿里云盘
+/volume1/quark-drive/       ← 夸克网盘
+/volume1/115-drive/         ← 115网盘</code></pre>
+
+  <h2 id="install">三、安装CloudMount并挂载网盘</h2>
+  <ol>
+    <li>从<a href="/#download">下载页面</a>获取 CloudMount SPK 安装包</li>
+    <li>在群晖套件中心「手动安装」SPK 文件，详见<a href="/#install">安装教程</a></li>
+    <li>打开 CloudMount，扫码登录你要挂载的网盘（支持<a href="/baidu-wangpan-mount.html">百度网盘</a>、<a href="/aliyun-drive-mount.html">阿里云盘</a>等8个网盘）</li>
+    <li>挂载完成后，在 File Station 中确认网盘目录已出现</li>
+  </ol>
+
+  <h2 id="jellyfin">四、Jellyfin Docker配置</h2>
+  <h3>方法1：群晖 Container Manager 图形界面配置</h3>
+  <ol>
+    <li>打开 Container Manager（旧版叫 Docker）</li>
+    <li>创建或编辑 Jellyfin 容器</li>
+    <li>在「卷」设置中添加映射：
+      <ul>
+        <li>本地路径：<code>/volume1/baidu-netdisk/电影</code></li>
+        <li>挂载路径：<code>/media/电影</code></li>
+      </ul>
+    </li>
+    <li>保存并启动容器</li>
+    <li>在 Jellyfin 管理界面添加媒体库，选择 <code>/media/电影</code> 目录</li>
+  </ol>
+
+  <h3>方法2：docker-compose 配置</h3>
+  <pre><code>version: "3"
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    volumes:
+      - /volume1/docker/jellyfin/config:/config
+      - /volume1/docker/jellyfin/cache:/cache
+      - /volume1/baidu-netdisk:/media/baidu
+      - /volume1/aliyun-drive:/media/aliyun
+      - /volume1/quark-drive:/media/quark
+    ports:
+      - "8096:8096"
+    restart: unless-stopped</code></pre>
+
+  <div class="highlight">
+    <p>配置完成后，Jellyfin 会自动扫描网盘中的视频文件并刮削海报、字幕等信息。播放时视频从网盘实时流式传输，不占本地存储。详见<a href="/jellyfin-cloud-drive.html">Jellyfin播放网盘视频完整教程</a>。</p>
+  </div>
+
+  <h2 id="emby-plex">五、Emby/Plex Docker配置</h2>
+  <p>Emby 和 Plex 的配置方法与 Jellyfin 完全相同，只需在容器卷映射中添加网盘目录即可：</p>
+  <pre><code># Emby
+volumes:
+  - /volume1/baidu-netdisk:/media/baidu
+  - /volume1/aliyun-drive:/media/aliyun
+
+# Plex
+volumes:
+  - /volume1/baidu-netdisk:/media/baidu
+  - /volume1/aliyun-drive:/media/aliyun</code></pre>
+  <p>映射后在 Emby/Plex 管理界面添加对应媒体库目录即可。</p>
+
+  <h2 id="tips">六、性能优化技巧</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>优化项</th>
+        <th>建议</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>网盘选择</td><td>影音播放优先选阿里云盘/夸克网盘（不限速），冷数据选百度网盘</td></tr>
+      <tr><td>缓存设置</td><td>CloudMount默认1GB缓存，播放大文件可适当增大缓存</td></tr>
+      <tr><td>转码注意</td><td>网盘视频转码会占用NAS CPU，建议客户端直接播放（Direct Play）</td></tr>
+      <tr><td>并发控制</td><td>同时播放多个网盘视频时注意带宽，建议限制并发转码数</td></tr>
+      <tr><td>目录结构</td><td>网盘内按类型分文件夹（电影/电视剧/动漫），方便媒体库管理</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="faq">七、常见问题</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：Docker容器访问网盘文件速度怎么样？</div>
+    <div class="faq-a">A：取决于网盘速度。阿里云盘和夸克网盘不限速，Docker容器内播放4K视频也能流畅。百度网盘非会员限速约200KB/s。详见<a href="/jellyfin-cloud-drive.html">Jellyfin教程</a>。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：容器内能看到网盘文件但播放失败怎么办？</div>
+    <div class="faq-a">A：检查容器是否有足够的权限访问挂载目录。在Container Manager中确认卷映射路径正确，容器运行用户有读取权限。也可能是网盘限速导致超时，建议换用阿里云盘测试。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：可以同时给多个Docker容器映射同一个网盘目录吗？</div>
+    <div class="faq-a">A：可以。多个容器可以同时映射同一个网盘目录，CloudMount会处理并发访问。但注意同时大量读取可能触发网盘限速。</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：除了Jellyfin/Emby/Plex，还有哪些Docker容器可以用？</div>
+    <div class="faq-a">A：任何需要文件访问的容器都可以，比如 qBittorrent（下载到网盘）、Nextcloud（网盘文件同步）、Alist（网盘聚合）等。只要是能映射存储目录的Docker容器都能使用CloudMount挂载的网盘。</div>
+  </div>
+
+  <a href="/#download" class="btn">立即下载 CloudMount 开始Docker挂载 →</a>
+
+  <div class="related">
+    <h3>相关阅读</h3>
+    <ul>
+      <li><a href="/">CloudMount 官网首页 - 立即下载</a></li>
+      <li><a href="/tutorials.html">全部教程合集</a></li>
+      <li><a href="/jellyfin-cloud-drive.html">Jellyfin播放网盘视频完整教程</a></li>
+      <li><a href="/video-station-cloud-drive.html">Video Station播放网盘视频教程</a></li>
+      <li><a href="/nas-storage-expansion.html">群晖NAS扩容方案</a></li>
+      <li><a href="/compare-cloudmount-clouddrive2-alist.html">网盘挂载工具对比评测</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>CloudMount - 群晖NAS网盘挂载工具 | <a href="/">首页</a> | <a href="/tutorials.html">教程</a> | <a href="/#download">下载</a></p>
+</footer>
+</body>
+</html>
