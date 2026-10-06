@@ -1715,6 +1715,8 @@
 
     // ===== Guestbook: MantleDB server-side storage =====
     var API_URL = 'https://mantledb.sh/v2/cloudmount-guestbook/messages';
+    // Namespace is claimed: writes require the key. Reads rely on the entry's public_read flag.
+    var WRITE_KEY = '0835b7c9b154d08a0d4b9a83e30af752d5024175205514ca967f365a225f1752';
 
     function escapeHtml(text) {
         var div = document.createElement('div');
@@ -1815,7 +1817,7 @@
                 // Save back to server
                 var saveRes = await fetch(API_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'X-Mantle-Key': WRITE_KEY },
                     body: JSON.stringify({ messages: msgs })
                 });
                 if (!saveRes.ok) throw new Error('save failed');
