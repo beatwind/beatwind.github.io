@@ -42,6 +42,39 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://beatwind.github.io/#organization",
+                "name": "CloudMount",
+                "url": "https://beatwind.github.io/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://beatwind.github.io/favicon-192.png",
+                    "width": 192,
+                    "height": 192
+                },
+                "description": "CloudMount 是一款群晖 NAS 网盘挂载工具，支持百度网盘、阿里云盘、夸克网盘等 8 大主流网盘挂载到 NAS 本地目录。",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "CloudMount"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://beatwind.github.io/#website",
+                "url": "https://beatwind.github.io/",
+                "name": "CloudMount",
+                "description": "群晖 NAS 网盘挂载工具官方站，提供 8 大网盘挂载教程、跨盘传输与在线播放指南。",
+                "inLanguage": "zh-CN",
+                "publisher": { "@id": "https://beatwind.github.io/#organization" }
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "CloudMount",
         "operatingSystem": "Synology DSM (x86_64)",
