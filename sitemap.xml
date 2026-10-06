@@ -177,6 +177,38 @@
     </url>
 
     <url>
+        <loc>https://beatwind.github.io/webdav-mount.html</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/mount-troubleshooting.html</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/mount-speed-optimization.html</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
+        <loc>https://beatwind.github.io/mount-vs-sync.html</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <mobile:mobile/>
+    </url>
+
+    <url>
         <loc>https://beatwind.github.io/en/uc-wangpan-mount.html</loc>
         <lastmod>2026-09-01</lastmod>
         <changefreq>monthly</changefreq>

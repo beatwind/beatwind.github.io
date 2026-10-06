@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>群晖网盘「挂载」和「同步」有什么区别 - 占用空间对比与选择 CloudMount</title>
+<meta name="description" content="群晖NAS网盘挂载和同步有什么区别？挂载按需读取云端文件几乎不占本地空间，同步会在本地保留完整副本。本文从原理、存储占用、速度、离线可用性、误删风险五方面对比，并给出按场景选择的建议。">
+<meta name="keywords" content="群晖挂载和同步区别,网盘挂载与同步,NAS同步占用空间,Synology Drive同步,随需同步,群晖云同步">
+<link rel="canonical" href="https://beatwind.github.io/mount-vs-sync.html">
+<meta property="og:title" content="群晖网盘「挂载」和「同步」有什么区别 - 占用空间对比与选择">
+<meta property="og:description" content="从原理、空间占用、速度、离线可用性、误删风险五方面对比挂载与同步，教你按场景选择。">
+<meta property="og:url" content="https://beatwind.github.io/mount-vs-sync.html">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="mobile-agent" content="format=html5;url=https://beatwind.github.io/mount-vs-sync.html">
+<meta property="og:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta property="og:image:alt" content="群晖网盘挂载和同步区别对比">
+<meta property="og:site_name" content="CloudMount">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="群晖网盘「挂载」和「同步」有什么区别 - 占用空间对比与选择">
+<meta name="twitter:description" content="挂载几乎不占本地空间，同步会留完整副本，一文看懂如何选择。">
+<meta name="twitter:image" content="https://beatwind.github.io/screenshots/2.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "如何选择网盘挂载还是同步",
+  "description": "按使用场景判断应该用挂载还是同步",
+  "step": [
+    {"@type": "HowToStep", "name": "看是否需要离线可用", "text": "需要断网也能打开文件选同步，只需要联网时访问选挂载"},
+    {"@type": "HowToStep", "name": "看本地空间是否充足", "text": "本地空间紧张选挂载或随需同步，空间充足需要完整副本选传统同步"},
+    {"@type": "HowToStep", "name": "看使用目的", "text": "观影、扩容量选挂载；备份、离线办公选同步，两者也可混合使用"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://beatwind.github.io/"},{"@type":"ListItem","position":2,"name":"教程合集","item":"https://beatwind.github.io/tutorials.html"},{"@type":"ListItem","position":3,"name":"挂载和同步有什么区别","item":"https://beatwind.github.io/mount-vs-sync.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"网盘挂载和同步最本质的区别是什么？","acceptedAnswer":{"@type":"Answer","text":"一句话：挂载是「用云端的」，按需读取网盘文件，本地几乎不存副本；同步是「存一份到本地」，在本地保留完整或部分副本并保持双向一致。"}},{"@type":"Question","name":"网盘挂载会占用NAS本地空间吗？","acceptedAnswer":{"@type":"Answer","text":"占用极少。文件实际存储在云端，仅在读取或传输时使用少量缓存（如默认1GB上限），缓存会在空闲时自动清理，因此挂载基本不占本地硬盘容量。"}},{"@type":"Question","name":"有没有既省空间又能离线访问的办法？","acceptedAnswer":{"@type":"Answer","text":"可以。Synology Drive 的「随需同步」仅在本地保留占位文件，打开时才下载，并可将需要的文件永久锁定保留；本地空间紧张时会自动释放最少使用的副本，兼顾省空间与离线访问。"}},{"@type":"Question","name":"挂载和同步可以同时使用吗？","acceptedAnswer":{"@type":"Answer","text":"可以。常见做法是用云同步处理需要离线、备份的重要文档，用网盘挂载处理观影、扩容这类按需访问的大文件，两者互补。"}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"群晖网盘挂载和同步有什么区别","description":"挂载与同步在原理、空间占用、速度、离线可用性、误删风险上的对比与选择建议","author":{"@type":"Organization","name":"CloudMount"},"publisher":{"@type":"Organization","name":"CloudMount"},"datePublished":"2026-10-07","dateModified":"2026-10-07","image":"https://beatwind.github.io/screenshots/2.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://beatwind.github.io/mount-vs-sync.html"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;background:#0a0f1e;color:#e5e7eb;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.breadcrumb{font-size:14px;color:#6b7280;margin-bottom:20px}
+.breadcrumb a{color:#3b82f6;text-decoration:none}
+h1{font-size:32px;margin-bottom:10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:#6b7280;margin-bottom:30px;font-size:16px}
+h2{font-size:24px;margin:40px 0 20px;color:#3b82f6;border-left:4px solid #3b82f6;padding-left:15px}
+h3{font-size:18px;margin:25px 0 12px;color:#8b5cf6}
+p{margin-bottom:15px;color:#d1d5db}
+ul,ol{margin-left:25px;margin-bottom:15px}
+li{margin-bottom:8px;color:#d1d5db}
+code{background:#1e293b;padding:2px 8px;border-radius:4px;font-family:monospace;color:#22d3ee}
+.toc{background:#1e293b;padding:25px;border-radius:12px;margin-bottom:40px;border:1px solid #334155}
+.toc h2,.toc h3{margin-top:0}
+.toc ol{margin-left:20px}
+.toc a{color:#3b82f6;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th,td{padding:12px;text-align:left;border:1px solid #334155}
+th{background:#1e293b;color:#e5e7eb}
+td{color:#d1d5db}
+.highlight{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));padding:20px;border-radius:12px;border:1px solid #3b82f6;margin:25px 0}
+.faq-item{background:#1e293b;padding:20px;border-radius:12px;margin-bottom:15px;border:1px solid #334155}
+.faq-q{font-weight:bold;color:#3b82f6;margin-bottom:8px}
+.btn{display:inline-block;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;margin:20px 0}
+.btn:hover{opacity:0.9}
+.related{background:#1e293b;padding:30px;border-radius:12px;margin-top:50px;border:1px solid #334155}
+.related h2,.related h3{margin-top:0;color:#3b82f6}
+.related ul{list-style:none;margin-left:0}
+.related li{margin-bottom:10px}
+.related a{color:#60a5fa;text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 20px;color:#6b7280;border-top:1px solid #1e293b;margin-top:60px}
+footer a{color:#3b82f6;text-decoration:none}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首页</a> / <a href="/tutorials.html">教程合集</a> / 挂载vs同步</div>
+  <h1>群晖网盘「挂载」和「同步」有什么区别？</h1>
+  <p class="subtitle">一句话说清：挂载是「用云端的」，同步是「存一份到本地」。本文从五个维度对比，帮你按场景选对方式</p>
+
+  <div class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#conclusion">一句话结论</a></li>
+      <li><a href="#principle">原理对比：挂载 vs 同步</a></li>
+      <li><a href="#space">本地存储占用对比</a></li>
+      <li><a href="#speed">速度与离线可用性对比</a></li>
+      <li><a href="#risk">数据安全与误删风险</a></li>
+      <li><a href="#table">一张表看懂</a></li>
+      <li><a href="#choose">按场景选择</a></li>
+      <li><a href="#faq">常见问题 FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="conclusion">一、一句话结论</h2>
+  <div class="highlight">
+    <strong>挂载</strong>：把网盘目录像本地文件夹一样「接」进来，文件仍在云端，按需读取，本地几乎不占空间。<br>
+    <strong>同步</strong>：在本地保留一份副本，云端和本地双向保持一致，本地会实实在在占用同等容量。
+  </div>
+
+  <h2 id="principle">二、原理对比：挂载 vs 同步</h2>
+  <ul>
+    <li><strong>挂载</strong>：通过挂载机制把远端网盘映射为一个目录，访问时才从云端拉取数据，本地只是「入口」，云端始终是数据主体</li>
+    <li><strong>同步</strong>：在本地建立一份文件副本，本地与云端之间双向同步改动，本地是真实存储，断网时仍可打开已同步的文件</li>
+  </ul>
+
+  <h2 id="space">三、本地存储占用对比</h2>
+  <p>这是两者最大的差别，也是多数人选错的地方：</p>
+  <ul>
+    <li><strong>挂载</strong>：几乎不占本地空间，仅在读取或传输时使用少量缓存，缓存还会在空闲时自动清理</li>
+    <li><strong>同步</strong>：本地会保留完整副本，网盘里有多少数据，本地大体就要占多少空间</li>
+    <li><strong>折中方案</strong>：Synology Drive 的「随需同步」只在本地保留占位文件，打开时才下载，并可把需要的文件永久锁定保留；本地空间紧张时会自动释放最少使用的副本，兼顾省空间与离线访问</li>
+  </ul>
+
+  <h2 id="speed">四、速度与离线可用性对比</h2>
+  <ul>
+    <li><strong>访问速度</strong>：挂载受网盘实时下载速度影响，首次打开需等待；同步打开的是本地副本，读取更快</li>
+    <li><strong>离线可用</strong>：挂载断网后无法访问云端文件；同步的本地副本断网也能用</li>
+    <li><strong>占用带宽</strong>：挂载按需占带宽；同步会在后台持续传输，初次同步可能占用大量带宽</li>
+  </ul>
+
+  <h2 id="risk">五、数据安全与误删风险</h2>
+  <ul>
+    <li><strong>挂载</strong>：操作直接作用于云端，删除即删云端文件，需谨慎；建议开启网盘回收站或版本保护</li>
+    <li><strong>同步</strong>：双向同步可能把本地的误删同步到云端；此外在部分文件系统（如 ext4）中开启版本控制会额外占用约一倍空间</li>
+  </ul>
+
+  <h2 id="table">六、一张表看懂</h2>
+  <table>
+    <thead>
+      <tr><th>对比维度</th><th>挂载</th><th>同步</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>数据位置</td><td>云端为主，按需读取</td><td>本地保留副本</td></tr>
+      <tr><td>本地占用</td><td>极少（仅缓存）</td><td>约等于数据总量</td></tr>
+      <tr><td>读取速度</td><td>受网盘速度影响</td><td>读本地，速度快</td></tr>
+      <tr><td>离线可用</td><td>否</td><td>是</td></tr>
+      <tr><td>适用场景</td><td>观影、扩容、按需访问</td><td>备份、离线办公、重要文档</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="choose">七、按场景选择</h2>
+  <ul>
+    <li><strong>想用网盘给 NAS 扩容量、存影视资源</strong>：优先「挂载」，本地零占用，详情见 <a href="/nas-storage-expansion.html">NAS 扩容方案</a></li>
+    <li><strong>需要离线也能打开的重要文档、照片备份</strong>：优先「同步」，或使用随需同步按需下载</li>
+    <li><strong>既要省空间又要偶尔离线</strong>：用随需同步，把关键文件永久锁定，其余文件按需释放</li>
+    <li><strong>两者并不冲突</strong>：团队协作、备份走同步，观影、扩容走挂载，混合使用最合适</li>
+  </ul>
+  <p>如果你主要想解决「NAS 空间不够、想看网盘里的影视」这类需求，CloudMount 的挂载方式更直接：一次扫码把 8 大网盘挂到 <a href="/">File Station</a>，本地几乎不占空间，还能直接配合 <a href="/jellyfin-cloud-drive.html">Jellyfin</a> 与 <a href="/video-station-cloud-drive.html">Video Station</a> 播放。</p>
+  <p><a class="btn" href="/">前往官网下载 CloudMount →</a></p>
+
+  <h2 id="faq">八、常见问题 FAQ</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：网盘挂载和同步最本质的区别是什么？</div>
+    <p>A：一句话：挂载是「用云端的」，按需读取网盘文件，本地几乎不存副本；同步是「存一份到本地」，在本地保留完整或部分副本并保持双向一致。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：网盘挂载会占用 NAS 本地空间吗？</div>
+    <p>A：占用极少。文件实际存储在云端，仅在读取或传输时使用少量缓存（如默认 1GB 上限），缓存会在空闲时自动清理，因此挂载基本不占本地硬盘容量。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：有没有既省空间又能离线访问的办法？</div>
+    <p>A：可以。Synology Drive 的「随需同步」仅在本地保留占位文件，打开时才下载，并可将需要的文件永久锁定保留；本地空间紧张时会自动释放最少使用的副本，兼顾省空间与离线访问。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Q：挂载和同步可以同时使用吗？</div>
+    <p>A：可以。常见做法是用云同步处理需要离线、备份的重要文档，用网盘挂载处理观影、扩容这类按需访问的大文件，两者互补。</p>
+  </div>
+
+  <p style="margin-top:40px;text-align:center">
+    <a class="btn" href="/">返回官网下载 →</a>
+  </p>
+
+  <div class="related">
+    <h2>相关阅读</h2>
+    <ul>
+      <li><a href="/mount-troubleshooting.html">群晖网盘挂载失败排查指南</a></li>
+      <li><a href="/mount-speed-optimization.html">网盘挂载速度优化教程</a></li>
+      <li><a href="/webdav-mount.html">群晖挂载WebDAV网盘教程</a></li>
+      <li><a href="/nas-storage-expansion.html">群晖NAS扩容方案</a></li>
+      <li><a href="/baidu-wangpan-mount.html">群晖挂载百度网盘教程</a></li>
+      <li><a href="/compare-cloudmount-clouddrive2-alist.html">网盘挂载工具对比评测</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 CloudMount · 群晖NAS网盘挂载工具</p>
+  <p><a href="/">首页</a> | <a href="/tutorials.html">教程合集</a> | <a href="/webdav-mount.html">WebDAV挂载</a> | <a href="/mount-troubleshooting.html">挂载排查</a> | <a href="/mount-speed-optimization.html">速度优化</a></p>
+</footer>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var bp = document.createElement('script');
+  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+(function(){
+  var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>
+</body>
+</html>
