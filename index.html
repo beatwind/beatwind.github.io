@@ -1758,10 +1758,12 @@
     async function loadMessages() {
         showLoading();
         try {
-            var response = await fetch(API_URL);
+            var response = await fetch(API_URL, { cache: 'no-store' });
+            // 404 = entry not created yet (or purged after inactivity): show empty state, not an error
+            if (response.status === 404) { renderMessages([]); return; }
             if (!response.ok) throw new Error('fetch failed');
             var data = await response.json();
-            renderMessages(data.messages || []);
+            renderMessages((data && data.messages) || []);
         } catch (e) {
             var list = document.getElementById('messagesList');
             if (list) list.innerHTML = '<div style="text-align: center; padding: 40px 20px; color: var(--text-muted);"><div style="font-size: 36px; margin-bottom: 12px;">⚠️</div><p style="font-size: 14px;">留言加载失败，请刷新页面重试</p></div>';
@@ -1795,10 +1797,10 @@
             submitBtn.disabled = true;
 
             try {
-                // Fetch current messages
-                var response = await fetch(API_URL);
-                var data = await response.json();
-                var msgs = data.messages || [];
+                // Fetch current messages (404 = store not created yet -> start from empty)
+                var response = await fetch(API_URL, { cache: 'no-store' });
+                var data = response.ok ? await response.json() : {};
+                var msgs = (data && data.messages) || [];
 
                 // Add new message
                 var now = new Date();
@@ -1811,11 +1813,12 @@
                 msgs.push({ name: name, message: message, time: timeStr, device: device });
 
                 // Save back to server
-                await fetch(API_URL, {
+                var saveRes = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ messages: msgs })
                 });
+                if (!saveRes.ok) throw new Error('save failed');
 
                 // Show success
                 var formSuccess = document.getElementById('formSuccess');
